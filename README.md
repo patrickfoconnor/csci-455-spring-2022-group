@@ -6,15 +6,25 @@ Coure Description: The basic tools and techniques of embedded systems using robo
 
 ## Development  Instructions
 
-### Source Code Projects File Structure
+### Projects File Structure
 
 *** NEED TO DO ONCE WE START ***
-.
-+-- csci-455-spring-2022-group
-|   +-- SourceCode
-|   |   +-- Robot
-|   +-- UnitTests
-|   |   +-- RobotUnitTests
+
+```
+csci-455-spring-2022-group  
+│   README.md
+│
+└───SourceCode
+│   │   
+│   └───Robot
+│   │   |   
+│   │   |   temp
+│   │   
+│   └───RobotUnitTests
+│       │   
+│       │   temp
+```
+
 
 ## Collaborating
 
