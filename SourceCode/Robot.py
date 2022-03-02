@@ -1,4 +1,4 @@
-import serial
+import serial, time
 
 
 try:
@@ -15,12 +15,17 @@ except:
     except:
         print("No servo serial ports")
 
-target = 6700
+target = 6800
 
 lsb = target & 0x74
 msb = (target >> 7) & 0x7F
 
-cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x01) + chr(lsb) + chr(msb)
 
-usb.write(cmd)
+# 0x01 is wheels?
+# 0x02 is body
+# 0x03 is the head
+# 0x04 is 
+cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x02) + chr(lsb) + chr(msb)
+
+usb.write(cmd.encode('utf-8'))
 
