@@ -36,7 +36,7 @@ class Robot:
     # class properties
     usb = None
     win = None
-
+    motors = 0
     # constructor
     def __init__(self):
         self.usb = getUSB()
