@@ -31,7 +31,7 @@ class RobotMotor(Enum):
     ArmLeft=0x05
     ArmRight=0x06
 
-class TangoRobot:
+class Robot:
 
     # class properties
     usb = None
@@ -97,6 +97,10 @@ class TangoRobot:
         keycode = event.keycode
         if keycode == 25:
             print("Head Up")
+            self.motors += 200
+            if(self.motors > 7900):
+                self.motors = 7900
+            self.tange.setTarget(HeadY, self.motors)
         elif keycode == 39:
             print("Head Down")
         elif keycode == 38:
@@ -107,4 +111,4 @@ class TangoRobot:
     def stop(self, event=None):
         self.win.destroy()
 
-robot = TangoRobot()
+robot = Robot()
