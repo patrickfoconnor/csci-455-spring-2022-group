@@ -24,6 +24,11 @@ class Robot:
         lsb = target & 0x74
         msb = (target >> 7) & 0x7F
 
+
+# Explanation
+        # 0x00 or 0x01 = Wheels
+        # 0x02 = Body
+        # 0x03 = Head
         cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x01) + chr(lsb) + chr(msb)
 
         self.maestro.write(cmd)
