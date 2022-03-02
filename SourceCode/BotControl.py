@@ -74,3 +74,5 @@ class TangoRobot:
         if self.usb is not None:
             # Write out command
             self.usb.write(command.encode('utf-8'))
+
+robot = TangoRobot()
