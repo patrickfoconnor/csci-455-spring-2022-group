@@ -75,4 +75,36 @@ class TangoRobot:
             # Write out command
             self.usb.write(command.encode('utf-8'))
 
+    def arrows(self, event):
+        keycode = event.keycode
+        if keycode == 111:
+            print("Up Arrow")
+        elif keycode == 116:
+            print("Down Arrow")
+        elif keycode == 113:
+            print("Left Arrow")
+        elif keycode == 114:
+            print("Right Arrow")
+
+    def waist(self, event):
+        keycode = event.keycode
+        if keycode == 52:
+            print("Z (Left)")
+        elif keycode == 54:
+            print("C (Right)")
+
+    def head(self, event):
+        keycode = event.keycode
+        if keycode == 25:
+            print("Head Up")
+        elif keycode == 39:
+            print("Head Down")
+        elif keycode == 38:
+            print("Head Left")
+        elif keycode == 40:
+            print("Head Right")
+
+    def stop(self, event=None):
+        self.win.destroy()
+
 robot = TangoRobot()
