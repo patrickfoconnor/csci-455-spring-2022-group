@@ -100,7 +100,7 @@ class Robot:
             self.motors += 200
             if(self.motors > 7900):
                 self.motors = 7900
-            self.tange.setTarget(HeadY, self.motors)
+            self.robot.setTarget(HeadY, self.motors)
         elif keycode == 39:
             print("Head Down")
         elif keycode == 38:
