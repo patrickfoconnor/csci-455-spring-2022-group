@@ -22,5 +22,5 @@ msb = (target >> 7) & 0x7F
 
 cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x01) + chr(lsb) + chr(msb)
 
-usb.write(cmd)
+usb.write(cmd.encode('utf-8'))
 
