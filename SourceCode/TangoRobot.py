@@ -1,5 +1,12 @@
 # Main class that will hold base Robot object
 
+# TODO
+# Get the wheels moving forward
+# Get the wheels moving backwards
+# Turn Right
+# Turn Left
+# Redo movements to incorporate for loop to reduce jerk
+
 import tkinter as tk
 from enum import Enum
 import serial
@@ -7,7 +14,7 @@ import sys
 import time
 
 # SERVO CONSTANTS
-TARGET_CENTER = 6000
+TARGET_CENTER = 5896
 MAX_SERVO = 8000
 MIN_SERVO = 4000
 SERVO_INCREMENT = 1000
@@ -73,41 +80,49 @@ class TangoRobot:
 
     # Methods for Moving the robot waist
     def waistLeft(self):
-        self.motors -= SERVO_INCREMENT
-        if (self.motors > MAX_SERVO):
-            self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.Waist, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors -= increment
+            if (self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.writeCmd(RobotMotor.Waist, self.motors)
 
     def waistRight(self):
-        self.motors += SERVO_INCREMENT
-        if (self.motors < MIN_SERVO):
-            self.motors = MIN_SERVO
-        self.writeCmd(RobotMotor.Waist, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors += increment
+            if (self.motors < MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.writeCmd(RobotMotor.Waist, self.motors)
 
     # Methods for Moving the robot head
     def headUp(self):
-        self.motors += SERVO_INCREMENT
-        if (self.motors > MAX_SERVO):
-            self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.HeadY, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors += increment
+            if (self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.writeCmd(RobotMotor.HeadY, self.motors)
 
     def headDown(self):
-        self.motors -= SERVO_INCREMENT
-        if (self.motors < MIN_SERVO):
-            self.motors = MIN_SERVO
-        self.writeCmd(RobotMotor.HeadY, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors -= increment
+            if (self.motors < MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.writeCmd(RobotMotor.HeadY, self.motors)
 
     def headLeft(self):
-        self.motors += SERVO_INCREMENT
-        if (self.motors > MAX_SERVO):
-            self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.HeadX, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors += increment
+            if (self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.writeCmd(RobotMotor.HeadX, self.motors)
+
+        #self.motors += SERVO_INCREMENT
 
     def headRight(self):
-        self.motors -= SERVO_INCREMENT
-        if (self.motors < MIN_SERVO):
-            self.motors = MIN_SERVO
-        self.writeCmd(RobotMotor.HeadX, self.motors)
+        for increment in range(0, SERVO_INCREMENT, 10):
+            self.motors -= increment
+            if (self.motors < MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.writeCmd(RobotMotor.HeadX, self.motors)
 
     # Methods for driving the robot
     def driveForward(self):
