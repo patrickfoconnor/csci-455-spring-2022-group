@@ -71,7 +71,7 @@ class TangoRobot:
             # Write out command
             self.usb.write(command.encode('utf-8'))
 
-# Methods for Moving the robot waist
+    # Methods for Moving the robot waist
     def waistLeft(self):
         self.motors -= SERVO_INCREMENT
         if (self.motors > MAX_SERVO):
@@ -84,7 +84,7 @@ class TangoRobot:
             self.motors = MIN_SERVO
         self.writeCmd(RobotMotor.Waist, self.motors)
 
-# Methods for Moving the robot head
+    # Methods for Moving the robot head
     def headUp(self):
         self.motors += SERVO_INCREMENT
         if (self.motors > MAX_SERVO):
@@ -109,10 +109,13 @@ class TangoRobot:
             self.motors = MIN_SERVO
         self.writeCmd(RobotMotor.HeadX, self.motors)
 
-
-# Methods for driving the robot
+    # Methods for driving the robot
     def driveForward(self):
-        pass
+        self.motors = 6000
+        self.motors += MOTOR_INCREMENT
+        if (self.motors < MAX_SERVO):
+            self.motors = MAX_SERVO
+        self.writeCmd(RobotMotor.HeadX, self.motors)
 
     def driveBackward(self):
         pass
@@ -127,12 +130,14 @@ class TangoRobot:
         self.writeCmd(motor, MOTOR_TARGET_RESET)
 
     def resetRobot(self):
+        for motor in RobotMotor:
+            self.writeCmd(motor, TARGET_CENTER)
         # center robot waist
-        self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
+        # self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
         # center robot head on X
-        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
+        # self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
         # center robot head on Y
-        self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
+        # self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
 
     def killRobot(self):
         self.win.destroy()
