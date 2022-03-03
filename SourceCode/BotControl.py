@@ -9,7 +9,7 @@ MAX_SERVO = 8000
 MIN_SERVO = 4000
 SERVO_INCREMENT = 100
 
-MOTOR_TARGET_RESET = 6001 # 6000
+MOTOR_TARGET_RESET = 6001  # 6000
 
 
 def getUSB():
@@ -37,8 +37,6 @@ class RobotMotor(Enum):
     HeadY = 0x04
     ArmLeft = 0x05
     ArmRight = 0x06
-
-
 
 
 class TangoRobot:
@@ -93,6 +91,7 @@ class TangoRobot:
         keycode = event.keycode
         if keycode == 111:
             print("Up Arrow")
+            self.resetMotor()
             self.motors -= SERVO_INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
