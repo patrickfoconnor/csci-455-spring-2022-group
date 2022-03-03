@@ -1,4 +1,5 @@
 from TangoRobot import *
+import time
 
 
 class KeyboardController:
@@ -24,49 +25,49 @@ class KeyboardController:
         keycode = event.keycode
         if keycode == 111:
             print("Up Arrow")
-            sleep(.2)
+            time.time.sleep(.2)
             robot.driveForward()
         elif keycode == 116:
             print("Down Arrow")
-            sleep(.2)
+            time.sleep(.2)
             robot.driveBackward()
         elif keycode == 113:
             print("Left Arrow")
-            sleep(.2)
+            time.sleep(.2)
             robot.turnLeft()
         elif keycode == 114:
             print("Right Arrow")
-            sleep(.2)
+            time.sleep(.2)
             robot.turnRight()
 
     def waist(self, event):
         keycode = event.keycode
         if keycode == 52:
             print("Z (Left)")
-            sleep(.2)
+            time.sleep(.2)
             robot.waistLeft()
         elif keycode == 54:
             print("C (Right)")
-            sleep(.2)
+            time.sleep(.2)
             robot.waistRight()
 
     def head(self, event):
         keycode = event.keycode
         if keycode == 25:
             print("W: Head Up")
-            sleep(.2)
+            time.sleep(.2)
             robot.headUp()
         elif keycode == 39:
             print("S: Head Down")
-            sleep(.2)
+            time.sleep(.2)
             robot.headDown()
         elif keycode == 38:
             print("A: Head Left")
-            sleep(.2)
+            time.sleep(.2)
             robot.headLeft()
         elif keycode == 40:
             print("D: Head Right")
-            sleep(.2)
+            time.sleep(.2)
             robot.headRight()
 
     def stop(self, event):
