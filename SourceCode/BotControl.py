@@ -101,13 +101,13 @@ class TangoRobot:
             self.motors += 200
             if(self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.writeCmd(RobotMotor.Waist, self.motors)
         elif keycode == 54:
             print("C (Right)")
             self.motors += 200
             if(self.motors > MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.writeCmd(RobotMotor.Waist, self.motors)
 
     def head(self, event):
         keycode = event.keycode
@@ -117,26 +117,26 @@ class TangoRobot:
             self.motors += 200
             if(self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.HeadY, self.motors)
+            self.writeCmd(RobotMotor.HeadY, self.motors)
 
         elif keycode == 39:
             print("S: Head Down")
             self.motors -= 200
             if(self.motors > MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.HeadY, self.motors)
+            self.writeCmd(RobotMotor.HeadY, self.motors)
         elif keycode == 38:
             print("A: Head Left")
             self.motors += 200
             if(self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.HeadX, self.motors)
+            self.writeCmd(RobotMotor.HeadX, self.motors)
         elif keycode == 40:
             print("D: Head Right")
             self.motors -= 200
             if(self.motors > MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.HeadY, self.motors)
+            self.writeCmd(RobotMotor.HeadY, self.motors)
 
     def stop(self, event=None):
         self.win.destroy()
