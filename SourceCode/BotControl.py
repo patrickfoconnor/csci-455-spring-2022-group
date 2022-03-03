@@ -96,7 +96,7 @@ class TangoRobot:
             self.motors -= SERVO_INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.Waist, self.motors)
+            self.writeCmd(RobotMotor.WheelLeft, self.motors)
         elif keycode == 116:
             print("Down Arrow")
         elif keycode == 113:
@@ -104,6 +104,9 @@ class TangoRobot:
         elif keycode == 114:
             print("Right Arrow")
 
+    def resetMotor(self):
+        self.motors = 6000
+        self.writeCmd(RobotMotor.WheelLeft, self.motors)
 
     def waist(self, event):
         keycode = event.keycode
