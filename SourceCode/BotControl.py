@@ -1,3 +1,6 @@
+# Controls
+#
+
 import serial
 import sys
 import time
@@ -103,56 +106,73 @@ class TangoRobot:
         elif keycode == 114:
             print("Right Arrow")
 
-    def resetMotor(self):
-        self.motors = 6000
-        self.writeCmd(RobotMotor.WheelLeft, self.motors)
 
     def waist(self, event):
         keycode = event.keycode
         if keycode == 52:
             print("Z (Left)")
-            self.motors -= SERVO_INCREMENT
-            if (self.motors > MAX_SERVO):
-                self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.Waist, self.motors)
+            self.waistLeft()
+
         elif keycode == 54:
             print("C (Right)")
-            self.motors += SERVO_INCREMENT
-            if (self.motors < MIN_SERVO):
-                self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.Waist, self.motors)
+            self.waistRight()
+
 
     def head(self, event):
         keycode = event.keycode
         if keycode == 25:
             print("W: Head Up")
-            self.motors += SERVO_INCREMENT
-            if (self.motors > MAX_SERVO):
-                self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.HeadY, self.motors)
+            self.headUp()
 
         elif keycode == 39:
             print("S: Head Down")
-            self.motors -= SERVO_INCREMENT
-            if (self.motors < MIN_SERVO):
-                self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.HeadY, self.motors)
+            self.headDown()
 
         elif keycode == 38:
             print("A: Head Left")
-            self.motors += SERVO_INCREMENT
-            if (self.motors > MAX_SERVO):
-                self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.HeadX, self.motors)
+            self.headLeft()
         elif keycode == 40:
             print("D: Head Right")
-            self.motors -= SERVO_INCREMENT
-            if (self.motors < MIN_SERVO):
-                self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.HeadX, self.motors)
+            self.headRight()
 
     def stop(self, event=None):
         self.win.destroy()
+
+    def waistLeft(self):
+        self.motors -= SERVO_INCREMENT
+        if (self.motors > MAX_SERVO):
+            self.motors = MAX_SERVO
+        self.writeCmd(RobotMotor.Waist, self.motors)
+
+    def waistRight(self):
+        self.motors += SERVO_INCREMENT
+        if (self.motors < MIN_SERVO):
+            self.motors = MIN_SERVO
+        self.writeCmd(RobotMotor.Waist, self.motors)
+
+    def headUp(self):
+        self.motors += SERVO_INCREMENT
+        if (self.motors > MAX_SERVO):
+            self.motors = MAX_SERVO
+        self.writeCmd(RobotMotor.HeadY, self.motors)
+
+    def headDown(self):
+        self.motors -= SERVO_INCREMENT
+        if (self.motors < MIN_SERVO):
+            self.motors = MIN_SERVO
+        self.writeCmd(RobotMotor.HeadY, self.motors)
+
+    def headLeft(self):
+        self.motors += SERVO_INCREMENT
+        if (self.motors > MAX_SERVO):
+            self.motors = MAX_SERVO
+        self.writeCmd(RobotMotor.HeadX, self.motors)
+
+    def headRight(self):
+        self.motors -= SERVO_INCREMENT
+        if (self.motors < MIN_SERVO):
+            self.motors = MIN_SERVO
+        self.writeCmd(RobotMotor.HeadX, self.motors)
 
 
 robot = TangoRobot()
