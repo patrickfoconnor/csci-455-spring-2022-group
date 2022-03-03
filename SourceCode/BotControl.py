@@ -5,9 +5,9 @@ from enum import Enum
 import tkinter as tk
 
 TARGET_CENTER = 5896
-MAX_SERVO = 7900
-MIN_SERVO = 4100
-SERVO_INCREMENT = 50
+MAX_SERVO = 8500
+MIN_SERVO = 4500
+SERVO_INCREMENT = 100
 
 MOTOR_TARGET_RESET = 6001 # 6000
 
@@ -91,12 +91,17 @@ class TangoRobot:
         keycode = event.keycode
         if keycode == 111:
             print("Up Arrow")
+            self.motors -= SERVO_INCREMENT
+            if (self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.writeCmd(RobotMotor.Waist, self.motors)
         elif keycode == 116:
             print("Down Arrow")
         elif keycode == 113:
             print("Left Arrow")
         elif keycode == 114:
             print("Right Arrow")
+
 
     def waist(self, event):
         keycode = event.keycode
