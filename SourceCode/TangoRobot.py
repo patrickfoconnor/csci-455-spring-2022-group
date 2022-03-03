@@ -6,12 +6,14 @@ import serial
 import sys
 import time
 
+# SERVO CONSTANTS
 TARGET_CENTER = 6000
 MAX_SERVO = 8000
 MIN_SERVO = 4000
 SERVO_INCREMENT = 100
-MOTOR_INCREMENT = 500
 
+# MOTOR CONSTANTS
+MOTOR_INCREMENT = 500
 MOTOR_TARGET_RESET = 6001  # 6000
 
 
@@ -69,6 +71,7 @@ class TangoRobot:
             # Write out command
             self.usb.write(command.encode('utf-8'))
 
+# Methods for Moving the robot waist
     def waistLeft(self):
         self.motors -= SERVO_INCREMENT
         if (self.motors > MAX_SERVO):
@@ -81,6 +84,7 @@ class TangoRobot:
             self.motors = MIN_SERVO
         self.writeCmd(RobotMotor.Waist, self.motors)
 
+# Methods for Moving the robot head
     def headUp(self):
         self.motors += SERVO_INCREMENT
         if (self.motors > MAX_SERVO):
@@ -104,6 +108,20 @@ class TangoRobot:
         if (self.motors < MIN_SERVO):
             self.motors = MIN_SERVO
         self.writeCmd(RobotMotor.HeadX, self.motors)
+
+
+# Methods for driving the robot
+    def driveForward(self):
+        pass
+
+    def driveBackward(self):
+        pass
+
+    def turnLeft(self):
+        pass
+
+    def turnRight(self):
+        pass
 
     def resetMotor(self, motor):
         self.writeCmd(motor, MOTOR_TARGET_RESET)
