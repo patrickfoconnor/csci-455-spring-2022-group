@@ -45,7 +45,7 @@ class TangoRobot:
         # center robot head on X
         self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
         # center robot head on Y
-        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
+        self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
