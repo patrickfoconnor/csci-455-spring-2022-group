@@ -109,7 +109,7 @@ class TangoRobot:
         elif keycode == 54:
             print("C (Right)")
             self.motors += SERVO_INCREMENT
-            if (self.motors > MIN_SERVO):
+            if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
             self.writeCmd(RobotMotor.Waist, self.motors)
 
@@ -125,7 +125,7 @@ class TangoRobot:
         elif keycode == 39:
             print("S: Head Down")
             self.motors -= SERVO_INCREMENT
-            if (self.motors > MIN_SERVO):
+            if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
             self.writeCmd(RobotMotor.HeadY, self.motors)
 
@@ -138,7 +138,7 @@ class TangoRobot:
         elif keycode == 40:
             print("D: Head Right")
             self.motors -= SERVO_INCREMENT
-            if (self.motors > MIN_SERVO):
+            if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
             self.writeCmd(RobotMotor.HeadY, self.motors)
 
