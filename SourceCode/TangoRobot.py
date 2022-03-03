@@ -1,11 +1,10 @@
-# Controls
-#
+# Main class that will hold base Robot object
 
+import tkinter as tk
+from enum import Enum
 import serial
 import sys
 import time
-from enum import Enum
-import tkinter as tk
 
 TARGET_CENTER = 6000
 MAX_SERVO = 8000
@@ -14,7 +13,6 @@ SERVO_INCREMENT = 100
 MOTOR_INCREMENT = 500
 
 MOTOR_TARGET_RESET = 6001  # 6000
-
 
 def getUSB():
     usb = None
@@ -52,12 +50,7 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        # center robot waist
-        self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
-        # center robot head on X
-        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
-        # center robot head on Y
-        self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
+        self.resetRobot()
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
@@ -90,52 +83,6 @@ class TangoRobot:
         if self.usb is not None:
             # Write out command
             self.usb.write(command.encode('utf-8'))
-
-    def arrows(self, event):
-        keycode = event.keycode
-        if keycode == 111:
-            print("Up Arrow")
-            self.resetMotor(RobotMotor.WheelLeft)
-            self.motors += MOTOR_INCREMENT
-            if (self.motors > MAX_SERVO):
-                self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.WheelLeft, self.motors)
-        elif keycode == 116:
-            print("Down Arrow")
-        elif keycode == 113:
-            print("Left Arrow")
-        elif keycode == 114:
-            print("Right Arrow")
-
-    def waist(self, event):
-        keycode = event.keycode
-        if keycode == 52:
-            print("Z (Left)")
-            self.waistLeft()
-
-        elif keycode == 54:
-            print("C (Right)")
-            self.waistRight()
-
-    def head(self, event):
-        keycode = event.keycode
-        if keycode == 25:
-            print("W: Head Up")
-            self.headUp()
-
-        elif keycode == 39:
-            print("S: Head Down")
-            self.headDown()
-
-        elif keycode == 38:
-            print("A: Head Left")
-            self.headLeft()
-        elif keycode == 40:
-            print("D: Head Right")
-            self.headRight()
-
-    def stop(self, event=None):
-        self.win.destroy()
 
     def waistLeft(self):
         self.motors -= SERVO_INCREMENT
@@ -176,5 +123,10 @@ class TangoRobot:
     def resetMotor(self, motor):
         self.writeCmd(motor, MOTOR_TARGET_RESET)
 
-
-robot = TangoRobot()
+    def resetRobot(self):
+        # center robot waist
+        self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
+        # center robot head on X
+        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
+        # center robot head on Y
+        self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
