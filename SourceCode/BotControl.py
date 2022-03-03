@@ -4,9 +4,9 @@ import time
 from enum import Enum
 import tkinter as tk
 
-TARGET_CENTER = 5896
+TARGET_CENTER = 6000
 MAX_SERVO = 8500
-MIN_SERVO = 4500
+MIN_SERVO = 3900
 SERVO_INCREMENT = 100
 
 MOTOR_TARGET_RESET = 6001 # 6000
@@ -37,6 +37,8 @@ class RobotMotor(Enum):
     HeadY = 0x04
     ArmLeft = 0x05
     ArmRight = 0x06
+
+
 
 
 class TangoRobot:
