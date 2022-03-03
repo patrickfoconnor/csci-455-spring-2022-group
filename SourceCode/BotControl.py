@@ -5,6 +5,10 @@ from enum import Enum
 import tkinter as tk
 
 TARGET_CENTER = 5896
+MAX_SERVO = 7900
+MIN_SERVO = 4100
+
+
 
 def getUSB():
     usb = None
@@ -22,17 +26,17 @@ def getUSB():
             sys.exit(0)
     return usb
 
+
 class RobotMotor(Enum):
-    WheelLeft=0x00
-    WheelRight=0x01
-    Waist=0x02
-    HeadX=0x03
-    HeadY=0x04
-    ArmLeft=0x05
-    ArmRight=0x06
+    WheelLeft = 0x00
+    WheelRight = 0x01
+    Waist = 0x02
+    HeadX = 0x03
+    HeadY = 0x04
+    ArmLeft = 0x05
+    ArmRight = 0x06
 
-class Robot:
-
+class TangoRobot:
     # class properties
     usb = None
     win = None
@@ -49,17 +53,17 @@ class Robot:
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
-        self.win.bind('<Up>', self.arrows)   # key code: 111
-        self.win.bind('<Down>', self.arrows) # key code: 116
-        self.win.bind('<Left>', self.arrows) # key code: 113
-        self.win.bind('<Right>', self.arrows) # key code: 114
-        self.win.bind('<space>', self.stop) # key code: 65
-        self.win.bind('<w>', self.head) # key code: 25
-        self.win.bind('<s>', self.head) # key code: 39
-        self.win.bind('<a>', self.head) # key code: 38
-        self.win.bind('<d>', self.head) # key code: 40
-        self.win.bind('<z>', self.waist) # key code: 52
-        self.win.bind('<c>', self.waist) # key code: 54
+        self.win.bind('<Up>', self.arrows)  # key code: 111
+        self.win.bind('<Down>', self.arrows)  # key code: 116
+        self.win.bind('<Left>', self.arrows)  # key code: 113
+        self.win.bind('<Right>', self.arrows)  # key code: 114
+        self.win.bind('<space>', self.stop)  # key code: 65
+        self.win.bind('<w>', self.head)  # key code: 25
+        self.win.bind('<s>', self.head)  # key code: 39
+        self.win.bind('<a>', self.head)  # key code: 38
+        self.win.bind('<d>', self.head)  # key code: 40
+        self.win.bind('<z>', self.waist)  # key code: 52
+        self.win.bind('<c>', self.waist)  # key code: 54
         # start tkinter window
         self.win.mainloop()
 
@@ -71,7 +75,7 @@ class Robot:
             print("Motor must be type {!s} - type '{!s}' not accepted".format(type(RobotMotor), type(motor)))
             return
         # Build command
-        lsb = target &0x7F
+        lsb = target & 0x7F
         msb = (target >> 7) & 0x7F
         command = chr(0xaa) + chr(0xC) + chr(0x04) + chr(motor.value) + chr(lsb) + chr(msb)
         # Check if usb is not None
@@ -94,25 +98,49 @@ class Robot:
         keycode = event.keycode
         if keycode == 52:
             print("Z (Left)")
+            self.motors += 200
+            if(self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.Robot.setTarget(RobotMotor.Waist, self.motors)
         elif keycode == 54:
             print("C (Right)")
+            self.motors += 200
+            if(self.motors > MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.Robot.setTarget(RobotMotor.Waist, self.motors)
 
     def head(self, event):
         keycode = event.keycode
         if keycode == 25:
-            print("Head Up")
+
+            print("W: Head Up")
             self.motors += 200
-            if(self.motors > 7900):
-                self.motors = 7900
-            self.robot.setTarget(HeadY, self.motors)
+            if(self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.Robot.setTarget(RobotMotor.HeadY, self.motors)
+            
         elif keycode == 39:
-            print("Head Down")
+            print("S: Head Down")
+            self.motors -= 200
+            if(self.motors > MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.Robot.setTarget(RobotMotor.HeadY, self.motors)
         elif keycode == 38:
-            print("Head Left")
+            print("A: Head Left")
+            self.motors += 200
+            if(self.motors > MAX_SERVO):
+                self.motors = MAX_SERVO
+            self.Robot.setTarget(RobotMotor.HeadX, self.motors)
         elif keycode == 40:
-            print("Head Right")
+            print("D: Head Right")
+            self.motors -= 200
+            if(self.motors > MIN_SERVO):
+                self.motors = MIN_SERVO
+            self.Robot.setTarget(RobotMotor.HeadY, self.motors)
 
     def stop(self, event=None):
         self.win.destroy()
 
-robot = Robot()
+        
+robot = TangoRobot()
+
