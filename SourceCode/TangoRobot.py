@@ -15,8 +15,8 @@ import time
 
 # SERVO CONSTANTS
 TARGET_CENTER = 5896
-MAX_SERVO = 8000
-MIN_SERVO = 4000
+MAX_SERVO = 7500
+MIN_SERVO = 4500
 SERVO_INCREMENT = 1000
 INCREMENT = 10
 
@@ -137,14 +137,14 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        self.motors = 6000
-        self.writeCmd(RobotMotor.WheelLeft.value, self.motors)
-        self.writeCmd(RobotMotor.WheelRight.value, self.motors)
+        self.motors = 6001
+        self.writeCmd(RobotMotor.WheelLeft, self.motors)
+        self.writeCmd(RobotMotor.WheelRight, self.motors)
         self.motors += MOTOR_INCREMENT
         if (self.motors > MAX_SERVO):
             self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.WheelLeft.value, self.motors)
-        self.writeCmd(RobotMotor.WheelRight.value, self.motors)
+        self.writeCmd(RobotMotor.WheelLeft, self.motors)
+        self.writeCmd(RobotMotor.WheelRight, self.motors)
 
     def driveBackward(self):
         pass
