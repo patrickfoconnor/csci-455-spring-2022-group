@@ -134,5 +134,8 @@ class TangoRobot:
         # center robot head on Y
         self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
 
+    def killRobot(self):
+        self.win.destroy()
+
 
 robot = TangoRobot()
