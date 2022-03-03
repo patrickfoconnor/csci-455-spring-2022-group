@@ -30,9 +30,9 @@ class Robot:
         lsb = target & 0x74
         msb = (target >> 7) & 0x7F
 
-<<<<<<< HEAD
+
 # Explanation
->>>>>>> 2d696a0f50eb95403a16e5dc864bb9bebc0df2b8
+
 # 0x01 is wheels?
 # 0x02 is body
 # 0x03 is the head

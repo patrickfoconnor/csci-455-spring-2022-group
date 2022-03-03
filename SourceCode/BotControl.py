@@ -42,6 +42,10 @@ class TangoRobot:
         self.usb = getUSB()
         # center robot waist
         self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
+        # center robot head on X
+        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
+        # center robot head on Y
+        self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
