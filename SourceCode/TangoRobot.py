@@ -115,7 +115,8 @@ class TangoRobot:
         self.motors += MOTOR_INCREMENT
         if (self.motors < MAX_SERVO):
             self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.HeadX, self.motors)
+        self.writeCmd(RobotMotor.WheelLeft, self.motors)
+        self.writeCmd(RobotMotor.WheelRight, self.motors)
 
     def driveBackward(self):
         pass
