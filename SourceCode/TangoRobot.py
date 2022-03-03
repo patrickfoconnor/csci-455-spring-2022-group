@@ -73,7 +73,7 @@ class TangoRobot:
         # Build command
         lsb = target & 0x7F
         msb = (target >> 7) & 0x7F
-        command = chr(0xaa) + chr(0xC) + chr(0x04) + chr(motor.value) + chr(lsb) + chr(msb)
+        command = chr(0xaa) + chr(0xC) + chr(0x04) + chr(motor) + chr(lsb) + chr(msb)
         # Check if usb is not None
         if self.usb is not None:
             # Write out command
