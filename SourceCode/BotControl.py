@@ -7,6 +7,7 @@ import tkinter as tk
 TARGET_CENTER = 5896
 MAX_SERVO = 7900
 MIN_SERVO = 4100
+MOTOR_TARGET_RESET = 6001 # 6000
 
 
 def getUSB():
@@ -99,7 +100,7 @@ class TangoRobot:
         keycode = event.keycode
         if keycode == 52:
             print("Z (Left)")
-            self.motors += 200
+            self.motors -= 200
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
             self.writeCmd(RobotMotor.Waist, self.motors)
@@ -113,7 +114,6 @@ class TangoRobot:
     def head(self, event):
         keycode = event.keycode
         if keycode == 25:
-
             print("W: Head Up")
             self.motors += 200
             if (self.motors > MAX_SERVO):
@@ -126,6 +126,7 @@ class TangoRobot:
             if (self.motors > MIN_SERVO):
                 self.motors = MIN_SERVO
             self.writeCmd(RobotMotor.HeadY, self.motors)
+
         elif keycode == 38:
             print("A: Head Left")
             self.motors += 200
