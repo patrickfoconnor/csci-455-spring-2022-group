@@ -115,3 +115,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
         # center robot head on Y
         self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
+
+
+robot = TangoRobot()
+

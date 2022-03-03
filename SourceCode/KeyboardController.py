@@ -70,5 +70,3 @@ def head(self, event):
 def stop(self, event=None):
     self.win.destroy()
 
-
-robot = TangoRobot()
