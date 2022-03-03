@@ -40,7 +40,6 @@ class KeyboardController:
         if keycode == 52:
             print("Z (Left)")
             robot.waistLeft()
-
         elif keycode == 54:
             print("C (Right)")
             robot.waistRight()
@@ -50,11 +49,9 @@ class KeyboardController:
         if keycode == 25:
             print("W: Head Up")
             robot.headUp()
-
         elif keycode == 39:
             print("S: Head Down")
             robot.headDown()
-
         elif keycode == 38:
             print("A: Head Left")
             robot.headLeft()
@@ -70,4 +67,4 @@ class KeyboardController:
 
 
 
-keyboard = KeyboardController()
+KeyboardController()
