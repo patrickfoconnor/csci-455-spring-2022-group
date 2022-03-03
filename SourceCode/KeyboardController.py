@@ -25,7 +25,7 @@ class KeyboardController:
         keycode = event.keycode
         if keycode == 111:
             print("Up Arrow")
-            time.time.sleep(.2)
+            time.sleep(.2)
             robot.driveForward()
         elif keycode == 116:
             print("Down Arrow")
