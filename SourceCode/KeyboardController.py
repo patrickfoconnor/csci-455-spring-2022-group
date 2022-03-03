@@ -24,17 +24,16 @@ class KeyboardController:
         keycode = event.keycode
         if keycode == 111:
             print("Up Arrow")
-            robot.resetMotor(RobotMotor.WheelLeft)
-            robot.motors += MOTOR_INCREMENT
-            if (robot.motors > MAX_SERVO):
-                robot.motors = MAX_SERVO
-            robot.writeCmd(RobotMotor.WheelLeft, robot.motors)
+            robot.driveForward()
         elif keycode == 116:
             print("Down Arrow")
+            robot.driveBackward()
         elif keycode == 113:
             print("Left Arrow")
+            robot.turnLeft()
         elif keycode == 114:
             print("Right Arrow")
+            robot.turnRight()
 
     def waist(self, event):
         keycode = event.keycode
@@ -63,8 +62,12 @@ class KeyboardController:
             print("D: Head Right")
             robot.headRight()
 
-    def stop(self, event=None):
-        robot.win.destroy()
+    def stop(self, event):
+        keycode = event.keycode
+        if keycode == 65:
+            print("Space: Kill Switch")
+            robot.killRobot()
+
 
 
 keyboard = KeyboardController()
