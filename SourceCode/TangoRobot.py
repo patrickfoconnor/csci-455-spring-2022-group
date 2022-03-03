@@ -7,7 +7,6 @@
 # Turn Left
 # Redo movements to incorporate for loop to reduce jerk
 
-import tkinter as tk
 from enum import Enum
 import serial
 import sys
@@ -137,9 +136,7 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        self.motors = 6001
-        self.writeCmd(RobotMotor.WheelLeft, self.motors)
-        self.writeCmd(RobotMotor.WheelRight, self.motors)
+        self.resetMotor(self.motors)
         self.motors += MOTOR_INCREMENT
         if (self.motors > MAX_SERVO):
             self.motors = MAX_SERVO
@@ -156,7 +153,10 @@ class TangoRobot:
         pass
 
     def resetMotor(self, motor):
-        self.writeCmd(motor, MOTOR_TARGET_RESET)
+        if (self.motors > 6000):
+            self.motors = motor.value
+        else:
+            self.motors = 6000
 
     def resetRobot(self):
         for motor in RobotMotor:
