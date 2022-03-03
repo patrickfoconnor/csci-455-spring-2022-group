@@ -140,7 +140,7 @@ class TangoRobot:
             self.motors -= SERVO_INCREMENT
             if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.HeadY, self.motors)
+            self.writeCmd(RobotMotor.HeadX, self.motors)
 
     def stop(self, event=None):
         self.win.destroy()
