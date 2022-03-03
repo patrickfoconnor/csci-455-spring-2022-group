@@ -11,6 +11,7 @@ TARGET_CENTER = 6000
 MAX_SERVO = 8000
 MIN_SERVO = 4000
 SERVO_INCREMENT = 100
+MOTOR_INCREMENT = 500
 
 MOTOR_TARGET_RESET = 6001  # 6000
 
@@ -95,7 +96,7 @@ class TangoRobot:
         if keycode == 111:
             print("Up Arrow")
             self.resetMotor(RobotMotor.WheelLeft)
-            self.motors -= SERVO_INCREMENT
+            self.motors += MOTOR_INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
             self.writeCmd(RobotMotor.WheelLeft, self.motors)
