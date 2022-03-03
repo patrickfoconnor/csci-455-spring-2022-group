@@ -14,6 +14,7 @@ MOTOR_INCREMENT = 500
 
 MOTOR_TARGET_RESET = 6001  # 6000
 
+
 def getUSB():
     usb = None
     try:
@@ -51,7 +52,6 @@ class TangoRobot:
     def __init__(self):
         self.usb = getUSB()
         self.resetRobot()
-
 
     # write out command to usb
     def writeCmd(self, motor, target):
@@ -118,4 +118,3 @@ class TangoRobot:
 
 
 robot = TangoRobot()
-
