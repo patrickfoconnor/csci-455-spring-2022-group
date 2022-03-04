@@ -160,23 +160,25 @@ class TangoRobot:
         print(self.speed)
 
     def turnLeft(self):
-        self.speed += MOTOR_INCREMENT
+        #self.speed += MOTOR_INCREMENT
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
             print("Too Slow")
 
         self.writeCmd(RobotMotor.WheelRight, self.speed)
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        time.sleep(.5)
         print(self.speed)
 
     def turnRight(self):
-        self.speed -= MOTOR_INCREMENT
+        #self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
             print("Too Slow")
 
         self.writeCmd(RobotMotor.WheelRight, self.speed)
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        time.sleep(.5)
+        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.speed)
 
     def resetMotor(self):
