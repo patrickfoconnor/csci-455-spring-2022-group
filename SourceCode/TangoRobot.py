@@ -140,7 +140,7 @@ class TangoRobot:
     def driveForward(self):
         # self.resetMotor(self.motors)
         if self.dummy == False:
-            resetMotor()
+            self.resetMotor()
             self.dummy = True
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
@@ -176,7 +176,6 @@ class TangoRobot:
     def turnRight(self):
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
         time.sleep(.5)
-
         resetWheels()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
@@ -192,8 +191,10 @@ class TangoRobot:
         # Center all motors to 6000
         for motor in RobotMotor:
             self.writeCmd(motor, TARGET_CENTER)
+<<<<<<< HEAD
             
     def resetWheels(self):
+>>>>>>> 82dbe59bede0ab35325e840cbcfcf1ce38b4fd08
         # Center all robot motors to 6000
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
