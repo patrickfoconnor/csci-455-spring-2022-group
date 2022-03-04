@@ -62,7 +62,9 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        self.resetRobot()
+        #self.resetRobot()
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
 
     # write out command to usb
     def writeCmd(self, motor, target):
@@ -139,8 +141,6 @@ class TangoRobot:
     # Methods for driving the robot
     def driveForward(self):
         #self.resetMotor(self.motors)
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        self.writeCmd(RobotMotor.WheelRight, self.speed)
         self.speed += MOTOR_INCREMENT
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
@@ -151,8 +151,6 @@ class TangoRobot:
 
 
     def driveBackward(self):
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        self.writeCmd(RobotMotor.WheelRight, self.speed)
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
