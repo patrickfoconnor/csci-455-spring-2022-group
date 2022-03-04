@@ -176,12 +176,14 @@ class TangoRobot:
             print("Too Slow")
 
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
+        time.sleep(.5)
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
 
     def turnRight(self):
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
+        time.sleep(.5)
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
