@@ -149,9 +149,9 @@ class TangoRobot:
     # Methods for driving the robot
     def driveForward(self):
         # self.resetMotor(self.motors)
-        if dummy == False:
+        if self.dummy == False:
             self.writeCmd(RobotMotor.WheelLeft, MOTOR_SPEED)
-            dummy = True
+            self.dummy = True
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
