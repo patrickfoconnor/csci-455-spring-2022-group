@@ -154,7 +154,7 @@ class TangoRobot:
 
     def resetMotor(self, motor):
         if (self.motors > 6000):
-            self.motors = motor.value
+            self.motors = self.motors
         else:
             self.motors = 6000
 
