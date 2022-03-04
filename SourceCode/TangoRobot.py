@@ -62,7 +62,7 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        #self.resetRobot()
+        self.resetRobot()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         self.writeCmd(RobotMotor.WheelRight, self.speed)
 
