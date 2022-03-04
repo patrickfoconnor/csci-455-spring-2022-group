@@ -13,7 +13,9 @@ SERVO_INCREMENT = 200
 INCREMENT = 10
 
 # MOTOR CONSTANTS
+
 MOTOR_SPEED = 6000
+
 MOTOR_INCREMENT = 200
 MOTOR_TARGET_RESET = 6000  # 6000
 
@@ -36,7 +38,6 @@ def getUSB():
 
 
 class RobotMotor(Enum):
-
     WheelLeft = 0x01
     WheelRight = 0x02
     Waist = 0x00
@@ -44,8 +45,6 @@ class RobotMotor(Enum):
     HeadY = 0x04
     ArmLeft = 0x05
     ArmRight = 0x06
-
-
 
 
 class TangoRobot:
@@ -141,7 +140,7 @@ class TangoRobot:
     def driveForward(self):
         # self.resetMotor(self.motors)
         if self.dummy == False:
-            self.resetMotor()
+            resetMotor()
             self.dummy = True
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
@@ -167,7 +166,7 @@ class TangoRobot:
             print("Too Slow")
 
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
-        # self.writeCmd(RobotMotor.WheelLeft, self.speed)
+
         time.sleep(.5)
         self.resetMotor()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
