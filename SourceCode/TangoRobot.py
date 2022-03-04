@@ -9,7 +9,7 @@ import time
 TARGET_CENTER = 6000
 MAX_SERVO = 7600
 MIN_SERVO = 4400
-SERVO_INCREMENT = 100
+SERVO_INCREMENT = 150
 INCREMENT = 10
 
 # MOTOR CONSTANTS
@@ -200,8 +200,6 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
 
-    def killRobot(self):
-        self.win.destroy()
 
 
 robot = TangoRobot()
