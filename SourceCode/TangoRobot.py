@@ -20,6 +20,7 @@ SERVO_INCREMENT = 1000
 INCREMENT = 10
 
 # MOTOR CONSTANTS
+MOTOR_SPEED = 6001
 MOTOR_INCREMENT = 500
 MOTOR_TARGET_RESET = 6000  # 6000
 
@@ -56,6 +57,7 @@ class TangoRobot:
     usb = None
     win = None
     motors = 0
+    speed = MOTOR_SPEED
 
     # constructor
     def __init__(self):
@@ -136,12 +138,16 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        self.resetMotor()
-        self.motors += MOTOR_INCREMENT
-        if (self.motors > MAX_SERVO):
-            self.motors = MAX_SERVO
-        self.writeCmd(RobotMotor.WheelLeft, self.motors)
-        self.writeCmd(RobotMotor.WheelRight, self.motors)
+        #self.resetMotor(self.motors)
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
+        self.speed += MOTOR_INCREMENT
+        if (self.speed > MAX_SERVO):
+            self.speed = MAX_SERVO
+            print("Too Speedy")
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
+
 
     def driveBackward(self):
         pass
