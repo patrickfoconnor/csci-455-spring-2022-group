@@ -168,7 +168,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
 
         time.sleep(.5)
-        self.resetMotor()
+        resetWheels()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
@@ -176,8 +176,7 @@ class TangoRobot:
     def turnRight(self):
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
         time.sleep(.5)
-        # self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        self.resetMotor()
+        resetWheels()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
@@ -194,7 +193,9 @@ class TangoRobot:
             self.writeCmd(motor, TARGET_CENTER)
             time.sleep(.5)
 
-    def resetMotor(self):
+            
+    def resetWheels(self):
+
         # Center all robot motors to 6000
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
