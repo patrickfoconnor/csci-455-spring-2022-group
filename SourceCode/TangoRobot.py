@@ -9,7 +9,8 @@ import time
 TARGET_CENTER = 6000
 MAX_SERVO = 7600
 MIN_SERVO = 4400
-SERVO_INCREMENT = 150
+SERVO_INCREMENT = 225
+SERVO_INCREMENT_WAIST = 750
 INCREMENT = 10
 
 # MOTOR CONSTANTS
@@ -83,7 +84,7 @@ class TangoRobot:
     # Methods for Moving the robot waist
     def waistLeft(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while (counter <= SERVO_INCREMENT_WAIST):
             self.motors -= INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
@@ -92,7 +93,7 @@ class TangoRobot:
 
     def waistRight(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while (counter <= SERVO_INCREMENT_WAIST):
             self.motors += INCREMENT
             if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
