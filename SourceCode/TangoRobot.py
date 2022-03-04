@@ -62,12 +62,11 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        self.resetRobot()
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        self.writeCmd(RobotMotor.WheelRight, self.speed)
+
 
     # write out command to usb
     def writeCmd(self, motor, target):
+        self.resetRobot()
         # Validate that 'motor' is of type 'RobotMotor' enum class
         if not isinstance(motor, RobotMotor):
             # Show error, motor is not of correct type
@@ -172,15 +171,9 @@ class TangoRobot:
             self.motors = MOTOR_TARGET_RESET
 
     def resetRobot(self):
-        # Center
+        # Center all robot motors to 6000
         for motor in RobotMotor:
             self.writeCmd(motor, TARGET_CENTER)
-        # center robot waist
-        # self.writeCmd(RobotMotor.Waist, TARGET_CENTER)
-        # center robot head on X
-        # self.writeCmd(RobotMotor.HeadX, TARGET_CENTER)
-        # center robot head on Y
-        # self.writeCmd(RobotMotor.HeadY, TARGET_CENTER)
 
     def killRobot(self):
         self.win.destroy()
