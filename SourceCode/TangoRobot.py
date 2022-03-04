@@ -62,11 +62,11 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
+        self.resetRobot()
 
 
     # write out command to usb
     def writeCmd(self, motor, target):
-        self.resetRobot()
         # Validate that 'motor' is of type 'RobotMotor' enum class
         if not isinstance(motor, RobotMotor):
             # Show error, motor is not of correct type
