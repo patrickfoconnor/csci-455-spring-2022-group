@@ -43,13 +43,16 @@ def getUSB():
 
 
 class RobotMotor(Enum):
-    WheelLeft = 0x00
-    WheelRight = 0x01
-    Waist = 0x02
+
+    WheelLeft = 0x01
+    WheelRight = 0x02
+    Waist = 0x00
     HeadX = 0x03
     HeadY = 0x04
     ArmLeft = 0x05
     ArmRight = 0x06
+
+
 
 
 class TangoRobot:
@@ -63,7 +66,6 @@ class TangoRobot:
     def __init__(self):
         self.usb = getUSB()
         self.resetRobot()
-
 
     # write out command to usb
     def writeCmd(self, motor, target):
@@ -139,7 +141,7 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        #self.resetMotor(self.motors)
+        # self.resetMotor(self.motors)
         self.speed += MOTOR_INCREMENT
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
@@ -147,7 +149,6 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
-
 
     def driveBackward(self):
         self.speed -= MOTOR_INCREMENT
@@ -157,7 +158,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
-        
+
     def turnLeft(self):
         pass
 
