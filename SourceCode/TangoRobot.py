@@ -177,16 +177,16 @@ class TangoRobot:
 
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
         time.sleep(.5)
+        self.writeCmd(RobotMotor.WheelLeft, MOTOR_SPEED)
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        dummy = False
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
 
     def turnRight(self):
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
         time.sleep(.5)
+        self.writeCmd(RobotMotor.WheelLeft, MOTOR_SPEED)
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        dummy = False
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
 
