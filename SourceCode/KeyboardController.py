@@ -76,7 +76,7 @@ class KeyboardController:
         keycode = event.keycode
         if keycode == 65:
             print("Space: Kill Switch")
-            robot.killRobot()
+            robot.resetRobot()
 
 
 

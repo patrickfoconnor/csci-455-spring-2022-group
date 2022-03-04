@@ -191,10 +191,11 @@ class TangoRobot:
         # Center all motors to 6000
         for motor in RobotMotor:
             self.writeCmd(motor, TARGET_CENTER)
-<<<<<<< HEAD
+            time.sleep(.5)
+
             
     def resetWheels(self):
->>>>>>> 82dbe59bede0ab35325e840cbcfcf1ce38b4fd08
+
         # Center all robot motors to 6000
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
