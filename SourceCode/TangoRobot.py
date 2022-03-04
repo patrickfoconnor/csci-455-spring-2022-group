@@ -139,11 +139,11 @@ class TangoRobot:
     # Methods for driving the robot
     def driveForward(self):
         #self.resetMotor(self.motors)
-        speed += MOTOR_INCREMENT
-        if (speed > MAX_SERVO):
-            sspeed = MAX_SERVO
-        self.writeCmd(RobotMotor.WheelLeft, speed)
-        self.writeCmd(RobotMotor.WheelRight, speed)
+        self.speed += MOTOR_INCREMENT
+        if (self.speed > MAX_SERVO):
+            self.sspeed = MAX_SERVO
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
 
     def driveBackward(self):
         pass
