@@ -150,8 +150,15 @@ class TangoRobot:
 
 
     def driveBackward(self):
-        pass
-
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
+        self.speed -= MOTOR_INCREMENT
+        if (self.speed < MAX_SERVO):
+            self.speed = MAX_SERVO
+            print("Too Speedy")
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
+        
     def turnLeft(self):
         pass
 
