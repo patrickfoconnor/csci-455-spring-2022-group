@@ -141,7 +141,7 @@ class TangoRobot:
     def driveForward(self):
         # self.resetMotor(self.motors)
         if self.dummy == False:
-            resetMotor()
+            self.resetMotor()
             self.dummy = True
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
@@ -169,7 +169,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
         # self.writeCmd(RobotMotor.WheelLeft, self.speed)
         time.sleep(.5)
-        resetMotor()
+        self.resetMotor()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
@@ -178,7 +178,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
         time.sleep(.5)
         # self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        resetMotor()
+        self.resetMotor()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
