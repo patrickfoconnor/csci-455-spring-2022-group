@@ -61,7 +61,7 @@ class TangoRobot:
     win = None
     motors = 0
     speed = MOTOR_SPEED
-    dummy = false
+    dummy = False
 
     # constructor
     def __init__(self):
@@ -149,9 +149,9 @@ class TangoRobot:
     # Methods for driving the robot
     def driveForward(self):
         # self.resetMotor(self.motors)
-        if dummy == false:
+        if dummy == False:
             self.writeCmd(RobotMotor.WheelLeft, MOTOR_SPEED)
-            dummy = true
+            dummy = True
         self.speed -= MOTOR_INCREMENT
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
