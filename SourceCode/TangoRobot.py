@@ -139,9 +139,13 @@ class TangoRobot:
     # Methods for driving the robot
     def driveForward(self):
         #self.resetMotor(self.motors)
+        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelRight, self.speed)
         self.speed += MOTOR_INCREMENT
         if (self.speed > MAX_SERVO):
             self.sspeed = MAX_SERVO
+            print("Too Speedy")
+        print(self.speed)
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         self.writeCmd(RobotMotor.WheelRight, self.speed)
 
