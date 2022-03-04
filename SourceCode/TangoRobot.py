@@ -13,7 +13,7 @@ import sys
 import time
 
 # SERVO CONSTANTS
-TARGET_CENTER = 5896
+TARGET_CENTER = 6000
 MAX_SERVO = 7500
 MIN_SERVO = 4500
 SERVO_INCREMENT = 1000
@@ -21,7 +21,7 @@ INCREMENT = 10
 
 # MOTOR CONSTANTS
 MOTOR_INCREMENT = 500
-MOTOR_TARGET_RESET = 6001  # 6000
+MOTOR_TARGET_RESET = 6000  # 6000
 
 
 def getUSB():
@@ -136,7 +136,7 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        self.resetMotor(self.motors)
+        self.resetMotor()
         self.motors += MOTOR_INCREMENT
         if (self.motors > MAX_SERVO):
             self.motors = MAX_SERVO
@@ -152,13 +152,14 @@ class TangoRobot:
     def turnRight(self):
         pass
 
-    def resetMotor(self, motor):
-        if (self.motors > 6000):
+    def resetMotor(self):
+        if (self.motors > MOTOR_TARGET_RESET):
             self.motors = self.motors
         else:
-            self.motors = 6000
+            self.motors = MOTOR_TARGET_RESET
 
     def resetRobot(self):
+        # Center
         for motor in RobotMotor:
             self.writeCmd(motor, TARGET_CENTER)
         # center robot waist
