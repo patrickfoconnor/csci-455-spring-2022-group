@@ -1,12 +1,5 @@
 # Main class that will hold base Robot object
 
-# TODO
-# Get the wheels moving forward
-# Get the wheels moving backwards
-# Turn Right
-# Turn Left
-# Redo movements to incorporate for loop to reduce jerk
-
 from enum import Enum
 import serial
 import sys
@@ -14,13 +7,15 @@ import time
 
 # SERVO CONSTANTS
 TARGET_CENTER = 6000
-MAX_SERVO = 7500
-MIN_SERVO = 4500
-SERVO_INCREMENT = 1000
+MAX_SERVO = 7600
+MIN_SERVO = 4400
+SERVO_INCREMENT = 200
 INCREMENT = 10
 
 # MOTOR CONSTANTS
+
 MOTOR_SPEED = 6000
+
 MOTOR_INCREMENT = 200
 MOTOR_TARGET_RESET = 6000  # 6000
 
@@ -43,7 +38,6 @@ def getUSB():
 
 
 class RobotMotor(Enum):
-
     WheelLeft = 0x01
     WheelRight = 0x02
     Waist = 0x00
@@ -51,8 +45,6 @@ class RobotMotor(Enum):
     HeadY = 0x04
     ArmLeft = 0x05
     ArmRight = 0x06
-
-
 
 
 class TangoRobot:
@@ -71,8 +63,6 @@ class TangoRobot:
         self.turnRightSpeed = 5000
         self.writeCmd(RobotMotor.WheelLeft, 6000)
         self.writeCmd(RobotMotor.WheelRight, 6000)
-
-
 
     # write out command to usb
     def writeCmd(self, motor, target):
@@ -157,7 +147,7 @@ class TangoRobot:
             self.speed = MIN_SERVO
             print("Too Speedy")
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelRight, self.speed)
+        # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
 
     def driveBackward(self):
@@ -166,16 +156,17 @@ class TangoRobot:
             self.speed = MAX_SERVO
             print("Too Slow")
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelRight, self.speed)
+        # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
 
     def turnLeft(self):
-        #self.speed += MOTOR_INCREMENT
+        # self.speed += MOTOR_INCREMENT
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
             print("Too Slow")
 
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
+
         time.sleep(.5)
         resetMotor()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
@@ -185,6 +176,7 @@ class TangoRobot:
     def turnRight(self):
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
         time.sleep(.5)
+
         resetMotor()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         #self.writeCmd(RobotMotor.WheelLeft, self.speed)
