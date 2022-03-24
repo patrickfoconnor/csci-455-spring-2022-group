@@ -65,18 +65,18 @@ class SpeechController:
                 print("listening")
                 audio = r.listen(source)
                 print("Got audio")
-                word = r.recognize_google(audio)
-                print(word)
+                command = r.recognize_google(audio)
+                print(command)
             except sr.UnknownValueError:
                 print("Word not recognized")
 
-            if "waist" in word:
-                waist(word)
-            elif "head" in word:
-                head(word)
-            elif "robot" in word:
-                arrows(word)
-            elif "stop" in word:
+            if "waist" in command:
+                waist(command)
+            elif "head" in command:
+                head(command)
+            elif "robot" in command:
+                arrows(command)
+            elif "stop" in command:
                 stop()
             else:
                 print("Command not recognized")
