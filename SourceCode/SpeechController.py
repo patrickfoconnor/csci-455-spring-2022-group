@@ -7,55 +7,55 @@ listening = True;
 
 def arrows(command):
     if "forward" in command:
-        print("Up Arrow")
+        print("Forward")
         time.sleep(.2)
         robot.driveForward()
     elif "back" in command:
-        print("Down Arrow")
+        print("Backward")
         time.sleep(.2)
         robot.driveBackward()
     elif "left" in command:
-        print("Left Arrow")
+        print("Left")
         time.sleep(.2)
         robot.turnLeft()
     elif "right" in command:
-        print("Right Arrow")
+        print("Right")
         time.sleep(.2)
         robot.turnRight()
 
 
 def waist(command):
     if "left" in command:
-        print("Z (Left)")
+        print("Bend Left")
         time.sleep(.2)
         robot.waistLeft()
     elif "right" in command:
-        print("C (Right)")
+        print("Bend Right")
         time.sleep(.2)
         robot.waistRight()
 
 
 def head(command):
     if "up" in command:
-        print("W: Head Up")
+        print("Head Up")
         time.sleep(.2)
         robot.headUp()
     elif "down" in command:
-        print("S: Head Down")
+        print("Head Down")
         time.sleep(.2)
         robot.headDown()
     elif "left" in command:
-        print("A: Head Left")
+        print("Head Left")
         time.sleep(.2)
         robot.headLeft()
     elif "right" in command:
-        print("D: Head Right")
+        print("Head Right")
         time.sleep(.2)
         robot.headRight()
 
 
 def stop():
-    print("Space: Kill Switch")
+    print("Halting")
     robot.resetRobot()
 
 
