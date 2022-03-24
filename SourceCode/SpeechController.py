@@ -5,20 +5,20 @@ import time
 listening = True;
 
 
-def arrows(word):
-    if "forward" in word:
+def arrows(command):
+    if "forward" in command:
         print("Up Arrow")
         time.sleep(.2)
         robot.driveForward()
-    elif "back" in word:
+    elif "back" in command:
         print("Down Arrow")
         time.sleep(.2)
         robot.driveBackward()
-    elif "left" in word:
+    elif "left" in command:
         print("Left Arrow")
         time.sleep(.2)
         robot.turnLeft()
-    elif "right" in word:
+    elif "right" in command:
         print("Right Arrow")
         time.sleep(.2)
         robot.turnRight()
