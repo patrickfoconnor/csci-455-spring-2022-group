@@ -60,7 +60,7 @@ class TangoRobot:
     def __init__(self):
         self.usb = getUSB()
         self.resetRobot()
-        self.speed = 6000
+        self.driveSpeed = 6000
         self.turn = 6000
 
     # write out command to usb
@@ -148,26 +148,21 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
-        # self.resetMotor(self.motors)
-        if not self.dummy:
-            self.resetMotor()
-            self.dummy = True
-        self.speed -= MOTOR_INCREMENT
-        if self.speed < MIN_SERVO:
-            self.speed = MIN_SERVO
+        self.driveSpeed -= MOTOR_INCREMENT
+        if self.driveSpeed < MIN_SERVO:
+            self.driveSpeed = MIN_SERVO
             print("Too Speedy")
-        self.setTarget(RobotMotor.Forward, self.speed)
-        # self.setTarget(RobotMotor.Turn, self.speed)
-        print(self.speed)
+        self.setTarget(RobotMotor.Forward, self.driveSpeed)
+        print(self.driveSpeed)
 
     def driveBackward(self):
-        self.speed += MOTOR_INCREMENT
-        if self.speed > MAX_SERVO:
-            self.speed = MAX_SERVO
+        self.driveSpeed += MOTOR_INCREMENT
+        if self.driveSpeed > MAX_SERVO:
+            self.driveSpeed = MAX_SERVO
             print("Too Slow")
-        self.setTarget(RobotMotor.Forward, self.speed)
-        # self.setTarget(RobotMotor.Turn, self.speed)
-        print(self.speed)
+        self.setTarget(RobotMotor.Forward, self.driveSpeed)
+        # self.setTarget(RobotMotor.Turn, self.driveSpeed)
+        print(self.driveSpeed)
 
     def turnLeft(self):
         self.turn += 200  # MOTOR_INCREMENT
