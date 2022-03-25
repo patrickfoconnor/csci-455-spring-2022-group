@@ -129,7 +129,7 @@ class TangoRobot:
     def headDown(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
-            self.headYMotors += INCREMENT
+            self.headYMotors -= INCREMENT
             if self.headYMotors < MIN_SERVO:
                 self.headYMotors = MIN_SERVO
             counter += INCREMENT
