@@ -180,11 +180,11 @@ class TangoRobot:
         self.setTarget(self.Drive, self.driveSpeed)
         print(self.turn)
 
-    def resetRobot(self):
+    #def resetRobot(self):
         # Center all motors to 6000
-        for motor in RobotMotor:
-            self.setTarget(self.motor, TARGET_CENTER)
-            time.sleep(.5)
+        #for motor in RobotMotor:
+        #    self.setTarget(motor, TARGET_CENTER)
+        #    time.sleep(.5)
 
     def resetWheels(self):
         # Center all robot motors to 6000
