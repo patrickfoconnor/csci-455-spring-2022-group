@@ -97,7 +97,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.setTarget(self.Waist, self.motors)
             counter += INCREMENT
 
     def waistRight(self):
@@ -106,7 +106,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.setTarget(self.Waist, self.motors)
             counter += INCREMENT
 
     # Methods for Moving the robot head
@@ -116,7 +116,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.HeadY, self.motors)
+            self.setTarget(self.HeadY, self.motors)
             counter += INCREMENT
 
     def headUp(self):
@@ -125,7 +125,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.HeadY, self.motors)
+            self.setTarget(self.HeadY, self.motors)
             counter += INCREMENT
 
     def headLeft(self):
@@ -134,7 +134,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.HeadX, self.motors)
+            self.setTarget(self.HeadX, self.motors)
             counter += INCREMENT
 
     def headRight(self):
@@ -143,7 +143,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.HeadX, self.motors)
+            self.setTarget(self.HeadX, self.motors)
             counter += INCREMENT
 
     # Methods for driving the robot
@@ -152,7 +152,7 @@ class TangoRobot:
         if self.driveSpeed < MIN_SERVO:
             self.driveSpeed = MIN_SERVO
             print("Too Speedy")
-        self.setTarget(RobotMotor.Forward, self.driveSpeed)
+        self.setTarget(self.Forward, self.driveSpeed)
         print(self.driveSpeed)
 
     def driveBackward(self):
@@ -160,7 +160,7 @@ class TangoRobot:
         if self.driveSpeed > MAX_SERVO:
             self.driveSpeed = MAX_SERVO
             print("Too Slow")
-        self.setTarget(RobotMotor.Forward, self.driveSpeed)
+        self.setTarget(self.Forward, self.driveSpeed)
         # self.setTarget(RobotMotor.Turn, self.driveSpeed)
         print(self.driveSpeed)
 
@@ -188,8 +188,8 @@ class TangoRobot:
 
     def resetWheels(self):
         # Center all robot motors to 6000
-        self.setTarget(RobotMotor.Turn, TARGET_CENTER)
-        self.setTarget(RobotMotor.Forward, TARGET_CENTER)
+        self.setTarget(self.Turn, TARGET_CENTER)
+        self.setTarget(self.Forward, TARGET_CENTER)
 
 
 
