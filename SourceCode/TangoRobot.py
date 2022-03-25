@@ -183,7 +183,7 @@ class TangoRobot:
     def resetRobot(self):
         # Center all motors to 6000
         for motor in RobotMotor:
-            self.setTarget(motor, TARGET_CENTER)
+            self.setTarget(self.motor, TARGET_CENTER)
             time.sleep(.5)
 
     def resetWheels(self):
