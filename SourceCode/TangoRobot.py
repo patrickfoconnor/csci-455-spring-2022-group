@@ -153,6 +153,8 @@ class TangoRobot:
 
     # Methods for driving the robot
     def driveForward(self):
+        if self.driveSpeed > 6400:
+            self.driveSpeed == 6400
         self.driveSpeed -= MOTOR_INCREMENT
         if self.driveSpeed < MIN_SERVO:
             self.driveSpeed = MIN_SERVO
@@ -161,6 +163,8 @@ class TangoRobot:
         print(self.driveSpeed)
 
     def driveBackward(self):
+        if self.driveSpeed > 6400:
+            self.driveSpeed == 6400
         self.driveSpeed += MOTOR_INCREMENT
         if self.driveSpeed > MAX_SERVO:
             self.driveSpeed = MAX_SERVO
@@ -170,6 +174,8 @@ class TangoRobot:
         print(self.driveSpeed)
 
     def turnLeft(self):
+        if self.driveSpeed > 6400:
+            self.driveSpeed == 6400
         self.turn += 200  # MOTOR_INCREMENT
         if self.turn > MAX_SERVO:
             self.turn = MAX_SERVO
@@ -177,6 +183,8 @@ class TangoRobot:
         print(self.turn)
 
     def turnRight(self):
+        if self.driveSpeed > 6400:
+            self.driveSpeed == 6400
         self.turn -= 200  # MOTOR_INCREMENT
         if self.turn < MIN_SERVO:
             self.turn = MIN_SERVO
