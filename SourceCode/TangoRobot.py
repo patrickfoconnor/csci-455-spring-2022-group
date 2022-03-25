@@ -52,7 +52,9 @@ class TangoRobot:
     # class properties
     usb = None
     win = None
-    motors = 0
+    headYMotors = 6000
+    headXMotors = 6000
+    waistMotors = 6000
     driveSpeed = MOTOR_SPEED
     dummy = False
 
@@ -99,56 +101,56 @@ class TangoRobot:
     def waistLeft(self):
         counter = 0
         while (counter <= SERVO_INCREMENT_WAIST):
-            self.motors -= INCREMENT
-            if (self.motors > MAX_SERVO):
-                self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.waistMotors -= INCREMENT
+            if (self.waistMotors > MAX_SERVO):
+                self.waistMotors = MAX_SERVO
+            self.setTarget(RobotMotor.Waist, self.waistMotors)
             counter += INCREMENT
 
     def waistRight(self):
         counter = 0
         while counter <= SERVO_INCREMENT_WAIST:
-            self.motors += INCREMENT
-            if self.motors < MIN_SERVO:
-                self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.Waist, self.motors)
+            self.waistMotors += INCREMENT
+            if self.waistMotors < MIN_SERVO:
+                self.waistMotors = MIN_SERVO
+            self.setTarget(RobotMotor.Waist, self.waistMotors)
             counter += INCREMENT
 
     # Methods for Moving the robot head
     def headUp(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
-            self.motors += INCREMENT
-            if self.motors > MAX_SERVO:
-                self.motors = MAX_SERVO
+            self.headYMotors += INCREMENT
+            if self.headYMotors > MAX_SERVO:
+                self.headYMotors = MAX_SERVO
             counter += INCREMENT
-        self.setTarget(RobotMotor.HeadY, self.motors)
+        self.setTarget(RobotMotor.HeadY, self.headYMotors)
 
     def headDown(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
-            self.motors += INCREMENT
-            if self.motors < MIN_SERVO:
-                self.motors = MIN_SERVO
+            self.headYMotors += INCREMENT
+            if self.headYMotors < MIN_SERVO:
+                self.headYMotors = MIN_SERVO
             counter += INCREMENT
-        self.setTarget(RobotMotor.HeadY, self.motors)
+        self.setTarget(RobotMotor.HeadY, self.headYMotors)
 
     def headLeft(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
-            self.motors += INCREMENT
-            if self.motors > MAX_SERVO:
-                self.motors = MAX_SERVO
-            self.setTarget(RobotMotor.HeadX, self.motors)
+            self.headXMotors += INCREMENT
+            if self.headXMotors > MAX_SERVO:
+                self.headXMotors = MAX_SERVO
+            self.setTarget(RobotMotor.HeadX, self.headXMotors)
             counter += INCREMENT
 
     def headRight(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
-            self.motors -= INCREMENT
-            if self.motors < MIN_SERVO:
-                self.motors = MIN_SERVO
-            self.setTarget(RobotMotor.HeadX, self.motors)
+            self.headXMotors -= INCREMENT
+            if self.headXMotors < MIN_SERVO:
+                self.headXMotors = MIN_SERVO
+            self.setTarget(RobotMotor.HeadX, self.headXMotors)
             counter += INCREMENT
 
     # Methods for driving the robot
