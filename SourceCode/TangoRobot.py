@@ -171,15 +171,15 @@ class TangoRobot:
 
     def turnLeft(self):
         self.turn += 200  # MOTOR_INCREMENT
-        if self.turn < MIN_SERVO:
-            self.turn = MIN_SERVO
+        if self.turn > MAX_SERVO:
+            self.turn = MAX_SERVO
         self.setTarget(RobotMotor.Turn, self.turn)
         print(self.turn)
 
     def turnRight(self):
-        self.turn -= 200  # MOTOR_INCREMENT
-        if self.turn > MAX_SERVO:
-            self.turn = MAX_SERVO
+        self.turn += 200  # MOTOR_INCREMENT
+        if self.turn < MIN_SERVO:
+            self.turn = MIN_SERVO
         self.setTarget(RobotMotor.Turn, self.turn)
         print(self.turn)
 
