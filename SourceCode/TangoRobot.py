@@ -115,7 +115,7 @@ class TangoRobot:
             counter += INCREMENT
 
     # Methods for Moving the robot head
-    def headDown(self):
+    def headUp(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
             self.motors += INCREMENT
@@ -124,11 +124,11 @@ class TangoRobot:
             counter += INCREMENT
         self.setTarget(RobotMotor.HeadY, self.motors)
 
-    def headUp(self):
+    def headDown(self):
         counter = 0
         while counter <= SERVO_INCREMENT:
             self.motors += INCREMENT
-            if (self.motors < MIN_SERVO):
+            if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
             counter += INCREMENT
         self.setTarget(RobotMotor.HeadY, self.motors)
