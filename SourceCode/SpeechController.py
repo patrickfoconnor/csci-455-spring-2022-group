@@ -60,6 +60,7 @@ def stop():
 
 
 while listening:
+    error = False
     with sr.Microphone() as source:
         r = sr.Recognizer()
         r.adjust_for_ambient_noise(source)
@@ -73,14 +74,15 @@ while listening:
             print(word)
         except sr.UnknownValueError:
             print("Word not recognized")
-
-        if "waist" in word or "waste" in word:
-            waist(word)
-        elif "head" in word:
-            head(word)
-        elif "robot" in word:
-            arrows(word)
-        elif "stop" in word:
-            stop()
-        else:
-            print("Command not recognized")
+            error = True
+        if not error:
+            if "waist" in word or "waste" in word:
+                waist(word)
+            elif "head" in word:
+                head(word)
+            elif "robot" in word:
+                arrows(word)
+            elif "stop" in word:
+                stop()
+            else:
+                print("Command not recognized")
