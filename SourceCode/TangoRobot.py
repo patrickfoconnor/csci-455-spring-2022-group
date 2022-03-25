@@ -59,7 +59,7 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        self.resetRobot()
+        #self.resetRobot()
         self.driveSpeed = 6000
         self.turn = 6000
 
