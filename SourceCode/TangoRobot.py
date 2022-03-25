@@ -169,6 +169,7 @@ class TangoRobot:
         if self.turn < MIN_SERVO:
             self.turn = MIN_SERVO
         self.setTarget(self.Turn, self.turn)
+        self.setTarget(self.Drive, self.driveSpeed)
         print(self.turn)
 
     def turnRight(self):
@@ -176,6 +177,7 @@ class TangoRobot:
         if self.turn > MAX_SERVO:
             self.turn = MAX_SERVO
         self.setTarget(self.Turn, self.turn)
+        self.setTarget(self.Drive, self.driveSpeed)
         print(self.turn)
 
     def resetRobot(self):
