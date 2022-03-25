@@ -59,7 +59,7 @@ class TangoRobot:
     # constructor
     def __init__(self):
         self.usb = getUSB()
-        #self.resetRobot()
+        self.resetRobot()
         self.driveSpeed = 6000
         self.turn = 6000
 
@@ -85,9 +85,14 @@ class TangoRobot:
         self.usb.write(bytes(cmdStr, 'latin-1'))
 
     def setTarget(self, chan, target):
+        if not isinstance(chan, RobotMotor):
+            # Show error, motor is not of correct type
+            print("Motor must be type {!s} - type '{!s}' not accepted".format(type(RobotMotor), type(motor)))
+            return
+
         lsb = target & 0x7f  # 7 bits for least significant byte
         msb = (target >> 7) & 0x7f  # shift 7 and take next 7 bits for msb
-        cmd = chr(0x04) + chr(chan) + chr(lsb) + chr(msb)
+        cmd = chr(0x04) + chr(chan.value) + chr(lsb) + chr(msb)
         self.sendCmd(cmd)
 
     # Methods for Moving the robot waist
@@ -97,7 +102,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.setTarget(self.Waist, self.motors)
+            self.setTarget(RobotMotor.Waist, self.motors)
             counter += INCREMENT
 
     def waistRight(self):
@@ -106,7 +111,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.setTarget(self.Waist, self.motors)
+            self.setTarget(RobotMotor.Waist, self.motors)
             counter += INCREMENT
 
     # Methods for Moving the robot head
@@ -116,7 +121,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.setTarget(self.HeadY, self.motors)
+            self.setTarget(RobotMotor.HeadY, self.motors)
             counter += INCREMENT
 
     def headUp(self):
@@ -125,7 +130,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.setTarget(self.HeadY, self.motors)
+            self.setTarget(RobotMotor.HeadY, self.motors)
             counter += INCREMENT
 
     def headLeft(self):
@@ -134,7 +139,7 @@ class TangoRobot:
             self.motors += INCREMENT
             if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.setTarget(self.HeadX, self.motors)
+            self.setTarget(RobotMotor.HeadX, self.motors)
             counter += INCREMENT
 
     def headRight(self):
@@ -143,7 +148,7 @@ class TangoRobot:
             self.motors -= INCREMENT
             if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.setTarget(self.HeadX, self.motors)
+            self.setTarget(RobotMotor.HeadX, self.motors)
             counter += INCREMENT
 
     # Methods for driving the robot
@@ -152,7 +157,7 @@ class TangoRobot:
         if self.driveSpeed < MIN_SERVO:
             self.driveSpeed = MIN_SERVO
             print("Too Speedy")
-        self.setTarget(self.Forward, self.driveSpeed)
+        self.setTarget(RobotMotor.Forward, self.driveSpeed)
         print(self.driveSpeed)
 
     def driveBackward(self):
@@ -160,7 +165,7 @@ class TangoRobot:
         if self.driveSpeed > MAX_SERVO:
             self.driveSpeed = MAX_SERVO
             print("Too Slow")
-        self.setTarget(self.Forward, self.driveSpeed)
+        self.setTarget(RobotMotor.Forward, self.driveSpeed)
         # self.setTarget(RobotMotor.Turn, self.driveSpeed)
         print(self.driveSpeed)
 
@@ -168,28 +173,28 @@ class TangoRobot:
         self.turn += 200  # MOTOR_INCREMENT
         if self.turn < MIN_SERVO:
             self.turn = MIN_SERVO
-        self.setTarget(self.Turn, self.turn)
-        self.setTarget(self.Drive, self.driveSpeed)
+        self.setTarget(RobotMotor.Turn, self.turn)
+        self.setTarget(RobotMotor.Drive, self.driveSpeed)
         print(self.turn)
 
     def turnRight(self):
         self.turn -= 200  # MOTOR_INCREMENT
         if self.turn > MAX_SERVO:
             self.turn = MAX_SERVO
-        self.setTarget(self.Turn, self.turn)
-        self.setTarget(self.Drive, self.driveSpeed)
+        self.setTarget(RobotMotor.Turn, self.turn)
+        self.setTarget(RobotMotor.Drive, self.driveSpeed)
         print(self.turn)
 
-    #def resetRobot(self):
+    def resetRobot(self):
         # Center all motors to 6000
-        #for motor in RobotMotor:
-        #    self.setTarget(motor, TARGET_CENTER)
-        #    time.sleep(.5)
+        for motor in RobotMotor:
+            self.setTarget(motor, TARGET_CENTER)
+            time.sleep(.5)
 
     def resetWheels(self):
         # Center all robot motors to 6000
-        self.setTarget(self.Turn, TARGET_CENTER)
-        self.setTarget(self.Forward, TARGET_CENTER)
+        self.setTarget(RobotMotor.Turn, TARGET_CENTER)
+        self.setTarget(RobotMotor.Forward, TARGET_CENTER)
 
 
 
