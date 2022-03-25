@@ -39,8 +39,8 @@ def getUSB():
 
 
 class RobotMotor(Enum):
-    WheelLeft = 0x01
-    WheelRight = 0x02
+    Forward = 0x01
+    Turn = 0x02
     Waist = 0x00
     HeadX = 0x03
     HeadY = 0x04
@@ -53,20 +53,19 @@ class TangoRobot:
     usb = None
     win = None
     motors = 0
-    speed = MOTOR_SPEED
+    driveSpeed = MOTOR_SPEED
     dummy = False
 
     # constructor
     def __init__(self):
         self.usb = getUSB()
         self.resetRobot()
-        self.turnLeftSpeed = 7000
-        self.turnRightSpeed = 5000
- #       self.writeCmd(RobotMotor.WheelLeft, 6000)
-#        self.writeCmd(RobotMotor.WheelRight, 6000)
+        self.speed = 6000
+        self.turn = 6000
 
     # write out command to usb
-    def writeCmd(self, motor, target):
+    '''
+    def setTarget(self, motor, target):
         # Validate that 'motor' is of type 'RobotMotor' enum class
         if not isinstance(motor, RobotMotor):
             # Show error, motor is not of correct type
@@ -80,6 +79,16 @@ class TangoRobot:
         if self.usb is not None:
             # Write out command
             self.usb.write(command.encode('utf-8'))
+    '''
+    def sendCmd(self, cmd):
+        cmdStr = chr(0xaa) + chr(0x0c) + cmd
+        self.usb.write(bytes(cmdStr, 'latin-1'))
+
+    def setTarget(self, chan, target):
+        lsb = target & 0x7f  # 7 bits for least significant byte
+        msb = (target >> 7) & 0x7f  # shift 7 and take next 7 bits for msb
+        cmd = chr(0x04) + chr(chan) + chr(lsb) + chr(msb)
+        self.sendCmd(cmd)
 
     # Methods for Moving the robot waist
     def waistLeft(self):
@@ -88,116 +97,102 @@ class TangoRobot:
             self.motors -= INCREMENT
             if (self.motors > MAX_SERVO):
                 self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.Waist, self.motors)
+            self.setTarget(RobotMotor.Waist, self.motors)
             counter += INCREMENT
 
     def waistRight(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT_WAIST):
+        while counter <= SERVO_INCREMENT_WAIST:
             self.motors += INCREMENT
-            if (self.motors < MIN_SERVO):
+            if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.Waist, self.motors)
+            self.setTarget(RobotMotor.Waist, self.motors)
             counter += INCREMENT
 
     # Methods for Moving the robot head
     def headDown(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while counter <= SERVO_INCREMENT:
             self.motors += INCREMENT
-            if (self.motors > MAX_SERVO):
+            if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.HeadY, self.motors)
+            self.setTarget(RobotMotor.HeadY, self.motors)
             counter += INCREMENT
 
     def headUp(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while counter <= SERVO_INCREMENT:
             self.motors -= INCREMENT
             if (self.motors < MIN_SERVO):
                 self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.HeadY, self.motors)
+            self.setTarget(RobotMotor.HeadY, self.motors)
             counter += INCREMENT
 
     def headLeft(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while counter <= SERVO_INCREMENT:
             self.motors += INCREMENT
-            if (self.motors > MAX_SERVO):
+            if self.motors > MAX_SERVO:
                 self.motors = MAX_SERVO
-            self.writeCmd(RobotMotor.HeadX, self.motors)
+            self.setTarget(RobotMotor.HeadX, self.motors)
             counter += INCREMENT
 
     def headRight(self):
         counter = 0
-        while (counter <= SERVO_INCREMENT):
+        while counter <= SERVO_INCREMENT:
             self.motors -= INCREMENT
-            if (self.motors < MIN_SERVO):
+            if self.motors < MIN_SERVO:
                 self.motors = MIN_SERVO
-            self.writeCmd(RobotMotor.HeadX, self.motors)
+            self.setTarget(RobotMotor.HeadX, self.motors)
             counter += INCREMENT
 
     # Methods for driving the robot
     def driveForward(self):
         # self.resetMotor(self.motors)
-        if self.dummy == False:
+        if not self.dummy:
             self.resetMotor()
             self.dummy = True
         self.speed -= MOTOR_INCREMENT
-        if (self.speed < MIN_SERVO):
+        if self.speed < MIN_SERVO:
             self.speed = MIN_SERVO
             print("Too Speedy")
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        # self.writeCmd(RobotMotor.WheelRight, self.speed)
+        self.setTarget(RobotMotor.Forward, self.speed)
+        # self.setTarget(RobotMotor.Turn, self.speed)
         print(self.speed)
 
     def driveBackward(self):
         self.speed += MOTOR_INCREMENT
-        if (self.speed > MAX_SERVO):
+        if self.speed > MAX_SERVO:
             self.speed = MAX_SERVO
             print("Too Slow")
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        # self.writeCmd(RobotMotor.WheelRight, self.speed)
+        self.setTarget(RobotMotor.Forward, self.speed)
+        # self.setTarget(RobotMotor.Turn, self.speed)
         print(self.speed)
 
     def turnLeft(self):
-        # self.speed += MOTOR_INCREMENT
-        if (self.speed > MAX_SERVO):
-            self.speed = MAX_SERVO
-            print("Too Slow")
-
-        self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
-
-        time.sleep(.5)
-        self.resetWheels()
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        print(self.turnLeftSpeed)
+        self.turn += 200  # MOTOR_INCREMENT
+        if self.turn < MIN_SERVO:
+            self.turn = MIN_SERVO
+        self.setTarget(self.Turn, self.turn)
+        print(self.turn)
 
     def turnRight(self):
-        self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
-        time.sleep(.5)
-        self.resetWheels()
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        print(self.turnRightSpeed)
-
-    def resetMotor(self):
-        if (self.motors > MOTOR_TARGET_RESET):
-            self.motors = self.motors
-        else:
-            self.motors = MOTOR_TARGET_RESET
+        self.turn -= 200  # MOTOR_INCREMENT
+        if self.turn > MAX_SERVO:
+            self.turn = MAX_SERVO
+        self.setTarget(self.Turn, self.turn)
+        print(self.turn)
 
     def resetRobot(self):
         # Center all motors to 6000
         for motor in RobotMotor:
-            self.writeCmd(motor, TARGET_CENTER)
+            self.setTarget(motor, TARGET_CENTER)
             time.sleep(.5)
 
     def resetWheels(self):
         # Center all robot motors to 6000
-        self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
-        self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
+        self.setTarget(RobotMotor.Turn, TARGET_CENTER)
+        self.setTarget(RobotMotor.Forward, TARGET_CENTER)
 
 
 
