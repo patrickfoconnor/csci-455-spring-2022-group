@@ -1,5 +1,5 @@
 #comments are ignored
-~greetings: [hello howdy "hi there"]
+~greetings:[hello howdy "hi there"]
 u:(~greetings):[hi hello "what up" sup]
     u1:(you):good
 	u1:(and):[one two]
@@ -13,5 +13,5 @@ u:(my name is _): hello $name
 		u2:(what is it):$name
 			u3:(you are very smart):I know
 u:(what is my name) : your name is $name
-u: (how old am I) : you are $age
+u:(how old am I) : you are $age
 u:(this is an error) error here
