@@ -4,5 +4,5 @@ class Human:
 
     # constructor
     def __init__(self):
-        pass
+        self.humanInput =
 
