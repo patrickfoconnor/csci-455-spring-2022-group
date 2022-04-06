@@ -2,11 +2,11 @@
 def_lists = []
 
 
-
 def command(commandString, lineNumber):
     level = 0
     humanInput = ""
     robotOutputs = []
+    variableName = ""
     for i in range(len(commandString)):
         if commandString[i].isdigit():
             level = commandString[i]
@@ -15,31 +15,41 @@ def command(commandString, lineNumber):
             while commandString[i] != ")":
                 humanInput += commandString[i]
                 i += 1
-        if commandString[i] == ":" and commandString[i + 1] == "[":
+                if commandString[i] == "_":
+                    x = i
+                    variable = ""
+                    while commandString[x] != "$":
+                        x += 1
+                        while commandString[x].isalpha():
+                            variable += commandString[x]
+                        variableName = variable
+
+        if commandString[i] == ":":
             i += 1
-            while commandString[i] != "]":
-                i += 1
-                robotOut = ""
-                while commandString[i].isalpha() or commandString[i] == "\"":
-                    if commandString[i] != "\"":
-                        robotOut += commandString[i]
-                    else:
-                        i += 1
-                        while commandString[i] != "\"":
-                            robotOut += commandString[i]
-                            i += 1
+            if commandString[i] == "[":
+                while commandString[i] != "]":
                     i += 1
-                if robotOut != "":
-                    robotOutputs.append(robotOut)
-        elif commandString[i] == ":" and (commandString[i + 1].isalpha() or commandString[i + 1] == " "):
-            i += 1
-            robotOut = ""
-            while i < len(commandString) - 1:
-                robotOut += commandString[i]
-                i += 1
-            robotOutputs.append(robotOut)
-    print(level, humanInput, robotOutputs)
-    return level, humanInput, robotOutputs
+                    robotOut = ""
+                    while commandString[i].isalpha() or commandString[i] == "\"":
+                        if commandString[i] != "\"":
+                            robotOut += commandString[i]
+                        else:
+                            i += 1
+                            while commandString[i] != "\"":
+                                robotOut += commandString[i]
+                                i += 1
+                        i += 1
+                    if robotOut != "":
+                        robotOutputs.append(robotOut)
+            elif commandString[i].isalpha() or commandString[i] == " ":
+                robotOut = ""
+                while i < len(commandString) - 1:
+                    robotOut += commandString[i]
+                    i += 1
+                robotOutputs.append(robotOut)
+            elif commandString[i] == "~":
+                print("scream")
+    return level, humanInput, robotOutputs, variableName
 
 
 def definition(definitionString, lineNumber):
@@ -78,7 +88,8 @@ def definition(definitionString, lineNumber):
             variableOptions.append(robotOut)
         temp = variable_names, variableOptions
         def_lists.append(temp)
-        return ("how the fuck did you get here?")
+        return "how the fuck did you get here?"
+
 
 def lineReader(line, lineNumber):
     lineValue = ""
@@ -99,13 +110,15 @@ def fileReader():
 
     file = open("../DialogRules/testing.txt")
     for line in file:
-        print(line)
-        lines.append(lineReader(line, lineNumber))
-
+        returned = lineReader(line, lineNumber)
+        print(line, "\n", returned)
+        lines.append(returned)
         lineNumber += 1
         print("")
         print("")
     #for row in lines:
         #print(row)
-    print(def_lists)
+    print()
+
+
 fileReader()
