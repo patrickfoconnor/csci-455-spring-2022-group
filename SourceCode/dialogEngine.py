@@ -56,8 +56,8 @@ def definition(definitionString, lineNumber):
         if definitionString[i] == ":" and definitionString[i + 1] == "[":
             i += 1
             while definitionString[i] != "]":
-                i += 1
                 robotOut = ""
+                i += 1
                 while definitionString[i].isalpha() or definitionString[i] == "\"":
                     if definitionString[i] != "\"":
                         robotOut += definitionString[i]
@@ -76,8 +76,9 @@ def definition(definitionString, lineNumber):
                 robotOut += definitionString[i]
                 i += 1
             variableOptions.append(robotOut)
-    temp = variable_names, variableOptions
-    def_lists.append(temp)
+        temp = variable_names, variableOptions
+        def_lists.append(temp)
+        return ("how the fuck did you get here?")
 
 def lineReader(line, lineNumber):
     lineValue = ""
