@@ -1,6 +1,6 @@
 #file in
-variable_names = []
-variableOptions = []
+def_lists = []
+
 
 
 def command(commandString, lineNumber):
@@ -15,41 +15,44 @@ def command(commandString, lineNumber):
             while commandString[i] != ")":
                 humanInput += commandString[i]
                 i += 1
+        if commandString[i] == ":" and commandString[i + 1] == "[":
             i += 1
-            if commandString[i] == ":" and commandString[i+1] == "[":
-                i += 1
-                while commandString[i] != "]":
-                    i += 1
-                    robotOut = ""
-                    while commandString[i].isalpha() or commandString[i] == "\"":
-                        if commandString[i] != "\"":
-                            robotOut += commandString[i]
-                        else:
-                            i += 1
-                            while commandString[i] != "\"":
-                                robotOut += commandString[i]
-                                i += 1
-                        i += 1
-                    if robotOut != "":
-                        robotOutputs.append(robotOut)
-            elif commandString[i] == ":" and commandString[i+1].isalpha():
+            while commandString[i] != "]":
                 i += 1
                 robotOut = ""
-                while i < len(commandString)-1:
-                    robotOut += commandString[i]
+                while commandString[i].isalpha() or commandString[i] == "\"":
+                    if commandString[i] != "\"":
+                        robotOut += commandString[i]
+                    else:
+                        i += 1
+                        while commandString[i] != "\"":
+                            robotOut += commandString[i]
+                            i += 1
                     i += 1
-                robotOutputs.append(robotOut)
+                if robotOut != "":
+                    robotOutputs.append(robotOut)
+        elif commandString[i] == ":" and (commandString[i + 1].isalpha() or commandString[i + 1] == " "):
+            i += 1
+            robotOut = ""
+            while i < len(commandString) - 1:
+                robotOut += commandString[i]
+                i += 1
+            robotOutputs.append(robotOut)
     print(level, humanInput, robotOutputs)
     return level, humanInput, robotOutputs
 
 
 def definition(definitionString, lineNumber):
-    for i in range(len(definitionString)):
-        variable = ""
-        while definitionString[i].isalpha():
-            variable += definitionString[i]
+    variable = ""
+    variable_names = []
+    variableOptions = []
+    for i in range(0,len(definitionString)):
+        if definitionString[i] == "~":
             i += 1
-        variable_names.append(variable)
+            while definitionString[i].isalpha():
+                variable += definitionString[i]
+                i += 1
+            variable_names.append(variable)
         if definitionString[i] == ":" and definitionString[i + 1] == "[":
             i += 1
             while definitionString[i] != "]":
@@ -66,13 +69,15 @@ def definition(definitionString, lineNumber):
                     i += 1
                 if robotOut != "":
                     variableOptions.append(robotOut)
-        elif definitionString[i] == ":" and definitionString[i + 1].isalpha():
+        elif definitionString[i] == ":" and (definitionString[i + 1].isalpha() or definitionString[i + 1] == " "):
             i += 1
             robotOut = ""
             while i < len(definitionString) - 1:
                 robotOut += definitionString[i]
                 i += 1
             variableOptions.append(robotOut)
+    temp = variable_names, variableOptions
+    def_lists.append(temp)
 
 def lineReader(line, lineNumber):
     lineValue = ""
@@ -101,6 +106,5 @@ def fileReader():
         print("")
     #for row in lines:
         #print(row)
-    print(variable_names)
-
+    print(def_lists)
 fileReader()
