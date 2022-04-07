@@ -121,13 +121,13 @@ def lineReader(line, lineNumber):
             if line.count(':') == 2:
                 lineValue = command(line, lineNumber)
             else:
-                lineValue = "error at line " + str(lineNumber)
+                print("error at line " + str(lineNumber))
             break
         elif token == "~":
             if line.count(':') == 1:
                 definition(line, lineNumber)
             else:
-                lineValue = "error at line " + str(lineNumber)
+                print("error at line " + str(lineNumber))
             break
         elif token == "#":
             print("Comment at line ", lineNumber)

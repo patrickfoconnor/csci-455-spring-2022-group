@@ -2,8 +2,9 @@
 ~greetings:[hello howdy "hi there"]
 u:(~greetings):[hi hello "what up" sup]
     u1:(you):good
+        u2:(ree):reeeee
 	u1:(and):[one two]
-	    u2:(okay)[final]
+	    u2:(okay):final
 u:(you):Should not be here
 u:(test):two
     u1:(third):~greetings

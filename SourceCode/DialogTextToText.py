@@ -2,6 +2,7 @@
 import time
 import dialogEngine
 import random
+import sys
 #import speech_recognition as sr
 
 rulesList = dialogEngine.fileReader()
@@ -28,50 +29,60 @@ def listen():
 
 def typing():
     humanInput = input("Human: ")
+    if humanInput == "exit":
+        sys.exit()
     return humanInput
 
 
 def typeBack(out):
-    for rule in rulesList:
-        if rule[2] == out:
-            rulesList.remove(rule)
     if isinstance(out, list):
         print(random.choice(out))
     else:
         print(out)
 
 
-
-
-
 def main():
     level = 0
     i = 0
-    if rulesList[0][0] == level:
-        humanRes = rulesList[0][1]
-        humanInput = typing()
-        if isinstance(humanRes, str):
+    humanInput = typing()
+    breaking = False
+    while not breaking:
+        humanRes = rulesList[i][1]
+        if int(rulesList[i][0]) > 0:
+            pass
+        elif isinstance(humanRes, str):
             if humanInput == humanRes:
-                typeBack(rulesList[0][2])
-
+                typeBack(rulesList[i][2])
+                breaking = True
         elif isinstance(humanRes, list):
             for word in humanRes:
                 if humanInput == word:
-                    typeBack(rulesList[0][2])
-        while len(rulesList) > 0:
-            level += 1
+                    typeBack(rulesList[i][2])
+                    breaking = True
+        i += 1
+    level = 1
+    nextList = []
+    currentLevel = 1
+    while len(rulesList) > 0:
+
+        currentList = nextList
+        while currentLevel <= level:
+            if int(rulesList[i][0]) == level:
+                currentList.append(rulesList[i])
+            else:
+                if int(rulesList[i][0]) < currentLevel:
+                    currentLevel += 1
+                else:
+                    nextList.append(rulesList[i])
+
             i += 1
-            x = i
-            currentList = []
-            print(rulesList[i][0], type(rulesList[i][0]), level)
-            while int(float(rulesList[i][0])) >= level:
-                if int(rulesList[x][0]) == level:
-                    currentList.append(rulesList[x])
-                i += 1
-                x += 1
-            humanInput = typing()
-            for j in range(0, len(currentList)):
-                if humanInput == currentList[j][1]:
-                    typeBack(currentList[j][2])
+        humanInput = typing()
+        for j in range(0, len(currentList)):
+            if humanInput == currentList[j][1]:
+                typeBack(currentList[j][2])
+                if len(nextList) > 0:
+                    level += 1
+                    break
+        i += 1
 
 main()
