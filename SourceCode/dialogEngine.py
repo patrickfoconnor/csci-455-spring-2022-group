@@ -22,7 +22,6 @@ def command(commandString, lineNumber):
                     temp += commandString[i]
                     i += 1
                 for vari in def_lists:
-                    print(vari[0])
                     if vari[0] == temp:
                         humanInput = vari[1]
 
@@ -38,7 +37,6 @@ def command(commandString, lineNumber):
                             test = commandString[x]
                         x += 1
                         while commandString[x].isalpha():
-                            print(commandString[x])
                             variable += commandString[x]
                             x += 1
                         variableName = variable
@@ -72,7 +70,6 @@ def command(commandString, lineNumber):
                     temp += commandString[i]
                     i += 1
                 for vari in def_lists:
-                    print(vari[0])
                     if vari[0] == temp:
                         robotOutputs = vari[1]
     return level, humanInput, robotOutputs, variableName
@@ -121,10 +118,17 @@ def lineReader(line, lineNumber):
     lineValue = ""
     for token in line:
         if token == "u":
-            lineValue = command(line, lineNumber)
+            if line.count(':') == 2:
+                lineValue = command(line, lineNumber)
+            else:
+                lineValue = "error at line " + str(lineNumber)
             break
         elif token == "~":
-            definition(line, lineNumber)
+            if line.count(':') == 1:
+                definition(line, lineNumber)
+            else:
+                lineValue = "error at line " + str(lineNumber)
+            break
         elif token == "#":
             print("Comment at line ", lineNumber)
     return lineValue
@@ -137,14 +141,8 @@ def fileReader():
     file = open("../DialogRules/testing.txt")
     for line in file:
         returned = lineReader(line, lineNumber)
-        print(line, "\n", returned)
-        lines.append(returned)
+        if returned != "":
+            lines.append(returned)
         lineNumber += 1
-        print("")
-        print("")
-    #for row in lines:
-        #print(row)
-    print()
 
-
-fileReader()
+    return lines
