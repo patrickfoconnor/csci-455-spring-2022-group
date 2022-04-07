@@ -32,6 +32,9 @@ def typing():
 
 
 def typeBack(out):
+    for rule in rulesList:
+        if rule[2] == out:
+            rulesList.remove(rule)
     if isinstance(out, list):
         print(random.choice(out))
     else:
@@ -55,18 +58,20 @@ def main():
             for word in humanRes:
                 if humanInput == word:
                     typeBack(rulesList[0][2])
-        level += 1
-        i += 1
-        x = i
-        currentList = []
-        while int(rulesList[i][0]) >= level:
-            if int(rulesList[x][0]) == level:
-                currentList.append(rulesList[x])
+        while len(rulesList) > 0:
+            level += 1
             i += 1
-            x += 1
-        humanInput = typing()
-        for j in range(0, len(currentList)):
-            if humanInput == currentList[j][1]:
-                typeBack(currentList[j][2])
+            x = i
+            currentList = []
+            print(rulesList[i][0], type(rulesList[i][0]), level)
+            while int(float(rulesList[i][0])) >= level:
+                if int(rulesList[x][0]) == level:
+                    currentList.append(rulesList[x])
+                i += 1
+                x += 1
+            humanInput = typing()
+            for j in range(0, len(currentList)):
+                if humanInput == currentList[j][1]:
+                    typeBack(currentList[j][2])
 
 main()
