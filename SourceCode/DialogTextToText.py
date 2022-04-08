@@ -33,12 +33,13 @@ def typing():
         sys.exit()
     return humanInput
 
+# Return the human data previously recorded
+def getHumanData(varName, dict):
+    humandData = dict.get(varName)
+    return humandData
 
-def getHumanData(varName):
-    return varName
 
-
-def typeBack(out):
+def typeBack(out, dict):
     # Thinking that checking here for the $ sign
     if isinstance(out, list): # if response is list
         output = random.choice(out)
@@ -50,7 +51,7 @@ def typeBack(out):
                     varFound = True
                 while varFound and char.isalpha():
                     varName += char
-            humanData = getHumanData(varName)
+            humanData = getHumanData(varName, dict)
             print(output.replace(varName, humanData))
         else:
             print(output)
@@ -61,6 +62,7 @@ def typeBack(out):
 def main():
     level = 0
     i = 0
+    humanDataDict = {}
     humanInput = typing()
     breaking = False
     while not breaking: # this while loop checks the top level of options
@@ -69,12 +71,14 @@ def main():
             pass
         elif isinstance(humanRes, str): # if human option is a str
             if humanInput == humanRes:
-                typeBack(rulesList[i][2])
+                # Thinking right here is a good place to have insertion of var in dict
+                typeBack(rulesList[i][2], humanDataDict)
                 breaking = True
         elif isinstance(humanRes, list): # if human option is a list
             for word in humanRes:
                 if humanInput == word:
-                    typeBack(rulesList[i][2])
+                    # Thinking right here is a good place to have insertion of var in dict
+                    typeBack(rulesList[i][2], humanDataDict)
                     breaking = True
         i += 1
     level = 1
