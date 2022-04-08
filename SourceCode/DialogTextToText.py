@@ -7,6 +7,7 @@ import sys
 
 rulesList = dialogEngine.fileReader()
 listening = True;
+humanDataDict = {}
 r = random.seed
 
 
@@ -40,46 +41,71 @@ def getHumanData(varName, dicts):
     return humanData
 
 
-def typeBack(out, dicts):
+def typeBack2(out, value):
     # Thinking that checking here for the $ sign
     if isinstance(out, list):  # if response is list
         output = random.choice(out)
         if "$" in output:
             varName = "$"
             varFound = False
-            for char in output:
-                if char == "$":
+            for i in range(0, len(output)):
+                if output[i] == "$":
                     varFound = True
-                while varFound and char.isalpha():
-                    varName += char
-            humanData = getHumanData(varName, dicts)
-            print(output.replace(varName, humanData))
+                while varFound and output[i+1].isalpha():
+                    varName += output[i]
+                    i += 1
+            for search in humanDataDict:
+                if search == varName:
+
+                    print(output.replace(varName, value))
+                else:
+                    print(output.replace(varName, value))
+                    return varName, value
         else:
             print(output)
     else:
         print(out)  # if response is string
 
 
+def typeBack(out):
+    if isinstance(out, list):  # if response is list
+        out = random.choice(out)
+    print(out)  # if response is string
+
+
 def main():
     level = 0
     i = 0
-    humanDataDict = {}
     humanInput = typing()
     breaking = False
     while not breaking: # this while loop checks the top level of options
+        var = False
         humanRes = rulesList[i][1]  # what the robot is looking to respond to
+        while humanRes == "":
+            i+=1
+            humanRes = rulesList[i][1]
+        if "_" in humanRes:
+            humanRes = humanRes.replace("_", "")
+        if humanRes in humanInput:
+            var = True
+            value = humanInput[len(humanRes):]
         if int(rulesList[i][0]) > 0:  # if the level is higher that first level it skips the loop.
             pass
         elif isinstance(humanRes, str):  # if human option is a str
-            if humanInput == humanRes:
-                # Thinking right here is a good place to have insertion of var in dict
-                typeBack(rulesList[i][2], humanDataDict)
+            if humanInput == humanRes or var:
+                if var:
+                    typeBack2(rulesList[i][2], value)
+                else:
+                    typeBack(rulesList[i][2])
                 breaking = True
         elif isinstance(humanRes, list):  # if human option is a list
             for word in humanRes:
-                if humanInput == word:
+                if humanInput == word or var:
                     # Thinking right here is a good place to have insertion of var in dict
-                    typeBack(rulesList[i][2], humanDataDict)
+                    if var:
+                        typeBack2(rulesList[i][2], value)
+                    else:
+                        typeBack(rulesList[i][2])
                     breaking = True
 
         i += 1

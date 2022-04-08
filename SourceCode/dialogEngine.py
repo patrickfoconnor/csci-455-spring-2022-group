@@ -34,7 +34,6 @@ def command(commandString, lineNumber):
                         variable = "$"
                         while commandString[x] != "$":
                             x += 1
-                            test = commandString[x]
                         x += 1
                         while commandString[x].isalpha():
                             variable += commandString[x]
