@@ -113,6 +113,7 @@ def main():
                     if humanData != "":
                         varName = getVarName(rulesList[i][2])
                         humanDataDict.add(varName, humanData)
+                        typeBack(out, humanDataDict)
                 elif humanInput == word:
                     # Thinking right here is a good place to have insertion of var in dict
                     typeBack(rulesList[i][2], humanDataDict)
