@@ -33,7 +33,7 @@ def typing():
         sys.exit()
     return humanInput
 
-
+# Return the human data previously recorded
 def getHumanData(varName):
     return varName
 
