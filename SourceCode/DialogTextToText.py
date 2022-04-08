@@ -36,7 +36,6 @@ def typing():
 # Return the human data previously recorded
 def getHumanData(varName, dict):
     if varName in dict.keys():
-    #if (dict.hasKey(varName)):
         humanData = dict.get(varName)
     else:
         humanData = "I Dont Know"
@@ -46,13 +45,26 @@ def getHumanData(varName, dict):
 def typeBack(out, dict, varName):
     # Thinking that checking here for the $ sign
     if isinstance(out, list) and bool(out): # if response is list
-        out = random.choice(out)
-    if "$" in out:
-        humanData = getHumanData(varName, dict)
-        if varName != "":
-            print(out.replace(varName, humanData))
+
+        output = random.choice(out)
+        if "$" in output:
+            humanData = getHumanData(varName, dict)
+            if humanData is None:
+                print(output.replace(varName, "I don't know"))
+            elif humanData is not "":
+                print(output.replace(varName, humanData))
+        else:
+            print(output)
+
     else:
-        print(out) # if response is string
+        if varName is not "":
+            humanData = getHumanData(varName, dict)
+            if humanData is not "":
+                print(humanData)
+            else:
+                print("I don't know")
+        else:
+            print(out) # if response is string
 
 
 def checkForVariables(humanInput, humanRes):
@@ -76,12 +88,10 @@ def getVarName(out):
         varName = "$"
         varFound = False
         for i in range (0, len(output)):
-
             if output[i] == "$":
                 varFound = True
             if varFound and output[i].isalpha():
                 varName += output[i]
-
         return varName
 
 
@@ -91,6 +101,7 @@ def main():
     humanDataDict = {}
     humanInput = typing()
     breaking = False
+    varName = ""
     while not breaking: # this while loop checks the top level of options
         humanRes = rulesList[i][1] # what the robot is looking to respond to
         if int(rulesList[i][0]) > 0: # if the level is higher that first level it skips the loop.
