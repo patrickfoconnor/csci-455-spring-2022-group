@@ -148,33 +148,11 @@ def main():
             i += 1
         humanInput = typing()
         for j in range(0, len(currentList)):
-            humanRes = currentList[j][1]
-            if isinstance(humanRes, str):  # if human option is a str
-                if "_" in humanRes:
-                    humanData = checkForVariables(humanInput, humanRes)
-                    if humanData != "":
-                        varName = getVarName(currentList[j][2])
-                        humanDataDict[varName] = humanData
-                        typeBack(currentList[j][2], humanDataDict, varName)
-                        breaking = True
-                elif humanInput == humanRes:
-                    # Thinking right here is a good place to have insertion of var in dict
-                    typeBack(currentList[j][2], humanDataDict, varName)
-                    breaking = True
-            elif isinstance(humanRes, list):  # if human option is a list
-                for word in humanRes:
-                    if "_" in humanRes:
-                        humanData = checkForVariables(humanInput, humanRes)
-                        if humanData != "":
-                            varName = getVarName(currentList[j][2])
-                            humanDataDict[varName] = humanData
-                            typeBack(currentList[j][2], humanDataDict, varName)
-                            breaking = True
-                    elif humanInput == word:
-                        # Thinking right here is a good place to have insertion of var in dict
-                        typeBack(currentList[j][2], humanDataDict, varName)
-                        breaking = True
-            i += 1
-
+            if humanInput == currentList[j][1]: # checks to see if input is in list
+                typeBack(currentList[j][2], humanDataDict, varName) # responds
+                if len(nextList) > 0: # if there is nothing in the list go to the next one
+                    level += 1
+                    break
+        i += 1
 
 main()
