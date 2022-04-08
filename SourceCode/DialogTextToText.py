@@ -45,6 +45,7 @@ def getHumanData(varName, dict):
 def typeBack(out, dict, varName):
     # Thinking that checking here for the $ sign
     if isinstance(out, list) and bool(out): # if response is list
+
         output = random.choice(out)
         if "$" in output:
             humanData = getHumanData(varName, dict)
@@ -54,6 +55,7 @@ def typeBack(out, dict, varName):
                 print(output.replace(varName, humanData))
         else:
             print(output)
+
     else:
         if varName is not "":
             humanData = getHumanData(varName, dict)
@@ -102,6 +104,8 @@ def main():
     varName = ""
     while not breaking: # this while loop checks the top level of options
         humanRes = rulesList[i][1] # what the robot is looking to respond to
+        types = type(humanRes)
+        types2 = type(types)
         if int(rulesList[i][0]) > 0: # if the level is higher that first level it skips the loop.
             pass
         elif isinstance(humanRes, str): # if human option is a str
@@ -116,7 +120,7 @@ def main():
                 # Thinking right here is a good place to have insertion of var in dict
                 typeBack(rulesList[i][2], humanDataDict, varName)
                 breaking = True
-        elif isinstance(humanRes, list): # if human option is a list
+        elif isinstance(humanRes[0], list): # if human option is a list
             for word in humanRes:
                 if "_" in humanRes:
                     humanData = checkForVariables(humanInput, humanRes)

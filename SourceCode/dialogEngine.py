@@ -7,6 +7,7 @@ def command(commandString, lineNumber):
     humanInput = ""
     robotOutputs = []
     variableName = ""
+    variable = "$"
     for i in range(len(commandString)):
         if commandString[i] == "u":
             i += 1
@@ -31,7 +32,6 @@ def command(commandString, lineNumber):
                     i += 1
                     if commandString[i] == "_":
                         x = i
-                        variable = "$"
                         while commandString[x] != "$":
                             x += 1
                             test = commandString[x]
@@ -72,6 +72,16 @@ def command(commandString, lineNumber):
                 for vari in def_lists:
                     if vari[0] == temp:
                         robotOutputs = vari[1]
+            elif commandString[i] == "$":
+                while commandString[i] != "$":
+                    i += 1
+                    test = commandString[i]
+                i += 1
+                while commandString[i].isalpha():
+                    variable += commandString[i]
+                    i += 1
+                variableName = variable
+                robotOutputs = variable
     return level, humanInput, robotOutputs, variableName
 
 
@@ -142,6 +152,7 @@ def fileReader():
     file = open("../DialogRules/liveFile.txt")
     for line in file:
         returned = lineReader(line, lineNumber)
+        #print(line, returned)
         if returned != "":
             lines.append(returned)
         lineNumber += 1
