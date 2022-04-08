@@ -35,25 +35,19 @@ def typing():
 
 # Return the human data previously recorded
 def getHumanData(varName, dict):
-    if (dict.hasKey(varName)):
+    if varName in dict.keys():
+    #if (dict.hasKey(varName)):
         humanData = dict.get(varName)
     else:
         humanData = "I Dont Know"
     return humanData
 
 
-def typeBack(out, dict):
+def typeBack(out, dict, varName):
     # Thinking that checking here for the $ sign
-    if isinstance(out, list): # if response is list
+    if isinstance(out, list) and bool(out): # if response is list
         output = random.choice(out)
         if "$" in output:
-            varName = "$"
-            varFound = False
-            for char in output:
-                if char == "$":
-                    varFound = True
-                while varFound and char.isalpha():
-                    varName += char
             humanData = getHumanData(varName, dict)
             print(output.replace(varName, humanData))
         else:
@@ -77,15 +71,18 @@ def checkForVariables(humanInput, humanRes):
         return parsedHumanVar
 
 
-def getVarName(output):
+def getVarName(out):
+    output = random.choice(out)
     if "$" in output:
         varName = "$"
         varFound = False
         for i in range (0, len(output)):
+
             if output[i] == "$":
                 varFound = True
-            while varFound and output[i].isalpha():
+            if varFound and output[i].isalpha():
                 varName += output[i]
+
         return varName
 
 
@@ -101,10 +98,15 @@ def main():
             pass
         elif isinstance(humanRes, str): # if human option is a str
             if "_" in humanRes:
-                checkForVariables(humanInput, humanRes)
+                humanData = checkForVariables(humanInput, humanRes)
+                if humanData != "":
+                    varName = getVarName(rulesList[i][2])
+                    humanDataDict[varName] = humanData
+                    typeBack(rulesList[i][2], humanDataDict, varName)
+                    breaking = True
             elif humanInput == humanRes:
                 # Thinking right here is a good place to have insertion of var in dict
-                typeBack(rulesList[i][2], humanDataDict)
+                typeBack(rulesList[i][2], humanDataDict, varName)
                 breaking = True
         elif isinstance(humanRes, list): # if human option is a list
             for word in humanRes:
@@ -112,11 +114,12 @@ def main():
                     humanData = checkForVariables(humanInput, humanRes)
                     if humanData != "":
                         varName = getVarName(rulesList[i][2])
-                        humanDataDict.add(varName, humanData)
-                        typeBack(out, humanDataDict)
+                        humanDataDict[varName] = humanData
+                        typeBack(rulesList[i][2], humanDataDict, varName)
+                        breaking = True
                 elif humanInput == word:
                     # Thinking right here is a good place to have insertion of var in dict
-                    typeBack(rulesList[i][2], humanDataDict)
+                    typeBack(rulesList[i][2], humanDataDict, varName)
                     breaking = True
         i += 1
     level = 1
@@ -124,7 +127,7 @@ def main():
     currentLevel = 1 # currentLevel is the level we want to look at
     while len(rulesList) > 0: # while there are still rules (might not be needed)
         currentList = nextList
-        while currentLevel <= level:
+        while currentLevel <= level and i < len(rulesList):
             if int(rulesList[i][0]) == level: # places rules into the current list if it is the level we are looking at
                 currentList.append(rulesList[i])
             else:
@@ -137,7 +140,7 @@ def main():
         humanInput = typing()
         for j in range(0, len(currentList)):
             if humanInput == currentList[j][1]: # checks to see if input is in list
-                typeBack(currentList[j][2]) # responds
+                typeBack(currentList[j][2], humanDataDict, varName) # responds
                 if len(nextList) > 0: # if there is nothing in the list go to the next one
                     level += 1
                     break
