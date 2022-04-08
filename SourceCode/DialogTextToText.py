@@ -34,9 +34,26 @@ def typing():
     return humanInput
 
 
+def getHumanData(varName):
+    return varName
+
+
 def typeBack(out):
+    # Thinking that checking here for the $ sign
     if isinstance(out, list): # if response is list
-        print(random.choice(out))
+        output = random.choice(out)
+        if "$" in output:
+            varName = "$"
+            varFound = False
+            for char in output:
+                if char == "$":
+                    varFound = True
+                while varFound and char.isalpha():
+                    varName += char
+            humanData = getHumanData(varName)
+            print(output.replace(varName, humanData))
+        else:
+            print(output)
     else:
         print(out) # if response is string
 

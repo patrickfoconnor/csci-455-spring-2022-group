@@ -79,7 +79,7 @@ def definition(definitionString, lineNumber):
     variable = ""
     variable_names = ""
     variableOptions = []
-    for i in range(0,len(definitionString)):
+    for i in range(0, len(definitionString)):
         if definitionString[i] == "~":
             i += 1
             while definitionString[i].isalpha():
