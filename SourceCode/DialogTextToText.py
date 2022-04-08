@@ -77,12 +77,10 @@ def getVarName(out):
         varName = "$"
         varFound = False
         for i in range (0, len(output)):
-
             if output[i] == "$":
                 varFound = True
             if varFound and output[i].isalpha():
                 varName += output[i]
-
         return varName
 
 
@@ -92,6 +90,7 @@ def main():
     humanDataDict = {}
     humanInput = typing()
     breaking = False
+    varName = ""
     while not breaking: # this while loop checks the top level of options
         humanRes = rulesList[i][1] # what the robot is looking to respond to
         if int(rulesList[i][0]) > 0: # if the level is higher that first level it skips the loop.
