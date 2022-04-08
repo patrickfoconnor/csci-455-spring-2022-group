@@ -36,7 +36,6 @@ def typing():
 # Return the human data previously recorded
 def getHumanData(varName, dict):
     if varName in dict.keys():
-    #if (dict.hasKey(varName)):
         humanData = dict.get(varName)
     else:
         humanData = "I Dont Know"
@@ -49,11 +48,21 @@ def typeBack(out, dict, varName):
         output = random.choice(out)
         if "$" in output:
             humanData = getHumanData(varName, dict)
-            print(output.replace(varName, humanData))
+            if humanData is None:
+                print(output.replace(varName, "I don't know"))
+            elif humanData is not "":
+                print(output.replace(varName, humanData))
         else:
             print(output)
     else:
-        print(out) # if response is string
+        if varName is not "":
+            humanData = getHumanData(varName, dict)
+            if humanData is not "":
+                print(humanData)
+            else:
+                print("I don't know")
+        else:
+            print(out) # if response is string
 
 
 def checkForVariables(humanInput, humanRes):
