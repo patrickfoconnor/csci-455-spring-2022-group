@@ -139,7 +139,7 @@ def fileReader():
     lines = []
     lineNumber = 1
 
-    file = open("../DialogRules/testing.txt")
+    file = open("../DialogRules/liveFile.txt")
     for line in file:
         returned = lineReader(line, lineNumber)
         if returned != "":
