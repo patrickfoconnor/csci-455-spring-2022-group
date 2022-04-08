@@ -56,7 +56,6 @@ def typeBack2(out, value):
                     i += 1
             for search in humanDataDict:
                 if search == varName:
-
                     print(output.replace(varName, value))
                 else:
                     print(output.replace(varName, value))

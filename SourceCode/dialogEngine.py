@@ -39,6 +39,7 @@ def command(commandString, lineNumber):
                             variable += commandString[x]
                             x += 1
                         variableName = variable
+                        print(variableName)
         elif commandString[i] == ":":
             i += 1
             if commandString[i] == "[":
