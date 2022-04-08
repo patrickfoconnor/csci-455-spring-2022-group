@@ -45,7 +45,6 @@ def getHumanData(varName, dict):
 def typeBack(out, dict, varName):
     # Thinking that checking here for the $ sign
     if isinstance(out, list) and bool(out): # if response is list
-
         output = random.choice(out)
         if "$" in output:
             humanData = getHumanData(varName, dict)
@@ -68,13 +67,13 @@ def typeBack(out, dict, varName):
 
 
 def checkForVariables(humanInput, humanRes):
-    #if "_" in humanRes:
+    # if "_" in humanRes:
     grabbingVarName = True
     parsedHumanVar = ""
     varIndex = humanRes.find("_")
-    if (humanInput[:varIndex] == humanRes[:varIndex]):
+    if humanInput[:varIndex] == humanRes[:varIndex]:
         while grabbingVarName:
-            if (varIndex < len(humanInput) and humanInput[varIndex].isalpha()):
+            if varIndex < len(humanInput) and humanInput[varIndex].isalpha():
                 parsedHumanVar += humanInput[varIndex]
                 varIndex += 1
             else:
@@ -149,11 +148,33 @@ def main():
             i += 1
         humanInput = typing()
         for j in range(0, len(currentList)):
-            if humanInput == currentList[j][1]: # checks to see if input is in list
-                typeBack(currentList[j][2], humanDataDict, varName) # responds
-                if len(nextList) > 0: # if there is nothing in the list go to the next one
-                    level += 1
-                    break
-        i += 1
+            humanRes = currentList[j][1]
+            if isinstance(humanRes, str):  # if human option is a str
+                if "_" in humanRes:
+                    humanData = checkForVariables(humanInput, humanRes)
+                    if humanData != "":
+                        varName = getVarName(currentList[j][2])
+                        humanDataDict[varName] = humanData
+                        typeBack(currentList[j][2], humanDataDict, varName)
+                        breaking = True
+                elif humanInput == humanRes:
+                    # Thinking right here is a good place to have insertion of var in dict
+                    typeBack(currentList[j][2], humanDataDict, varName)
+                    breaking = True
+            elif isinstance(humanRes, list):  # if human option is a list
+                for word in humanRes:
+                    if "_" in humanRes:
+                        humanData = checkForVariables(humanInput, humanRes)
+                        if humanData != "":
+                            varName = getVarName(currentList[j][2])
+                            humanDataDict[varName] = humanData
+                            typeBack(currentList[j][2], humanDataDict, varName)
+                            breaking = True
+                    elif humanInput == word:
+                        # Thinking right here is a good place to have insertion of var in dict
+                        typeBack(currentList[j][2], humanDataDict, varName)
+                        breaking = True
+            i += 1
+
 
 main()
