@@ -35,8 +35,11 @@ def typing():
 
 # Return the human data previously recorded
 def getHumanData(varName, dict):
-    humandData = dict.get(varName)
-    return humandData
+    if (dict.hasKey(varName)):
+        humanData = dict.get(varName)
+    else:
+        humanData = "I Dont Know"
+    return humanData
 
 
 def typeBack(out, dict):
@@ -59,6 +62,33 @@ def typeBack(out, dict):
         print(out) # if response is string
 
 
+def checkForVariables(humanInput, humanRes):
+    #if "_" in humanRes:
+    grabbingVarName = True
+    parsedHumanVar = ""
+    varIndex = humanRes.find("_")
+    if (humanInput[:varIndex] == humanRes[:varIndex]):
+        while grabbingVarName:
+            if (varIndex < len(humanInput) and humanInput[varIndex].isalpha()):
+                parsedHumanVar += humanInput[varIndex]
+                varIndex += 1
+            else:
+                grabbingVarName = False
+        return parsedHumanVar
+
+
+def getVarName(output):
+    if "$" in output:
+        varName = "$"
+        varFound = False
+        for i in range (0, len(output)):
+            if output[i] == "$":
+                varFound = True
+            while varFound and output[i].isalpha():
+                varName += output[i]
+        return varName
+
+
 def main():
     level = 0
     i = 0
@@ -70,13 +100,21 @@ def main():
         if int(rulesList[i][0]) > 0: # if the level is higher that first level it skips the loop.
             pass
         elif isinstance(humanRes, str): # if human option is a str
-            if humanInput == humanRes:
+            if "_" in humanRes:
+                checkForVariables(humanInput, humanRes)
+            elif humanInput == humanRes:
                 # Thinking right here is a good place to have insertion of var in dict
                 typeBack(rulesList[i][2], humanDataDict)
                 breaking = True
         elif isinstance(humanRes, list): # if human option is a list
             for word in humanRes:
-                if humanInput == word:
+                if "_" in humanRes:
+                    humanData = checkForVariables(humanInput, humanRes)
+                    if humanData != "":
+                        varName = getVarName(rulesList[i][2])
+                        humanDataDict.add(varName, humanData)
+                        typeBack(out, humanDataDict)
+                elif humanInput == word:
                     # Thinking right here is a good place to have insertion of var in dict
                     typeBack(rulesList[i][2], humanDataDict)
                     breaking = True
