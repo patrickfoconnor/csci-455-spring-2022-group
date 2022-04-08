@@ -62,8 +62,6 @@ class TangoRobot:
         self.resetRobot()
         self.turnLeftSpeed = 7000
         self.turnRightSpeed = 5000
- #       self.writeCmd(RobotMotor.WheelLeft, 6000)
-#        self.writeCmd(RobotMotor.WheelRight, 6000)
 
     # write out command to usb
     def writeCmd(self, motor, target):
@@ -157,7 +155,6 @@ class TangoRobot:
             self.speed = MAX_SERVO
             print("Too Slow")
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
 
     def turnLeft(self):
@@ -171,7 +168,6 @@ class TangoRobot:
         time.sleep(.5)
         self.resetWheels()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
 
     def turnRight(self):
@@ -179,7 +175,6 @@ class TangoRobot:
         time.sleep(.5)
         self.resetWheels()
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
 
     def resetMotor(self):
@@ -198,7 +193,6 @@ class TangoRobot:
         # Center all robot motors to 6000
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
-
 
 
 robot = TangoRobot()
