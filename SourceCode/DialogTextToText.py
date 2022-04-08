@@ -50,21 +50,21 @@ def typeBack(out, dict, varName):
         if "$" in output:
             humanData = getHumanData(varName, dict)
             if humanData is None:
-                print(output.replace(varName, "I don't know"))
+                print(output.replace(varName, "I don't know").title())
             elif humanData is not "":
-                print(output.replace(varName, humanData))
+                print(output.replace(varName, humanData).title())
         else:
-            print(output)
+            print(output.title())
 
     else:
         if varName is not "":
             humanData = getHumanData(varName, dict)
             if humanData is not "":
-                print(humanData)
+                print(humanData.title())
             else:
                 print("I don't know")
         else:
-            print(out) # if response is string
+            print(out.title()) # if response is string
 
 
 def checkForVariables(humanInput, humanRes):
@@ -99,7 +99,7 @@ def main():
     level = 0
     i = 0
     humanDataDict = {}
-    humanInput = typing()
+    humanInput = typing().lower()
     breaking = False
     varName = ""
     while not breaking: # this while loop checks the top level of options
