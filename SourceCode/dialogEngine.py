@@ -117,7 +117,9 @@ def definition(definitionString, lineNumber):
 def lineReader(line, lineNumber):
     lineValue = ""
     for token in line:
-        if token == "u":
+        if token == "#":
+            print("Comment at line ", lineNumber)
+        elif token == "u":
             if line.count(':') == 2:
                 lineValue = command(line, lineNumber)
             else:
@@ -129,8 +131,7 @@ def lineReader(line, lineNumber):
             else:
                 print("error at line " + str(lineNumber))
             break
-        elif token == "#":
-            print("Comment at line ", lineNumber)
+
     return lineValue
 
 
