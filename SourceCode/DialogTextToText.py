@@ -44,9 +44,12 @@ def getHumanData(varName, dict):
 
 def typeBack(out, dict, varName):
     # Thinking that checking here for the $ sign
-    if isinstance(out, list) and bool(out): # if response is list
-        output = random.choice(out)
-        if "$" in output:
+    if isinstance(out, list): # if response is list
+        output = ""
+        test = bool(out)
+        if bool(out):
+            output = random.choice(out)
+        if "$" in output or not bool(out):
             humanData = getHumanData(varName, dict)
             if humanData is None:
                 print(output.replace(varName, "I don't know").title())
@@ -89,9 +92,29 @@ def getVarName(out):
         for i in range (0, len(output)):
             if output[i] == "$":
                 varFound = True
+
             if varFound and output[i].isalpha():
                 varName += output[i]
+            if varFound and not output[i].isalpha() and not output[i] == "$":
+                return varName
         return varName
+
+
+def findDif(i, rules, humanRes, humanInput, humanDataDict, varName):
+        if humanInput == humanRes:
+            out = rules[i][2]
+            if varName == "":
+                varName = getVarName(rules[i][2])
+            typeBack(out, humanDataDict, varName)
+            return True
+        elif "_" in humanRes:
+            humanData = checkForVariables(humanInput, humanRes)
+            if humanData != "" and humanRes[:humanRes.index("_")] in humanInput:
+                if varName == "":
+                    varName = getVarName(rules[i][2])
+                humanDataDict[varName] = humanData
+                typeBack(rules[i][2], humanDataDict, varName)
+                return True
 
 
 def main():
@@ -105,31 +128,11 @@ def main():
         humanRes = rulesList[i][1] # what the robot is looking to respond to
         if int(rulesList[i][0]) > 0: # if the level is higher that first level it skips the loop.
             pass
-        elif isinstance(humanRes, str): # if human option is a str
-            if "_" in humanRes:
-                humanData = checkForVariables(humanInput, humanRes)
-                if humanData != "":
-                    varName = getVarName(rulesList[i][2])
-                    humanDataDict[varName] = humanData
-                    typeBack(rulesList[i][2], humanDataDict, varName)
-                    breaking = True
-            elif humanInput == humanRes:
-                # Thinking right here is a good place to have insertion of var in dict
-                typeBack(rulesList[i][2], humanDataDict, varName)
-                breaking = True
-        elif isinstance(humanRes, list): # if human option is a list
+        if isinstance(humanRes, str):
+            breaking = findDif(i, rulesList, humanRes, humanInput, humanDataDict, varName)
+        elif isinstance(humanRes, list):  # if human option is a list
             for word in humanRes:
-                if "_" in humanRes:
-                    humanData = checkForVariables(humanInput, humanRes)
-                    if humanData != "":
-                        varName = getVarName(rulesList[i][2])
-                        humanDataDict[varName] = humanData
-                        typeBack(rulesList[i][2], humanDataDict, varName)
-                        breaking = True
-                elif humanInput == word:
-                    # Thinking right here is a good place to have insertion of var in dict
-                    typeBack(rulesList[i][2], humanDataDict, varName)
-                    breaking = True
+                breaking = findDif(i, rulesList, word, humanInput, humanDataDict, varName)
         i += 1
     level = 1
     nextList = []
@@ -146,13 +149,19 @@ def main():
                     nextList.append(rulesList[i]) # places rules into the list to look at next
 
             i += 1
-        humanInput = typing()
-        for j in range(0, len(currentList)):
-            if humanInput == currentList[j][1]: # checks to see if input is in list
-                typeBack(currentList[j][2], humanDataDict, varName) # responds
-                if len(nextList) > 0: # if there is nothing in the list go to the next one
-                    level += 1
-                    break
-        i += 1
+        j = 0
+
+        while True:
+            humanInput = typing()
+            breaking = False
+            while not breaking:
+                humanRes = currentList[j][1]
+                if isinstance(humanRes, str):
+                    breaking = findDif(j, currentList, humanRes, humanInput, humanDataDict, varName)
+                elif isinstance(humanRes, list):  # if human option is a list
+                    for word in humanRes:
+                        breaking = findDif(j, currentList, word, humanInput, humanDataDict, varName)
+
+                j += 1
 
 main()

@@ -81,6 +81,8 @@ def command(commandString, lineNumber):
                     variable += commandString[i]
                     i += 1
                 variableName = variable
+    if not robotOutputs:
+        robotOutputs = [variableName]
     return level, humanInput, robotOutputs, variableName
 
 
@@ -151,7 +153,6 @@ def fileReader():
     file = open("../DialogRules/liveFile.txt")
     for line in file:
         returned = lineReader(line, lineNumber)
-
         if returned != "":
             lines.append(returned)
         lineNumber += 1
