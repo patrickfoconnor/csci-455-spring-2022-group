@@ -53,15 +53,15 @@ def typeBack(out, dict, varName):
             humanData = getHumanData(varName, dict)
             if humanData is None:
                 print(output.replace(varName, "I don't know").title())
-            elif humanData is not "":
+            elif humanData != "":
                 print(output.replace(varName, humanData).title())
         else:
             print(output.title())
 
     else:
-        if varName is not "":
+        if varName != "":
             humanData = getHumanData(varName, dict)
-            if humanData is not "":
+            if humanData != "":
                 print(humanData.title())
             else:
                 print("I don't know")
@@ -163,5 +163,6 @@ def main():
                         breaking = findDif(j, currentList, word, humanInput, humanDataDict, varName)
 
                 j += 1
-
-main()
+while True:
+    print("")
+    main()
