@@ -1,41 +1,61 @@
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.image import Image
-from kivy.uix.label import Label
-from kivy.lang import Builder
+from tkinter import *
 
-kv = '''
-<DragLabel>:
-    # Define the properties for the DragLabel
-    drag_rectangle: self.x, self.y, self.width, self.height
-    drag_timeout: 10000000
-    drag_distance: 0
+# Create object
+root = Tk()
 
-FloatLayout:
-    # Define the root widget
-    DragLabel:
-        size_hint: 0.25, 0.2
-        text: 'Drag me'
-'''
-
-class Gui(App):
-
-    def build(self):
-        self.window = GridLayout()
-        self.window.cols = 2
-        self.window.add_widget(Image(source='hello.jpg'))
-        return self.window
-
-class DragLabel(DragBehavior, Label):
-    pass
+# Adjust size
+root.geometry("200x300")
 
 
-class TestApp(App):
-    def build(self):
-        return Builder.load_string(kv)
+# Change the label text
+def show():
+    for i in range(0, 8):
+        clicked = StringVar()
 
-def main():
-    Gui().run()
+        # initial menu text
+        clicked.set("Option {}".format(i + 1))
+
+        # Create Dropdown menu
+        drop = OptionMenu(root, clicked, *options)
+        drop.pack(side=RIGHT)
+
+        buttonValues.append(clicked)
+
+    for i in (range(0,len(buttonValues))):
+        print(buttonValues[i].get())
+
+button = Button(root, text="click Me", command=show).pack(side=BOTTOM)
+# Dropdown menu options
+options = [
+    "Move",
+    "Turn",
+    "Nod",
+    "Shake",
+    "Bend",
+    "Listen",
+    "Speak"
+]
+
+buttonValues = []
+
+for i in range(0,8):
+    clicked = StringVar()
+
+    # initial menu text
+    clicked.set("Option {}".format(i+1))
+
+    # Create Dropdown menu
+    drop = OptionMenu(root, clicked, *options)
+    drop.pack(side=TOP)
+
+    buttonValues.append(clicked)
+
+# Create button, it will change label text
 
 
-main()
+# Create Label
+label = Label(root, text=" ")
+label.pack()
+
+# Execute tkinter
+root.mainloop()
