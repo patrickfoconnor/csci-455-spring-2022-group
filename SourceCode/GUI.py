@@ -1,9 +1,8 @@
 import tkinter as tk
-from PIL import Image, ImageTk
 
 class MyTK():
     def __init__(self, win):
-
+        self.instructions = []
         self.win = win
         self.win.geometry("800x480")
         self.leftfr = tk.Frame(win)
@@ -45,40 +44,39 @@ class MyTK():
         tk.Button(self.leftfr, text='Talking',image=self.talkingimg,command=lambda m="talking": self.commands(m)).grid(column=0, row=6)
 
 
+    def createInstruction(self,name,args):
+        temp = [name]
+        for arg in args:
+            temp.append(arg)
+        self.instructions.append(temp)
+        print("Created instruction ")
+        print(temp)
 
-
+    def parseSpeech(self):
+        pass
     def motors(self,speed,time,direction):
         pass
 
     def turn(self,direction,seconds):
-        print("Turn %s %d" % (direction,seconds))
+        print("Turn %s for %d seconds" % (direction,seconds))
 
-    def headtitlt(self,direction):
-        pass
+    def headtilt(self,direction):
+        print("Head tilt %s" % (direction))
 
     def headpan(self,direction):
-        pass
+        print("Head pan %s" % (direction))
 
     def waistturn(self,direction):
-        pass
+        print("Waist turn %s" % (direction))
 
-    def speech(self,direction):
-        pass
+    def speech(self):
+        print("Say a command")
+        command = ""
+        #parse and call speech input hereee
 
     def talking(self,sentence):
-        pass
-
-    def fun(self):
-        print("Print is pushed")
-
-    def fun2(self):
-        print("Second is pressed")
-
-    def fun3(self, name):
-        print(name)
-        if (name == "exit"):
-            print("leaving")
-            self.win.destroy()
+        print("The robot says %s" % (sentence))
+        #to do make robot speak
 
     def commands(self,name):
         top = tk.Toplevel(self.win)
@@ -89,27 +87,54 @@ class MyTK():
         fr = tk.Frame(top)
         fr.pack(fill='x',padx=5, pady=5)
         selected = tk.StringVar()
+        args = []
         if name in "motors":
             pass
-            b = tk.Button(fr, text="OK", width=10)
-            b.pack()
         elif name in "turn":
-            label = tk.Label(fr, text="Select a direction:")
+            label = tk.Label(fr, text="Direction to turn:")
             r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator = 0,background = "light blue")
             r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected,indicator = 0,background = "light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x',padx=5, pady=5)
             r2.pack(fill='x',padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [self.turn(selected.get(), 100), top.destroy()])
+            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [args.append(selected.get()),self.createInstruction(name, args), top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "headtilt":
-            pass
+            label = tk.Label(fr, text="Direction to tilt head:")
+            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,background="light blue")
+            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
+            label.pack(fill='x', padx=5, pady=5)
+            r1.pack(fill='x', padx=5, pady=5)
+            r2.pack(fill='x', padx=5, pady=5)
+            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()),self.createInstruction(name, args), top.destroy()])
+            ok.pack(fill='x', padx=5, pady=5)
         elif name in "headpan":
-            pass
+            label = tk.Label(fr, text="Direction to pan head:")
+            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0,
+                                background="light blue")
+            r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
+            label.pack(fill='x', padx=5, pady=5)
+            r1.pack(fill='x', padx=5, pady=5)
+            r2.pack(fill='x', padx=5, pady=5)
+            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
+            ok.pack(fill='x', padx=5, pady=5)
         elif name in "waist":
-            pass
+            label = tk.Label(fr, text="Direction to spin waist:")
+            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0, background="light blue")
+            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
+            label.pack(fill='x', padx=5, pady=5)
+            r1.pack(fill='x', padx=5, pady=5)
+            r2.pack(fill='x', padx=5, pady=5)
+            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
+            ok.pack(fill='x', padx=5, pady=5)
         elif name in "speech":
-            pass
+            label = tk.Label(fr, text="Think of an instruction to")
+            label2 = tk.Label(fr, text="say to the robot and press Ok")
+            label.pack(fill='x', padx=5, pady=5)
+            label2.pack(fill='x', padx=5, pady=5)
+            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [self.createInstruction(name, args),top.destroy()])
+            ok.pack(fill='x', padx=5, pady=5)
+
         elif name in "talking":
             pass
 
