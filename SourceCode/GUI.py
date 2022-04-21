@@ -5,12 +5,12 @@ class MyTK():
         self.instructions = []
         self.win = win
         self.win.geometry("800x480")
-        self.leftfr = tk.Frame(win)
-        self.leftfr.columnconfigure(0,weight=1)
+        self.leftfr = tk.Frame(win,width=60)
         self.leftfr.pack(side=tk.LEFT)
-        self.rightfr = tk.Frame(win)
-        self.rightfr.pack(side=tk.RIGHT)
-        self.rightfr.columnconfigure(1,weight=0)
+        self.leftfr['borderwidth'] = 2
+        self.leftfr['relief'] = 'raised'
+        self.midframe = tk.Frame(win)
+        self.midframe.pack(side=tk.BOTTOM)
         self.turnimg = tk.PhotoImage(file="GUI/turn.png")
         self.headpanimg = tk.PhotoImage(file="GUI/headpan.png")
         self.headtiltimg = tk.PhotoImage(file="GUI/headtilt.png")
@@ -18,11 +18,9 @@ class MyTK():
         self.speechimg = tk.PhotoImage(file="GUI/speechinput.png")
         self.talkingimg = tk.PhotoImage(file="GUI/talking.png")
         self.waistimg = tk.PhotoImage(file="GUI/waistturn.png")
+        self.emptyimg =tk.PhotoImage(file="GUI/empty.png")
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
-        # width = self.win.winfo_screenwidth()
-        # height = self.win.winfo_screenheight()
-        # self.win.geometry("%dx%d"%(width, height))
 
     def createCanvas(self):
         self.myCan = tk.Canvas(self.win, bg="#333333", width="500", height="500")
@@ -42,6 +40,15 @@ class MyTK():
         tk.Button(self.leftfr, text='Waist Turn',image=self.waistimg,command=lambda m="waist": self.commands(m)).grid(column=0, row=4)
         tk.Button(self.leftfr, text='Speech Input',image=self.speechimg,command=lambda m="speech": self.commands(m)).grid(column=0, row=5)
         tk.Button(self.leftfr, text='Talking',image=self.talkingimg,command=lambda m="talking": self.commands(m)).grid(column=0, row=6)
+
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=0, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=1, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=2, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=3, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=4, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=5, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=6, row=0)
+        tk.Button(self.midframe, text="instruction1", image=self.emptyimg).grid(column=7, row=0)
 
 
     def createInstruction(self,name,args):
@@ -155,7 +162,7 @@ class MyTK():
 
 win = tk.Tk()
 win.title("Robot Program GUI")
-win.configure(background='#121212')
+win.configure(background='light blue')
 v = MyTK(win)
 ##Key bindings
 #win.bind('<Motion>', v.motion)
