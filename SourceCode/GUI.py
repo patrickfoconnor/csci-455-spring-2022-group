@@ -33,7 +33,7 @@ class MyTK():
         lab = tk.Label(self.win, text="Hello Tkinter!")
         lab.pack()
 
-    def createButton(self):
+    def createButtons(self):
         # command = fun
         tk.Button(self.leftfr, text='Motors',image=self.motorsimg,command=lambda m="motors": self.commands(m)).grid(column=0, row=0)
         tk.Button(self.leftfr, text='Turn', image=self.turnimg,command=lambda m="turn": self.commands(m)).grid(column=0, row=1)
@@ -54,6 +54,7 @@ class MyTK():
 
     def parseSpeech(self):
         pass
+
     def motors(self,speed,time,direction):
         pass
 
@@ -165,5 +166,5 @@ win.bind('<Button>', v.mouseClick)
 # v.createCanvas()
 # Place a label on Window
 #v.createLabel()
-v.createButton()
+v.createButtons()
 win.mainloop()
