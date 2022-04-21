@@ -1,52 +1,61 @@
 from tkinter import *
 
+
+# Methods for Moving the robot waist
+class testRobot:
+    def waistLeft(self):
+        pass
+
+    def waistRight(self):
+        pass
+
+    def headDown(self):
+        pass
+
+    def headUp(self):
+        pass
+
+    def headLeft(self):
+        pass
+
+    def headRight(self):
+        pass
+
+    def driveForward(self):
+        pass
+
+    def driveBackward(self):
+        pass
+
+    def turnLeft(self):
+        pass
+
+    def turnRight(self):
+        pass
+
+
+#       +-------------------+--------------------------------------------------+
+#       |      Actions      |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                 TimeLine Window                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       |        BTN*       |                                                  |
+#       +-------------------+--------------------------------------------------+
+#       |    Insert BTN     |    Clear Timeline BTN     |    Start BTN         |
+#       +-------------------+--------------------------------------------------+
+
+
 root = Tk()  # Makes the window
 root.wm_title("Operating Robot 30")  # Makes the title that will appear in the top left
 root.config(background="#fff")  # sets background color to white
 
-
 # put widgets here
-
-
-# Methods for Moving the robot waist
-def waistLeft():
-    pass
-
-
-def waistRight():
-    pass
-
-
-def headDown():
-    pass
-
-
-def headUp():
-    pass
-
-
-def headLeft():
-    pass
-
-
-def headRight():
-    pass
-
-
-def driveForward():
-    pass
-
-
-def driveBackward():
-    pass
-
-
-def turnLeft():
-    pass
-
-
-def turnRight():
-    pass
 
 
 # Left Frame and its contents
@@ -182,7 +191,7 @@ textToSpeechBtn = Button(
 allButtons.append(textToSpeechBtn)
 
 drivingOneBtn = Button(
-    # image = ImageTk.PhotoImage(Image.open("../guiLogos/test.png")),
+    # image = ImageTk.PhotoImage(Image.open("../guiIcons/test.png")),
     text="Insert",
     # compound="top",
     height=4,
@@ -219,8 +228,5 @@ drivingOneBtn = Button(
     bg="Red",
     command=driveBackward()
 )
-
-
-
 
 root.mainloop()  # start monitoring and updating the GUI. Nothing below here runs.
