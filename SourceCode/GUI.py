@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 
 class MyTK():
     def __init__(self, win):
+
         self.win = win
         self.win.geometry("800x480")
         self.leftfr = tk.Frame(win)
@@ -35,27 +36,22 @@ class MyTK():
 
     def createButton(self):
         # command = fun
-        tk.Button(self.leftfr, text='Motors',image=self.motorsimg).grid(column=0, row=0)
-        tk.Button(self.leftfr, text='Turn', image=self.turnimg).grid(column=0, row=1)
-        tk.Button(self.leftfr, text='Head Tilt',image=self.headtiltimg).grid(column=0, row=2)
-        tk.Button(self.leftfr, text='Head Pan', image=self.headpanimg).grid(column=0, row=3)
-        tk.Button(self.leftfr, text='Waist Turn',image=self.waistimg).grid(column=0, row=4)
-        tk.Button(self.leftfr, text='Speech Input',image=self.speechimg).grid(column=0, row=5)
-        tk.Button(self.leftfr, text='Talking',image=self.talkingimg).grid(column=0, row=6)
-        # button = tk.Button(self.leftfr, width="45", text="print", bg="blue", fg="yellow",
-        #                    command=lambda m="#print button pressed": self.fun3(m))
-        # button.pack(side=tk.TOP)
-        # button2 = tk.Button(self.leftfr, width="15", text="Second", bg="blue", fg="yellow",
-        #                     command=lambda m="#second button pressed": self.fun3(m))
-        # button2.pack(side=tk.LEFT)
-        # button2 = tk.Button(self.leftfr, width="15", text="exit", bg="blue", fg="yellow",
-        #                     command=lambda m="exit": self.fun3(m))
-        # button2.pack(side=tk.BOTTOM)
+        tk.Button(self.leftfr, text='Motors',image=self.motorsimg,command=lambda m="motors": self.commands(m)).grid(column=0, row=0)
+        tk.Button(self.leftfr, text='Turn', image=self.turnimg,command=lambda m="turn": self.commands(m)).grid(column=0, row=1)
+        tk.Button(self.leftfr, text='Head Tilt',image=self.headtiltimg,command=lambda m="headtilt": self.commands(m)).grid(column=0, row=2)
+        tk.Button(self.leftfr, text='Head Pan', image=self.headpanimg,command=lambda m="headpan": self.commands(m)).grid(column=0, row=3)
+        tk.Button(self.leftfr, text='Waist Turn',image=self.waistimg,command=lambda m="waist": self.commands(m)).grid(column=0, row=4)
+        tk.Button(self.leftfr, text='Speech Input',image=self.speechimg,command=lambda m="speech": self.commands(m)).grid(column=0, row=5)
+        tk.Button(self.leftfr, text='Talking',image=self.talkingimg,command=lambda m="talking": self.commands(m)).grid(column=0, row=6)
+
+
+
+
     def motors(self,speed,time,direction):
         pass
 
     def turn(self,direction,seconds):
-        pass
+        print("Turn %s %d" % (direction,seconds))
 
     def headtitlt(self,direction):
         pass
@@ -84,6 +80,39 @@ class MyTK():
             print("leaving")
             self.win.destroy()
 
+    def commands(self,name):
+        top = tk.Toplevel(self.win)
+        x = self.win.winfo_pointerx()
+        y = self.win.winfo_pointery()
+        top.geometry("%dx%d+%d+%d" %(200,150,x,y))
+        top.title(name)
+        fr = tk.Frame(top)
+        fr.pack(fill='x',padx=5, pady=5)
+        selected = tk.StringVar()
+        if name in "motors":
+            pass
+            b = tk.Button(fr, text="OK", width=10)
+            b.pack()
+        elif name in "turn":
+            label = tk.Label(fr, text="Select a direction:")
+            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator = 0,background = "light blue")
+            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected,indicator = 0,background = "light blue")
+            label.pack(fill='x', padx=5, pady=5)
+            r1.pack(fill='x',padx=5, pady=5)
+            r2.pack(fill='x',padx=5, pady=5)
+            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [self.turn(selected.get(), 100), top.destroy()])
+            ok.pack(fill='x', padx=5, pady=5)
+        elif name in "headtilt":
+            pass
+        elif name in "headpan":
+            pass
+        elif name in "waist":
+            pass
+        elif name in "speech":
+            pass
+        elif name in "talking":
+            pass
+
     def motion(self, event):
         print("Mouse position: (%s %s)" % (event.x, event.y))
         return
@@ -99,10 +128,11 @@ class MyTK():
 
 
 win = tk.Tk()
+win.title("Robot Program GUI")
 win.configure(background='#121212')
 v = MyTK(win)
 ##Key bindings
-win.bind('<Up>', v.arrow)
+#win.bind('<Motion>', v.motion)
 win.bind('<Right>', v.arrow)
 win.bind('<Button>', v.mouseClick)
 
