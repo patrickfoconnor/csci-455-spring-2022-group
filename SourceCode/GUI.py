@@ -179,7 +179,7 @@ class MyTK():
                 timeEnd = time.time()
                 runTime += timeEnd - timeStart
         else:
-            errorPopUpWind("Invalid Motor Direction")
+            self.errorPopUpWind("Invalid Motor Direction")
 
     #
     def turn(self, direction, time):
@@ -198,7 +198,7 @@ class MyTK():
                 timeEnd = time.time()
                 runTime += timeEnd - timeStart
         else:
-            errorPopUpWind("Invalid Robot Turn Direction")
+            self.errorPopUpWind("Invalid Robot Turn Direction")
         print("turn")
 
     def headtilt(self, direction):
@@ -218,7 +218,7 @@ class MyTK():
                 timeEnd = time.time()
                 runTime += timeEnd - timeStart
         else:
-            errorPopUpWind("Invalid Robot Head Tilt Direction")
+            self.errorPopUpWind("Invalid Robot Head Tilt Direction")
 
     def headpan(self, direction):
         print("head pan")
@@ -237,7 +237,7 @@ class MyTK():
                 timeEnd = time.time()
                 runTime += timeEnd - timeStart
         else:
-            errorPopUpWind("Invalid Robot Head Turn Direction")
+            self.errorPopUpWind("Invalid Robot Head Turn Direction")
 
     def waistturn(self, direction):
         print("waist turn")
@@ -256,7 +256,7 @@ class MyTK():
                 timeEnd = time.time()
                 runTime += timeEnd - timeStart
         else:
-            errorPopUpWind("Invalid Robot Waist Turn Direction")
+            self.errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
         pass
