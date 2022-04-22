@@ -163,7 +163,7 @@ class MyTK():
     # Need some more info on the actual details of speed and direction
     def motors(self, speed, time, direction):
 
-        if direction == "forward":
+        if direction in "forward":
             self.guiRobot.speed = speed
             runTime = 0
             while (runTime != time):
@@ -172,7 +172,7 @@ class MyTK():
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
 
-        elif direction == "backwards":
+        elif direction in "backwards":
             self.guiRobot.speed = speed
             runTime = 0
             while (runTime != time):
