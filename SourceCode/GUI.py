@@ -34,7 +34,6 @@ class MyTK():
         self.topfr.pack(side=tk.TOP)
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
-<<<<<<< HEAD
         self.engine = pyttsx3.init()
         #self.input = SpeechController()
         self.canvas = tk.Canvas(self.topfr,highlightthickness=0, bg="light blue", width=300, height=300)
@@ -43,7 +42,6 @@ class MyTK():
         self.canvaslist = []
         self.drawBot()
         self.canvas.pack()
->>>>>>> 8e0dc7625d60442d5262b7d03bacffb0e118d8a1
         #self.guiRobot = TangoRobot()
 
     def drawBot(self):
