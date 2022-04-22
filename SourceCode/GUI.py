@@ -325,7 +325,7 @@ class MyTK:
                       command=lambda: [args.append(speed.get()), args.append(time.get()), args.append(selected.get()),
                                        self.createInstruction(name, args), top.destroy()]).grid(column=1, row=7)
         elif name in "turn":
-            speed = tk.IntVar(0)
+            time = tk.IntVar(0)
             label = tk.Label(fr, text="Direction to turn:")
             r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,
                                 background="light blue")
@@ -333,16 +333,16 @@ class MyTK:
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
-            label = tk.Label(fr, text="Speed")
+            label = tk.Label(fr, text="Time")
             label.pack(fill='x', padx=5, pady=5)
-            minus = tk.Button(fr, text="-", width=5, command=lambda: speed.set(speed.get() - 5))
-            plus = tk.Button(fr, text="+", width=5, command=lambda: speed.set(speed.get() + 5))
+            minus = tk.Button(fr, text="-", width=5, command=lambda: time.set(time.get() - 5))
+            plus = tk.Button(fr, text="+", width=5, command=lambda: time.set(time.get() + 5))
             plus.pack(side=tk.LEFT)
             minus.pack(side=tk.LEFT)
-            text = tk.Entry(fr, textvariable=speed, width=5)
+            text = tk.Entry(fr, textvariable=time, width=5)
             text.pack(side=tk.LEFT)
             ok = tk.Button(fr, height=5, width=5, text="Ok", background="green",
-                           command=lambda: [args.append(selected.get()), args.append(speed.get()),
+                           command=lambda: [args.append(selected.get()), args.append(time.get()),
                                             self.createInstruction(name, args), top.destroy()])
             ok.pack(side=tk.TOP)
         elif name in "headtilt":
@@ -407,6 +407,7 @@ class MyTK:
                 self.motors(com[2], com[3])
             elif com[0] in "turn":
                 self.turn(com[1], com[2])
+                print(com)
             elif com[0] in "headtilt":
                 self.headtilt(com[1])
             elif com[0] in "headpan":
