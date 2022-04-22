@@ -13,7 +13,7 @@ class MyTK():
         self.leftfr['relief'] = 'raised'
         self.midframe = tk.Frame(win)
         self.midframe.pack(side=tk.BOTTOM)
-        self.rightfr = tk.Frame(win)
+        self.rightfr = tk.Frame(win, width=60)
         self.rightfr.pack(side=tk.RIGHT)
         self.turnimg = tk.PhotoImage(file="GUI/turn.png")
         self.headpanimg = tk.PhotoImage(file="GUI/headpan.png")
@@ -23,6 +23,9 @@ class MyTK():
         self.talkingimg = tk.PhotoImage(file="GUI/talking.png")
         self.waistimg = tk.PhotoImage(file="GUI/waist.png")
         self.emptyimg =tk.PhotoImage(file="GUI/empty.png")
+        self.runimg = tk.PhotoImage(file="GUI/run.png")
+        self.clearimg = tk.PhotoImage(file="GUI/clear.png")
+        self.quitimg = tk.PhotoImage(file="GUI/quit.png")
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
         #self.guiRobot = TangoRobot()
@@ -96,7 +99,9 @@ class MyTK():
         tk.Button(self.midframe, text="7", image=self.emptyimg, command=lambda j=6: self.deletePopUp(j)).grid(column=6, row=0)
         tk.Button(self.midframe, text="8", image=self.emptyimg, command=lambda j=7: self.deletePopUp(j)).grid(column=7, row=0)
 
-        tk.Button(self.rightfr, text="Run Program", command=lambda : self.runProgram()).grid(column=0,row=0)
+        tk.Button(self.rightfr, text="Run Program", image=self.runimg, command=lambda : self.runProgram()).grid(column=0,row=0)
+        tk.Button(self.rightfr, text="Clear Program", image=self.clearimg, command=lambda: [self.instructions.clear(), self.updateInstructions()]).grid(column=0,row=1)
+        tk.Button(self.rightfr, text="Quit", image=self.quitimg, command=lambda : self.win.destroy()).grid(column=0,row=2)
 
     def createInstruction(self,name,args):
         temp = [name]
@@ -105,8 +110,6 @@ class MyTK():
         self.instructions.append(temp)
         self.updateInstructions()
 
-    def parseSpeech(self):
-        pass
 
     # Need some more info on the actual details of speed and direction
     def motors(self, speed, time, direction):
@@ -227,23 +230,50 @@ class MyTK():
         top = tk.Toplevel(self.win)
         x = self.win.winfo_pointerx()
         y = self.win.winfo_pointery()
-        top.geometry("%dx%d+%d+%d" % (200, 150, x, y))
+        top.geometry("%dx%d+%d+%d" % (200, 300, x, y))
         top.title(name)
         fr = tk.Frame(top)
         fr.pack(fill='x', padx=5, pady=5)
         selected = tk.StringVar()
         args = []
         if name in "motors":
-            pass
+            speed = tk.IntVar()
+            speed.set(6000)
+            time = tk.IntVar()
+            tk.Label(fr, text="Direction to turn:").grid(column=0,row=0)
+            tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,background="light blue").grid(column=0,row=1)
+            tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue").grid(column=0,row=2)
+            tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue").grid(column=0,row=3)
+            tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue").grid(column=0,row=4)
+            tk.Radiobutton(fr, text="Front", value="front", variable=selected, indicator=0, background="light blue").grid(column=0,row=5)
+            tk.Radiobutton(fr, text="Back", value="back", variable=selected, indicator=0, background="light blue").grid(column=0,row=6)
+            tk.Label(fr, text="Time:").grid(column=1,row=0)
+            tk.Button(fr, text="+", width=5, command=lambda: time.set(time.get() + 1)).grid(column=1,row=2)
+            tk.Button(fr, text="-", width=5, command=lambda: time.set(time.get() - 1)).grid(column=1,row=3)
+            tk.Entry(fr, textvariable=time, width=5).grid(column=1,row=1)
+            tk.Label(fr, text="Speed:").grid(column=2, row=0)
+            tk.Button(fr, text="+", width=5, command=lambda: speed.set(speed.get() + 100)).grid(column=2, row=2)
+            tk.Button(fr, text="-", width=5, command=lambda: speed.set(speed.get() - 100)).grid(column=2, row=3)
+            tk.Entry(fr, textvariable=speed, width=5).grid(column=2, row=1)
+            tk.Button(fr, height=5, width=5, text="Ok", background="green",command=lambda: [args.append(speed.get()), args.append(time.get()),args.append(selected.get()),self.createInstruction(name, args), top.destroy()]).grid(column=1,row=7)
         elif name in "turn":
+            speed = tk.IntVar(0)
             label = tk.Label(fr, text="Direction to turn:")
             r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator = 0,background = "light blue")
             r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected,indicator = 0,background = "light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x',padx=5, pady=5)
             r2.pack(fill='x',padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [args.append(selected.get()),args.append(100),self.createInstruction(name, args), top.destroy()])
-            ok.pack(fill='x', padx=5, pady=5)
+            label = tk.Label(fr, text="Speed")
+            label.pack(fill='x',padx=5, pady=5)
+            minus = tk.Button(fr,text="-", width=5,command=lambda : speed.set(speed.get()-5))
+            plus =  tk.Button(fr,text="-", width=5,command=lambda : speed.set(speed.get()-5))
+            plus.pack(side=tk.LEFT)
+            minus.pack(side=tk.LEFT)
+            text = tk.Entry(fr, textvariable=speed, width=5)
+            text.pack(side=tk.LEFT)
+            ok = tk.Button(fr, height=5, width=5, text="Ok", background="green",command=lambda: [args.append(selected.get()),args.append(speed.get()),self.createInstruction(name, args), top.destroy()])
+            ok.pack(side=tk.TOP)
         elif name in "headtilt":
             label = tk.Label(fr, text="Direction to tilt head:")
             r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,background="light blue")
@@ -251,17 +281,16 @@ class MyTK():
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()),self.createInstruction(name, args), top.destroy()])
+            ok = tk.Button(fr, height=5,text="Ok", background="green", command=lambda: [args.append(selected.get()),self.createInstruction(name, args), top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "headpan":
             label = tk.Label(fr, text="Direction to pan head:")
-            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0,
-                                background="light blue")
+            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0,background="light blue")
             r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
+            ok = tk.Button(fr,height=5, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "waist":
             label = tk.Label(fr, text="Direction to spin waist:")
@@ -270,18 +299,24 @@ class MyTK():
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
+            ok = tk.Button(fr, height=5,text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "speech":
             label = tk.Label(fr, text="Think of an instruction to")
             label2 = tk.Label(fr, text="say to the robot and press Ok")
             label.pack(fill='x', padx=5, pady=5)
             label2.pack(fill='x', padx=5, pady=5)
-            ok = tk.Button(fr, text="Ok", background="green",command=lambda: [self.createInstruction(name, args),top.destroy()])
+            ok = tk.Button(fr, height=5,text="Ok", background="green",command=lambda: [self.createInstruction(name, args),top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
 
         elif name in "talking":
-            pass
+            talklab = tk.Label(fr, text="What would you like\nthe robot to say?")
+            talklab.pack(fill='x', expand=True)
+            text = tk.Entry(fr,textvariable=selected)
+            text.pack(fill='x', expand=True)
+            text.focus()
+            ok = tk.Button(fr, height=5,text="Ok", background="green",command=lambda: [args.append(selected.get()),self.createInstruction(name, args),top.destroy()])
+            ok.pack(fill='x', expand=True)
 
     def runProgram(self):
         for com in self.instructions:
