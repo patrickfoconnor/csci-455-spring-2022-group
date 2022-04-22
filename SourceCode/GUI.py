@@ -400,8 +400,8 @@ class MyTK:
             tk.Radiobutton(fr, text="Backwards", value="backward", variable=selected, indicator=0, background="light blue").grid(
                 column=0, row=6)
             tk.Label(fr, text="Time:").grid(column=1, row=0)
-            tk.Button(fr, text="+", width=5, command=lambda: time.set(time.get() + (.5))).grid(column=1, row=2)
-            tk.Button(fr, text="-", width=5, command=lambda: time.set(time.get() - (.5))).grid(column=1, row=3)
+            tk.Button(fr, text="+", width=5, command=lambda: time.set(time.get() + 1)).grid(column=1, row=2)
+            tk.Button(fr, text="-", width=5, command=lambda: time.set(time.get() - .5)).grid(column=1, row=3)
             tk.Entry(fr, textvariable=time, width=5).grid(column=1, row=1)
             tk.Label(fr, text="Speed:").grid(column=2, row=0)
             tk.Button(fr, text="+", width=5, command=lambda: speed.set(speed.get() + 100)).grid(column=2, row=2)
