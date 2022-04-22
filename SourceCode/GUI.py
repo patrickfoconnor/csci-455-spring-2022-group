@@ -86,51 +86,51 @@ class MyTK:
         if "forward" in command:
             print( "Forward" )
             time.sleep( .2 )
-            self.guirobot.driveForward()
+            self.guiRobot.driveForward()
         elif "back" in command:
             print( "Backward" )
             time.sleep( .2 )
-            self.guirobot.driveBackward()
+            self.guiRobot.driveBackward()
         elif "left" in command:
             print( "Left" )
             time.sleep( .2 )
-            self.guirobot.turnLeft()
+            self.guiRobot.turnLeft()
         elif "right" in command:
             print( "Right" )
             time.sleep( .2 )
-            self.guirobot.turnRight()
+            self.guiRobot.turnRight()
 
     def waist(self, command):
         if "left" in command:
             print( "Bend Left" )
             time.sleep( .2 )
-            self.guirobot.waistLeft()
+            self.guiRobot.waistLeft()
         elif "right" in command:
             print( "Bend Right" )
             time.sleep( .2 )
-            self.guirobot.waistRight()
+            self.guiRobot.waistRight()
 
     def head(self, command):
         if "up" in command:
             print( "Head Up" )
             time.sleep( .2 )
-            self.guirobot.headUp()
+            self.guiRobot.headUp()
         elif "down" in command:
             print( "Head Down" )
             time.sleep( .2 )
-            self.guirobot.headDown()
+            self.guiRobot.headDown()
         elif "left" in command:
             print( "Head Left" )
             time.sleep( .2 )
-            self.guirobot.headLeft()
+            self.guiRobot.headLeft()
         elif "right" in command:
             print( "Head Right" )
             time.sleep( .2 )
-            self.guirobot.headRight()
+            self.guiRobot.headRight()
 
     def stop(self):
         print( "Halting" )
-        self.guirobot.resetRobot()
+        self.guiRobot.resetRobot()
 
     def updateInstructions(self):
         for i in range(len(self.instructions)):
