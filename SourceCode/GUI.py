@@ -169,6 +169,7 @@ class MyTK():
                 timeStart = timeLib.time()
                 self.guiRobot.driveForward()
                 timeEnd = timeLib.time()
+                print(runTime)
                 runTime += timeEnd - timeStart
 
         elif direction in "backwards":
