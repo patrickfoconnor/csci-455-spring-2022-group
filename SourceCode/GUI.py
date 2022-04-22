@@ -431,4 +431,4 @@ v = MyTK(win)
 # Place a label on Window
 #v.createLabel()
 v.createButtons()
-win.mainloop()
+v.win.mainloop()
