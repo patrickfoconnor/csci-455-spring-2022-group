@@ -1,5 +1,9 @@
+from SpeechController import *
 import tkinter as tk
-import time
+import pyttsx3
+
+
+
 
 
 class MyTK():
@@ -28,6 +32,8 @@ class MyTK():
         self.quitimg = tk.PhotoImage(file="GUI/quit.png")
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
+        self.engine = pyttsx3.init()
+        #self.input = SpeechController()
         #self.guiRobot = TangoRobot()
 
 
@@ -211,14 +217,19 @@ class MyTK():
         # else:
         #     errorPopUpWind("Invalid Robot Waist Turn Direction")
 
+
     def speech(self):
-        print("Say a command")
-        command = ""
-        # parse and call speech input here
+        #SpeechController()
 
     def talking(self, sentence):
         print("The robot says %s" % (sentence))
-        # to do make robot speak
+        voices = self.engine.getProperty('voices')
+
+        self.engine.setProperty('voice', voices[1].id)
+        self.engine.setProperty('rate', 150)
+
+        self.engine.say(sentence)
+        self.engine.runAndWait()
 
     # def errorPopUpWind(self, message):
     #     top = Toplevel(win)
