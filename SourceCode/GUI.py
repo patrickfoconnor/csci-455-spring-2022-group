@@ -261,7 +261,7 @@ class MyTK():
 
     def speech(self):
         pass
-        SpeechController()
+        #SpeechController()
 
     def talking(self, sentence):
         pass
@@ -275,7 +275,7 @@ class MyTK():
         # self.engine.runAndWait()
 
     def errorPopUpWind(self, message):
-        top = Toplevel(win)
+        top = tk.Toplevel(win)
         top.geometry("250x250")
         top.title("Input Error")
         tk.Label(top, text=message).place(x=150, y=80)
