@@ -260,18 +260,19 @@ class MyTK():
             errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
-        # pass
-        SpeechController()
+        pass
+        # SpeechController()
 
     def talking(self, sentence):
-        print("The robot says %s" % (sentence))
-        voices = self.engine.getProperty('voices')
-
-        self.engine.setProperty('voice', voices[1].id)
-        self.engine.setProperty('rate', 150)
-
-        self.engine.say(sentence)
-        self.engine.runAndWait()
+        pass
+        # print("The robot says %s" % (sentence))
+        # voices = self.engine.getProperty('voices')
+        #
+        # self.engine.setProperty('voice', voices[1].id)
+        # self.engine.setProperty('rate', 150)
+        #
+        # self.engine.say(sentence)
+        # self.engine.runAndWait()
 
     def errorPopUpWind(self, message):
         top = Toplevel(win)
