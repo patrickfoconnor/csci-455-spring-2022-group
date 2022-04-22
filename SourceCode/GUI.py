@@ -211,9 +211,9 @@ class MyTK:
                 runTime += timeEnd - timeStart
         else:
             errorPopUpWind("Invalid Robot Turn Direction")
+
         self.guiRobot.resetWheels()
-        self.guiRobot.turnLeftSpeed = 6000
-        self.guiRobot.turnRightSpeed = 6000
+        self.guiRobot.speed = 6000
 
     def headtilt(self, direction):
         if direction in "up":
