@@ -161,21 +161,19 @@ class MyTK():
         self.updateInstructions()
 
     # Need some more info on the actual details of speed and direction
-    def motors(self, speed, time, direction):
+    def motors(self, time, direction):
 
         if direction in "forward":
-            self.guiRobot.speed = speed
             runTime = 0
-            while (runTime != time):
+            while (runTime <= time):
                 timeStart = timeLib.time()
                 self.guiRobot.driveForward()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
 
         elif direction in "backwards":
-            self.guiRobot.speed = speed
             runTime = 0
-            while (runTime != time):
+            while (runTime <= time):
                 timeStart = timeLib.time()
                 self.guiRobot.driveBackward()
                 timeEnd = timeLib.time()
@@ -400,7 +398,7 @@ class MyTK():
     def runProgram(self):
         for com in self.instructions:
             if com[0] in "motors":
-                self.motors(com[1], com[2], com[3])
+                self.motors(com[2], com[3])
             elif com[0] in "turn":
                 self.turn(com[1], com[2])
             elif com[0] in "headtilt":
