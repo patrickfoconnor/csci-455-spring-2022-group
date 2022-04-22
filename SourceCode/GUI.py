@@ -1,4 +1,4 @@
-from speechEngine import *
+import speechEngine
 from TangoRobot import *
 import tkinter as tk
 import pyttsx3
@@ -298,11 +298,11 @@ class MyTK:
                 if "waist" in word or "waste" in word:
                     speechEngine.waist(word)
                 elif "head" in word:
-                    SpeechController.head(word)
+                    speechEngine.head(word)
                 elif "robot" in word:
-                    SpeechController.arrows(word)
+                    speechEngine.arrows(word)
                 elif "stop" in word:
-                    SpeechController.stop()
+                    speechEngine.stop()
                 else:
                     print("Command not recognized")
 
