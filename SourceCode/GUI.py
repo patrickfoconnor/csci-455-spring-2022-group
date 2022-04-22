@@ -306,7 +306,7 @@ class MyTK:
                     print("Command not recognized")
 
 
-def talking(self, sentence):
+    def talking(self, sentence):
         print("The robot says %s" % sentence)
         voices = self.engine.getProperty('voices')
 
