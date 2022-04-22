@@ -352,13 +352,13 @@ class MyTK:
                     word = ""
 
                 if "waist" in word or "waste" in word:
-                    self.waist(word)
+                    waist(word)
                 elif "head" in word:
-                    self.head(word)
+                    head(word)
                 elif "robot" in word:
-                    self.arrows(word)
+                    arrows(word)
                 elif "stop" in word:
-                    self.stop()
+                    stop()
                 else:
                     print("Command not recognized")
 
