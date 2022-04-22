@@ -420,7 +420,7 @@ class MyTK():
                 self.win.after(250, self.animate("+"))
                 self.canvas.pack()
                 self.win.update()
-            timeLib.sleep(1.5)
+            timeLib.sleep(.5)
 
 
 win = tk.Tk()
