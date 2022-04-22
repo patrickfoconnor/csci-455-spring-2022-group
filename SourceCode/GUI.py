@@ -39,7 +39,7 @@ class MyTK():
         self.canvaslist = []
         self.drawBot()
         self.canvas.pack()
-        # self.guiRobot = TangoRobot()
+        self.guiRobot = TangoRobot()
 
     def drawBot(self):
         self.canvaslist.append(self.canvas.create_rectangle(100, 50, 200, 150, fill="#83CAC9"))
