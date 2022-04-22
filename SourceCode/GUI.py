@@ -1,8 +1,9 @@
-from SpeechController import *
+from speechEngine import *
 from TangoRobot import *
 import tkinter as tk
 import pyttsx3
 import time as timeLib
+import speech_recognition as sr
 
 
 def errorPopUpWind(message):
@@ -295,7 +296,7 @@ class MyTK:
                     word = ""
 
                 if "waist" in word or "waste" in word:
-                    SpeechController.waist(word)
+                    speechEngine.waist(word)
                 elif "head" in word:
                     SpeechController.head(word)
                 elif "robot" in word:
