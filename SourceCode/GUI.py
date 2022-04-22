@@ -1,4 +1,4 @@
-# from SpeechController import *
+from SpeechController import *
 from TangoRobot import *
 import tkinter as tk
 import pyttsx3
@@ -275,8 +275,7 @@ class MyTK:
             errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
-        pass
-        # SpeechController()
+        SpeechController()
 
     def talking(self, sentence):
         print("The robot says %s" % sentence)

@@ -44,8 +44,8 @@ class RobotMotor(Enum):
     Waist = 0x00
     HeadX = 0x03
     HeadY = 0x04
-    ArmLeft = 0x05
-    ArmRight = 0x06
+    #ArmLeft = 0x05
+    #ArmRight = 0x06
 
 
 class TangoRobot:
@@ -167,7 +167,6 @@ class TangoRobot:
 
         time.sleep(.5)
         self.resetWheels()
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
 
     def turnRight(self):
@@ -177,7 +176,6 @@ class TangoRobot:
 
         time.sleep(.5)
         self.resetWheels()
-        #self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
 
     def resetMotor(self):
