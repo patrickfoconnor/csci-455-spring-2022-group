@@ -1,4 +1,4 @@
-from SpeechController import *
+from TangoRobot import *
 import tkinter as tk
 import pyttsx3
 
@@ -260,7 +260,7 @@ class MyTK():
 
     def speech(self):
         pass
-        SpeechController()
+        #SpeechController()
 
     def talking(self, sentence):
         pass
