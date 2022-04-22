@@ -141,7 +141,8 @@ class TangoRobot:
         if self.dummy == False:
             self.resetMotor()
             self.dummy = True
-        #self.speed -= MOTOR_INCREMENT
+        self.speed -= MOTOR_INCREMENT
+        time.sleep(1)
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
             print("Too Speedy")
