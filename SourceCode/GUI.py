@@ -7,13 +7,13 @@ class MyTK():
         self.instructions = []
         self.win = win
         self.win.geometry("800x480")
-        self.leftfr = tk.Frame(win, width=60)
+        self.leftfr = tk.Frame( self.win, width=60)
         self.leftfr.pack(side=tk.LEFT)
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
-        self.midframe = tk.Frame(win)
+        self.midframe = tk.Frame( self.win)
         self.midframe.pack(side=tk.BOTTOM)
-        self.rightfr = tk.Frame(win, width=60)
+        self.rightfr = tk.Frame( self.win, width=60)
         self.rightfr.pack(side=tk.RIGHT)
         self.turnimg = tk.PhotoImage(file="GUI/turn.png")
         self.headpanimg = tk.PhotoImage(file="GUI/headpan.png")
@@ -22,15 +22,51 @@ class MyTK():
         self.speechimg = tk.PhotoImage(file="GUI/speech.png")
         self.talkingimg = tk.PhotoImage(file="GUI/talking.png")
         self.waistimg = tk.PhotoImage(file="GUI/waist.png")
-        self.emptyimg =tk.PhotoImage(file="GUI/empty.png")
+        self.emptyimg = tk.PhotoImage(file="GUI/empty.png")
         self.runimg = tk.PhotoImage(file="GUI/run.png")
         self.clearimg = tk.PhotoImage(file="GUI/clear.png")
         self.quitimg = tk.PhotoImage(file="GUI/quit.png")
+        self.topfr = tk.Frame(self.win, bg="light blue")
+        self.topfr.pack(side=tk.TOP)
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
+        self.canvas = tk.Canvas(self.topfr,highlightthickness=0, bg="light blue", width=300, height=300)
+        self.eye1 = []
+        self.eye2 = []
+        self.canvaslist = []
+        self.drawBot()
+        self.canvas.pack()
         #self.guiRobot = TangoRobot()
 
+    def drawBot(self):
+        self.canvaslist.append(self.canvas.create_rectangle(100,50,200,150, fill="#83CAC9"))
+        self.canvaslist.append(self.canvas.create_rectangle(115,70,140,90, fill = "white"))
+        self.canvaslist.append(self.canvas.create_rectangle(160,70,185,90, fill = "white"))
+        self.eye1 = self.canvas.create_rectangle(120,82,122,84, fill="black")
+        self.eye2 = self.canvas.create_rectangle(165,82,167, 84, fill="black")
+        self.canvaslist.append(self.canvas.create_rectangle(115,110,185,145,fill = "yellow"))
+        self.canvaslist.append(self.canvas.create_rectangle(115,50,118,35, fill="red"))
+        self.canvaslist.append(self.canvas.create_rectangle(185,50,188,35,fill ="red"))
+        self.canvaslist.append(self.canvas.create_rectangle(100,80,90,100, fill ="blue"))
+        self.canvaslist.append(self.canvas.create_rectangle(200, 80, 210, 100, fill="blue"))
+        for i in range(7):
+            self.canvaslist.append(self.canvas.create_line(115 + (10*i),110,115 + (10*i),145))
+            i+=10
 
+
+
+    def animate(self, ch):
+        for c in self.canvaslist:
+            if ch in "+":
+                self.canvas.move(c, 0, 5)
+            elif ch in "-":
+                self.canvas.move(c, 0, -5)
+        if ch in "+":
+            self.canvas.move(self.eye1, -16, 5)
+            self.canvas.move(self.eye2, -16, 5)
+        elif ch in "-":
+            self.canvas.move(self.eye1, 16, -5)
+            self.canvas.move(self.eye2, 16, -5)
 
     def updateInstructions(self):
         for i in range(len(self.instructions)):
@@ -54,18 +90,10 @@ class MyTK():
         if len(self.instructions) < 8:
             for j in range(len(self.instructions),8):
                 self.midframe.winfo_children()[j].configure(image=self.emptyimg)
+
     def deleteInstruction(self,i):
         self.instructions.pop(i)
         self.updateInstructions()
-
-    def createCanvas(self):
-        self.myCan = tk.Canvas(self.win, bg="#333333", width="500", height="500")
-        self.myCan.bind('<Motion>', self.motion)
-        self.myCan.pack()
-
-    def createLabel(self):
-        lab = tk.Label(self.win, text="Hello Tkinter!")
-        lab.pack()
 
     def deletePopUp(self,j):
         top = tk.Toplevel(self.win)
@@ -334,6 +362,13 @@ class MyTK():
                 self.speech()
             elif com[0] in "talking":
                 self.talking(com[1])
+            for i in range(9):
+                self.win.after(250, self.animate("-"))
+                self.canvas.pack()
+                self.win.update()
+                self.win.after(250, self.animate("+"))
+                self.canvas.pack()
+                self.win.update()
 
 
 win = tk.Tk()
