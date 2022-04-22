@@ -13,58 +13,7 @@ def errorPopUpWind(message):
     tk.Label(top, text=message).place(x=150, y=80)
 
 
-def arrows(command):
-    if "forward" in command:
-        print("Forward")
-        time.sleep(.2)
-        robot.driveForward()
-    elif "back" in command:
-        print("Backward")
-        time.sleep(.2)
-        robot.driveBackward()
-    elif "left" in command:
-        print("Left")
-        time.sleep(.2)
-        robot.turnLeft()
-    elif "right" in command:
-        print( "Right" )
-        time.sleep( .2 )
-        robot.turnRight()
 
-
-def waist(command):
-    if "left" in command:
-        print("Bend Left")
-        time.sleep(.2)
-        robot.waistLeft()
-    elif "right" in command:
-        print("Bend Right")
-        time.sleep(.2)
-        robot.waistRight()
-
-
-def head(command):
-    if "up" in command:
-        print("Head Up")
-        time.sleep(.2)
-        robot.headUp()
-    elif "down" in command:
-        print("Head Down")
-        time.sleep(.2)
-        robot.headDown()
-    elif "left" in command:
-        print("Head Left")
-        time.sleep(.2)
-        robot.headLeft()
-    elif "right" in command:
-        print("Head Right")
-        time.sleep(.2)
-        robot.headRight()
-
-
-def stop(self):
-    print("Halting")
-    robot.resetRobot()
 
 
 class MyTK:
@@ -133,7 +82,55 @@ class MyTK:
             self.canvas.move(self.eye1, 16, -5)
             self.canvas.move(self.eye2, 16, -5)
 
+    def arrows(self, command):
+        if "forward" in command:
+            print( "Forward" )
+            time.sleep( .2 )
+            self.guirobot.driveForward()
+        elif "back" in command:
+            print( "Backward" )
+            time.sleep( .2 )
+            self.guirobot.driveBackward()
+        elif "left" in command:
+            print( "Left" )
+            time.sleep( .2 )
+            self.guirobot.turnLeft()
+        elif "right" in command:
+            print( "Right" )
+            time.sleep( .2 )
+            self.guirobot.turnRight()
 
+    def waist(self, command):
+        if "left" in command:
+            print( "Bend Left" )
+            time.sleep( .2 )
+            self.guirobot.waistLeft()
+        elif "right" in command:
+            print( "Bend Right" )
+            time.sleep( .2 )
+            self.guirobot.waistRight()
+
+    def head(self, command):
+        if "up" in command:
+            print( "Head Up" )
+            time.sleep( .2 )
+            self.guirobot.headUp()
+        elif "down" in command:
+            print( "Head Down" )
+            time.sleep( .2 )
+            self.guirobot.headDown()
+        elif "left" in command:
+            print( "Head Left" )
+            time.sleep( .2 )
+            self.guirobot.headLeft()
+        elif "right" in command:
+            print( "Head Right" )
+            time.sleep( .2 )
+            self.guirobot.headRight()
+
+    def stop(self):
+        print( "Halting" )
+        self.guirobot.resetRobot()
 
     def updateInstructions(self):
         for i in range(len(self.instructions)):
