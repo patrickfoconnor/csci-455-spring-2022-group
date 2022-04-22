@@ -2,49 +2,51 @@ from TangoRobot import *
 
 
 class SpeechEngine:
+    def __init__(self, command):
+        self.command = command
 
-    def arrows(command):
-        if "forward" in command:
+    def arrows(self):
+        if "forward" in self.command:
             print("Forward")
             time.sleep(.2)
             robot.driveForward()
-        elif "back" in command:
+        elif "back" in self.command:
             print("Backward")
             time.sleep(.2)
             robot.driveBackward()
-        elif "left" in command:
+        elif "left" in self.command:
             print("Left")
             time.sleep(.2)
             robot.turnLeft()
-        elif "right" in command:
+        elif "right" in self.command:
             print("Right")
             time.sleep(.2)
             robot.turnRight()
 
-    def waist(command):
-        if "left" in command:
+    def waist(self):
+        if "left" in self.command:
             print("Bend Left")
             time.sleep(.2)
             robot.waistLeft()
-        elif "right" in command:
+        elif "right" in self.command:
             print("Bend Right")
             time.sleep(.2)
             robot.waistRight()
 
-    def head(command):
-        if "up" in command:
+    def head(self):
+        if "up" in self.command:
             print("Head Up")
             time.sleep(.2)
             robot.headUp()
-        elif "down" in command:
+        elif "down" in self.command:
             print("Head Down")
             time.sleep(.2)
             robot.headDown()
-        elif "left" in command:
+        elif "left" in self.command:
             print("Head Left")
             time.sleep(.2)
             robot.headLeft()
-        elif "right" in command:
+        elif "right" in self.command:
             print("Head Right")
             time.sleep(.2)
             robot.headRight()
