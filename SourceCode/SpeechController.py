@@ -64,7 +64,7 @@ while listening:
         r = sr.Recognizer()
         r.adjust_for_ambient_noise(source)
         r.dynamic_energythreshhold = 3000
-
+        listening = False
         try:
             print("listening")
             audio = r.listen(source)
@@ -73,6 +73,7 @@ while listening:
             print(word)
         except sr.UnknownValueError:
             print("Word not recognized")
+            listening = True
 
         if "waist" in word or "waste" in word:
             waist(word)
