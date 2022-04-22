@@ -149,7 +149,7 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
-        self.guiRobot.resetWheels()
+
 
     def driveBackward(self):
         self.speed += MOTOR_INCREMENT
@@ -159,7 +159,6 @@ class TangoRobot:
             print("Too Slow")
         self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.speed)
-        self.guiRobot.resetWheels()
 
     def turnLeft(self):
         # self.speed += MOTOR_INCREMENT

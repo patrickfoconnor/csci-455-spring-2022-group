@@ -165,6 +165,7 @@ class MyTK():
 
         if direction in "forward":
             runTime = 0
+            time+=.3
             while (runTime <= time):
                 timeStart = timeLib.time()
                 self.guiRobot.driveForward()
@@ -181,6 +182,7 @@ class MyTK():
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Motor Direction")
+        self.guiRobot.resetWheels()
 
     #
     def turn(self, direction, time):
