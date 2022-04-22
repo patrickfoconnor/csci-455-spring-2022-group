@@ -290,7 +290,7 @@ class MyTK:
         top = tk.Toplevel(self.win)
         x = self.win.winfo_pointerx()
         y = self.win.winfo_pointery()
-        top.geometry("%dx%d+%d+%d" % (200, 300, x, y))
+        top.geometry("%dx%d+%d+%d" % (400, 300, x, y))
         top.title(name)
         fr = tk.Frame(top)
         fr.pack(fill='x', padx=5, pady=5)
