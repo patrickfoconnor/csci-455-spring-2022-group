@@ -165,7 +165,7 @@ class MyTK():
 
         if direction in "forward":
             runTime = 0
-            time+=.3
+            time += 1
             while (runTime <= time):
                 timeStart = timeLib.time()
                 self.guiRobot.driveForward()
