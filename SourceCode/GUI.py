@@ -183,7 +183,7 @@ class MyTK():
             errorPopUpWind("Invalid Motor Direction")
 
     #
-    def turn(self, direction, seconds):
+    def turn(self, direction, time):
         if direction == "left":
             runTime = 0
             while (runTime != time):
@@ -303,9 +303,9 @@ class MyTK():
                 column=0, row=3)
             tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue").grid(
                 column=0, row=4)
-            tk.Radiobutton(fr, text="Front", value="front", variable=selected, indicator=0,
+            tk.Radiobutton(fr, text="Forward", value="forward", variable=selected, indicator=0,
                            background="light blue").grid(column=0, row=5)
-            tk.Radiobutton(fr, text="Back", value="back", variable=selected, indicator=0, background="light blue").grid(
+            tk.Radiobutton(fr, text="Backwards", value="backward", variable=selected, indicator=0, background="light blue").grid(
                 column=0, row=6)
             tk.Label(fr, text="Time:").grid(column=1, row=0)
             tk.Button(fr, text="+", width=5, command=lambda: time.set(time.get() + 1)).grid(column=1, row=2)
