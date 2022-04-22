@@ -424,11 +424,11 @@ win.title("Robot Program GUI")
 win.configure(background='light blue')
 v = MyTK(win)
 ##Key bindings
-win.bind('<Motion>', v.motion)
+#win.bind('<Motion>', v.motion)
 
 # create a canvas and add it to window
-v.createCanvas()
+#v.createCanvas()
 # Place a label on Window
-v.createLabel()
+#v.createLabel()
 v.createButtons()
 win.mainloop()
