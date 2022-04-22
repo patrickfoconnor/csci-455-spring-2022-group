@@ -2,6 +2,7 @@
 from TangoRobot import *
 import tkinter as tk
 import pyttsx3
+import time as timeLib
 
 
 class MyTK():
@@ -166,18 +167,18 @@ class MyTK():
             self.guiRobot.speed = speed
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.driveForward()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
 
         elif direction == "backwards":
             self.guiRobot.speed = speed
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.driveBackward()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Motor Direction")
@@ -187,16 +188,16 @@ class MyTK():
         if direction == "left":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.turnLeft()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         elif direction == "right":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.turnRight()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Turn Direction")
@@ -207,16 +208,16 @@ class MyTK():
         if direction == "up":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.headUp()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         elif direction == "down":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.headDown()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Head Tilt Direction")
@@ -226,16 +227,16 @@ class MyTK():
         if direction == "left":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.headLeft()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         elif direction == "right":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.headRight()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Head Turn Direction")
@@ -245,16 +246,16 @@ class MyTK():
         if direction == "left":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.waistLeft()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         elif direction == "right":
             runTime = 0
             while (runTime != time):
-                timeStart = time.time()
+                timeStart = timeLib.time()
                 self.guiRobot.waistRight()
-                timeEnd = time.time()
+                timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Waist Turn Direction")
