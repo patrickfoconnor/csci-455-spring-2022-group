@@ -1,4 +1,4 @@
-from SpeechController import *
+#from SpeechController import *
 import tkinter as tk
 import pyttsx3
 

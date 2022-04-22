@@ -74,6 +74,7 @@ while listening:
         except sr.UnknownValueError:
             print("Word not recognized")
             listening = True
+            word = ""
 
         if "waist" in word or "waste" in word:
             waist(word)
