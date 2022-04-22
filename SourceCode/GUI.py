@@ -247,6 +247,7 @@ class MyTK():
 
 
     def speech(self):
+        pass
         #SpeechController()
 
     def talking(self, sentence):
