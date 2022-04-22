@@ -276,7 +276,7 @@ class MyTK:
         # SpeechController()
 
     def talking(self, sentence):
-        print("The robot says %s" % (sentence))
+        print("The robot says %s" % sentence)
         voices = self.engine.getProperty('voices')
 
         self.engine.setProperty('voice', voices[1].id)
