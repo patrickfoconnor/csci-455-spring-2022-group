@@ -1,11 +1,14 @@
+from TangoRobot import *
 import tkinter as tk
+import time
+
 
 class MyTK():
     def __init__(self, win):
-        self.instructions =[]
+        self.instructions = []
         self.win = win
         self.win.geometry("800x480")
-        self.leftfr = tk.Frame(win,width=60)
+        self.leftfr = tk.Frame(win, width=60)
         self.leftfr.pack(side=tk.LEFT)
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
@@ -23,6 +26,7 @@ class MyTK():
         self.emptyimg =tk.PhotoImage(file="GUI/empty.png")
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
+        self.guiRobot = TangoRobot()
 
 
 
@@ -100,45 +104,129 @@ class MyTK():
         for arg in args:
             temp.append(arg)
         self.instructions.append(temp)
-        print("Created instruction ")
-        print(temp)
         self.updateInstructions()
 
     def parseSpeech(self):
         pass
 
-    def motors(self,speed,time,direction):
-        pass
+    # Need some more info on the actual details of speed and direction
+    def motors(self, speed, time, direction):
+        if direction == "forward":
+            self.guiRobot.speed = speed
+            runTime = 0
+            while(runTime != time):
+                timeStart = time.time()
+                self.guiRobot.driveForward()
+                timeEnd = time.time()
+                runTime += timeEnd-timeStart
 
-    def turn(self,direction,seconds):
-        print("Turn %s for %d seconds" % (direction,seconds))
+        elif direction == "backwards":
+            self.guiRobot.speed = speed
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.driveBackward()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        else:
+            errorPopUpWind("Invalid Motor Direction")
 
-    def headtilt(self,direction):
-        print("Head tilt %s" % (direction))
+#
+    def turn(self, direction, seconds):
+        if direction == "left":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.turnLeft()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        elif direction == "right":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.turnRight()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        else:
+            errorPopUpWind("Invalid Robot Turn Direction")
 
-    def headpan(self,direction):
-        print("Head pan %s" % (direction))
+    def headtilt(self, direction):
+        if direction == "up":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.headUp()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        elif direction == "down":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.headDown()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        else:
+            errorPopUpWind("Invalid Robot Head Tilt Direction")
 
-    def waistturn(self,direction):
-        print("Waist turn %s" % (direction))
+    def headpan(self, direction):
+        if direction == "left":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.headLeft()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        elif direction == "right":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.headRight()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        else:
+            errorPopUpWind("Invalid Robot Head Turn Direction")
+
+    def waistturn(self, direction):
+        if direction == "left":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.waistLeft()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        elif direction == "right":
+            runTime = 0
+            while (runTime != time):
+                timeStart = time.time()
+                self.guiRobot.waistRight()
+                timeEnd = time.time()
+                runTime += timeEnd - timeStart
+        else:
+            errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
         print("Say a command")
         command = ""
-        #parse and call speech input hereee
+        # parse and call speech input here
 
-    def talking(self,sentence):
+    def talking(self, sentence):
         print("The robot says %s" % (sentence))
-        #to do make robot speak
+        # to do make robot speak
 
-    def commands(self,name):
+    def errorPopUpWind(self, message):
+        top = Toplevel(win)
+        top.geometry("250x250")
+        top.title("Input Error")
+        tk.Label(top, text=message).place(x=150, y=80)
+
+    def commands(self, name):
         top = tk.Toplevel(self.win)
         x = self.win.winfo_pointerx()
         y = self.win.winfo_pointery()
-        top.geometry("%dx%d+%d+%d" %(200,150,x,y))
+        top.geometry("%dx%d+%d+%d" % (200, 150, x, y))
         top.title(name)
         fr = tk.Frame(top)
-        fr.pack(fill='x',padx=5, pady=5)
+        fr.pack(fill='x', padx=5, pady=5)
         selected = tk.StringVar()
         args = []
         if name in "motors":
