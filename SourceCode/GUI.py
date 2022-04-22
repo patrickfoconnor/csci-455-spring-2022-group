@@ -1,4 +1,3 @@
-from TangoRobot import *
 import tkinter as tk
 import time
 
@@ -26,7 +25,7 @@ class MyTK():
         self.emptyimg =tk.PhotoImage(file="GUI/empty.png")
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
-        self.guiRobot = TangoRobot()
+        #self.guiRobot = TangoRobot()
 
 
 
@@ -111,98 +110,103 @@ class MyTK():
 
     # Need some more info on the actual details of speed and direction
     def motors(self, speed, time, direction):
-        if direction == "forward":
-            self.guiRobot.speed = speed
-            runTime = 0
-            while(runTime != time):
-                timeStart = time.time()
-                self.guiRobot.driveForward()
-                timeEnd = time.time()
-                runTime += timeEnd-timeStart
-
-        elif direction == "backwards":
-            self.guiRobot.speed = speed
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.driveBackward()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        else:
-            errorPopUpWind("Invalid Motor Direction")
+        print("motors")
+        # if direction == "forward":
+        #     self.guiRobot.speed = speed
+        #     runTime = 0
+        #     while(runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.driveForward()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd-timeStart
+        #
+        # elif direction == "backwards":
+        #     self.guiRobot.speed = speed
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.driveBackward()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # else:
+        #     errorPopUpWind("Invalid Motor Direction")
 
 #
     def turn(self, direction, seconds):
-        if direction == "left":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.turnLeft()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        elif direction == "right":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.turnRight()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        else:
-            errorPopUpWind("Invalid Robot Turn Direction")
+        # if direction == "left":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.turnLeft()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # elif direction == "right":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.turnRight()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # else:
+        #     errorPopUpWind("Invalid Robot Turn Direction")
+        print("turn")
 
     def headtilt(self, direction):
-        if direction == "up":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.headUp()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        elif direction == "down":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.headDown()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        else:
-            errorPopUpWind("Invalid Robot Head Tilt Direction")
+        print("headtilt")
+        # if direction == "up":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.headUp()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # elif direction == "down":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.headDown()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # else:
+        #     errorPopUpWind("Invalid Robot Head Tilt Direction")
 
     def headpan(self, direction):
-        if direction == "left":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.headLeft()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        elif direction == "right":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.headRight()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        else:
-            errorPopUpWind("Invalid Robot Head Turn Direction")
+        print("head pan")
+        # if direction == "left":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.headLeft()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # elif direction == "right":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.headRight()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # else:
+        #     errorPopUpWind("Invalid Robot Head Turn Direction")
 
     def waistturn(self, direction):
-        if direction == "left":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.waistLeft()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        elif direction == "right":
-            runTime = 0
-            while (runTime != time):
-                timeStart = time.time()
-                self.guiRobot.waistRight()
-                timeEnd = time.time()
-                runTime += timeEnd - timeStart
-        else:
-            errorPopUpWind("Invalid Robot Waist Turn Direction")
+        print("waist turn")
+        # if direction == "left":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.waistLeft()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # elif direction == "right":
+        #     runTime = 0
+        #     while (runTime != time):
+        #         timeStart = time.time()
+        #         self.guiRobot.waistRight()
+        #         timeEnd = time.time()
+        #         runTime += timeEnd - timeStart
+        # else:
+        #     errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
         print("Say a command")
@@ -213,11 +217,11 @@ class MyTK():
         print("The robot says %s" % (sentence))
         # to do make robot speak
 
-    def errorPopUpWind(self, message):
-        top = Toplevel(win)
-        top.geometry("250x250")
-        top.title("Input Error")
-        tk.Label(top, text=message).place(x=150, y=80)
+    # def errorPopUpWind(self, message):
+    #     top = Toplevel(win)
+    #     top.geometry("250x250")
+    #     top.title("Input Error")
+    #     tk.Label(top, text=message).place(x=150, y=80)
 
     def commands(self, name):
         top = tk.Toplevel(self.win)
@@ -269,8 +273,10 @@ class MyTK():
             ok = tk.Button(fr, text="Ok", background="green", command=lambda: [args.append(selected.get()), self.createInstruction(name, args),top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "speech":
-            label = tk.Label(fr, text="Think of an instruction to \nsay to the robot and press Ok")
+            label = tk.Label(fr, text="Think of an instruction to")
+            label2 = tk.Label(fr, text="say to the robot and press Ok")
             label.pack(fill='x', padx=5, pady=5)
+            label2.pack(fill='x', padx=5, pady=5)
             ok = tk.Button(fr, text="Ok", background="green",command=lambda: [self.createInstruction(name, args),top.destroy()])
             ok.pack(fill='x', padx=5, pady=5)
 
@@ -299,5 +305,12 @@ win = tk.Tk()
 win.title("Robot Program GUI")
 win.configure(background='light blue')
 v = MyTK(win)
+##Key bindings
+#win.bind('<Motion>', v.motion)
+
+# create a canvas and add it to window
+# v.createCanvas()
+# Place a label on Window
+#v.createLabel()
 v.createButtons()
 win.mainloop()
