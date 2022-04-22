@@ -204,7 +204,7 @@ class MyTK:
                 runTime += timeEnd - timeStart
         elif direction in "right":
             runTime = 0
-            while runTime != waitTime:
+            while runTime<= waitTime:
                 timeStart = timeLib.time()
                 self.guiRobot.turnRight()
                 timeEnd = timeLib.time()
