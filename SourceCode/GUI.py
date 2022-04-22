@@ -32,7 +32,6 @@ class MyTK():
         self.leftfr['borderwidth'] = 2
         self.leftfr['relief'] = 'raised'
         self.engine = pyttsx3.init()
-        self.input = SpeechController()
         self.canvas = tk.Canvas(self.topfr, highlightthickness=0, bg="light blue", width=300, height=300)
         self.eye1 = []
         self.eye2 = []
