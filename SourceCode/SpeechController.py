@@ -58,6 +58,7 @@ def stop(self):
 
 
 class SpeechController:
+
     listening = True;
 
     while listening:
