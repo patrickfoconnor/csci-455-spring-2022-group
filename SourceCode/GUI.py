@@ -205,14 +205,15 @@ class MyTK():
 
     def headtilt(self, direction):
 
-        if direction == "up":
+        if direction in "up":
             runTime = 0
             while (runTime != time):
+                print("headtilt up")
                 timeStart = timeLib.time()
                 self.guiRobot.headUp()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
-        elif direction == "down":
+        elif direction in "down":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
@@ -224,15 +225,14 @@ class MyTK():
 
     def headpan(self, direction):
         print("head pan")
-        self.sp
-        if direction == "left":
+        if direction in "left":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
                 self.guiRobot.headLeft()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
-        elif direction == "right":
+        elif direction in "right":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
@@ -263,7 +263,7 @@ class MyTK():
 
     def speech(self):
         pass
-        SpeechController()
+        #SpeechController()
 
     def talking(self, sentence):
         pass
@@ -277,7 +277,7 @@ class MyTK():
         # self.engine.runAndWait()
 
     def errorPopUpWind(self, message):
-        top = Toplevel(win)
+        top = tk.Toplevel(win)
         top.geometry("250x250")
         top.title("Input Error")
         tk.Label(top, text=message).place(x=150, y=80)
@@ -343,9 +343,9 @@ class MyTK():
             ok.pack(side=tk.TOP)
         elif name in "headtilt":
             label = tk.Label(fr, text="Direction to tilt head:")
-            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,
-                                background="light blue")
-            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
+
+            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue")
+            r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
@@ -355,8 +355,9 @@ class MyTK():
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "headpan":
             label = tk.Label(fr, text="Direction to pan head:")
-            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue")
-            r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
+            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,
+                                background="light blue")
+            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
