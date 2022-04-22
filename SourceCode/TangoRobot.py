@@ -162,7 +162,6 @@ class TangoRobot:
 
     def turnLeft(self):
         # self.speed += MOTOR_INCREMENT
-
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
             print("Too Slow")

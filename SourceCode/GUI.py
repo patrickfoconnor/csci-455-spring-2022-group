@@ -197,21 +197,20 @@ class MyTK:
         waitTime += 1
         if direction in "left":
             runTime = 0
-            while runTime != waitTime:
+            while runTime <= waitTime:
                 timeStart = timeLib.time()
                 self.guiRobot.turnLeft()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         elif direction in "right":
             runTime = 0
-            while runTime<= waitTime:
+            while runTime <= waitTime:
                 timeStart = timeLib.time()
                 self.guiRobot.turnRight()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
         else:
             errorPopUpWind("Invalid Robot Turn Direction")
-        print("turn")
 
     def headtilt(self, direction):
         if direction in "up":
