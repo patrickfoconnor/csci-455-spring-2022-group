@@ -195,14 +195,14 @@ class MyTK:
     #
     def turn(self, direction, waitTime):
         waitTime += 1
-        if direction == "left":
+        if direction in "left":
             runTime = 0
             while runTime != waitTime:
                 timeStart = timeLib.time()
                 self.guiRobot.turnLeft()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
-        elif direction == "right":
+        elif direction in "right":
             runTime = 0
             while runTime != waitTime:
                 timeStart = timeLib.time()
