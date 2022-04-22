@@ -343,9 +343,9 @@ class MyTK():
             ok.pack(side=tk.TOP)
         elif name in "headtilt":
             label = tk.Label(fr, text="Direction to tilt head:")
-            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,
-                                background="light blue")
-            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
+
+            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue")
+            r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
@@ -355,8 +355,9 @@ class MyTK():
             ok.pack(fill='x', padx=5, pady=5)
         elif name in "headpan":
             label = tk.Label(fr, text="Direction to pan head:")
-            r1 = tk.Radiobutton(fr, text="Down", value="down", variable=selected, indicator=0, background="light blue")
-            r2 = tk.Radiobutton(fr, text="Up", value="up", variable=selected, indicator=0, background="light blue")
+            r1 = tk.Radiobutton(fr, text="Right", value="right", variable=selected, indicator=0,
+                                background="light blue")
+            r2 = tk.Radiobutton(fr, text="Left", value="left", variable=selected, indicator=0, background="light blue")
             label.pack(fill='x', padx=5, pady=5)
             r1.pack(fill='x', padx=5, pady=5)
             r2.pack(fill='x', padx=5, pady=5)
