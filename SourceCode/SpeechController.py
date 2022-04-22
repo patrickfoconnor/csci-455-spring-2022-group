@@ -57,37 +57,37 @@ def stop(self):
     robot.resetRobot()
 
 
-class SpeechController:
-
-    listening = True;
-
-    while listening:
-        with sr.Microphone() as source:
-            r = sr.Recognizer()
-            r.adjust_for_ambient_noise(source)
-            r.dynamic_energythreshhold = 3000
-            listening = False
-            try:
-                print("listening")
-                audio = r.listen(source)
-                print("Got audio")
-                word = r.recognize_google(audio)
-                print(word)
-            except sr.UnknownValueError:
-                print("Word not recognized")
-                listening = True
-                word = ""
-
-            if "waist" in word or "waste" in word:
-                waist(word)
-            elif "head" in word:
-                head(word)
-            elif "robot" in word:
-                arrows(word)
-            elif "stop" in word:
-                stop()
-            else:
-                print("Command not recognized")
-
-
-SpeechController()
+# class SpeechController:
+#
+#     listening = True;
+#
+#     while listening:
+#         with sr.Microphone() as source:
+#             r = sr.Recognizer()
+#             r.adjust_for_ambient_noise(source)
+#             r.dynamic_energythreshhold = 3000
+#             listening = False
+#             try:
+#                 print("listening")
+#                 audio = r.listen(source)
+#                 print("Got audio")
+#                 word = r.recognize_google(audio)
+#                 print(word)
+#             except sr.UnknownValueError:
+#                 print("Word not recognized")
+#                 listening = True
+#                 word = ""
+#
+#             if "waist" in word or "waste" in word:
+#                 waist(word)
+#             elif "head" in word:
+#                 head(word)
+#             elif "robot" in word:
+#                 arrows(word)
+#             elif "stop" in word:
+#                 stop()
+#             else:
+#                 print("Command not recognized")
+#
+#
+# SpeechController()
