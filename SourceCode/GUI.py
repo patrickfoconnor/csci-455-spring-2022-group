@@ -267,7 +267,7 @@ class MyTK():
             label = tk.Label(fr, text="Speed")
             label.pack(fill='x',padx=5, pady=5)
             minus = tk.Button(fr,text="-", width=5,command=lambda : speed.set(speed.get()-5))
-            plus =  tk.Button(fr,text="-", width=5,command=lambda : speed.set(speed.get()-5))
+            plus =  tk.Button(fr,text="+", width=5,command=lambda : speed.set(speed.get()+5))
             plus.pack(side=tk.LEFT)
             minus.pack(side=tk.LEFT)
             text = tk.Entry(fr, textvariable=speed, width=5)
