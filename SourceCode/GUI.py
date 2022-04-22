@@ -224,6 +224,7 @@ class MyTK():
 
     def headpan(self, direction):
         print("head pan")
+        self.sp
         if direction == "left":
             runTime = 0
             while (runTime != time):
@@ -418,6 +419,7 @@ class MyTK():
                 self.win.after(250, self.animate("+"))
                 self.canvas.pack()
                 self.win.update()
+            timeLib.sleep(5)
 
 
 win = tk.Tk()
