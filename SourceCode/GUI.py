@@ -207,57 +207,57 @@ class MyTK():
 
         if direction in "up":
             runTime = 0
-            while (runTime != time):
-                print("headtilt up")
-                timeStart = timeLib.time()
-                self.guiRobot.headUp()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            self.guiRobot.headUp()
+            # while (runTime != time):
+            #     print("headtilt up")
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         elif direction in "down":
             runTime = 0
-            while (runTime != time):
-                timeStart = timeLib.time()
-                self.guiRobot.headDown()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            self.guiRobot.headDown()
+            # while (runTime != time):
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Head Tilt Direction")
 
     def headpan(self, direction):
         print("head pan")
         if direction in "left":
-            runTime = 0
-            while (runTime != time):
-                timeStart = timeLib.time()
                 self.guiRobot.headLeft()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            # runTime = 0
+            # while (runTime != time):
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         elif direction in "right":
             runTime = 0
-            while (runTime != time):
-                timeStart = timeLib.time()
-                self.guiRobot.headRight()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            self.guiRobot.headRight()
+            # while (runTime != time):
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Head Turn Direction")
 
     def waistturn(self, direction):
         print("waist turn")
         if direction == "left":
-            runTime = 0
-            while (runTime != time):
-                timeStart = timeLib.time()
-                self.guiRobot.waistLeft()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            self.guiRobot.waistLeft()
+            # runTime = 0
+            # while (runTime != time):
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         elif direction == "right":
             runTime = 0
-            while (runTime != time):
-                timeStart = timeLib.time()
-                self.guiRobot.waistRight()
-                timeEnd = timeLib.time()
-                runTime += timeEnd - timeStart
+            self.guiRobot.waistRight()
+            # while (runTime != time):
+            #     timeStart = timeLib.time()
+            #     timeEnd = timeLib.time()
+            #     runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Robot Waist Turn Direction")
 
