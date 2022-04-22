@@ -361,6 +361,8 @@ class MyTK:
                     stop()
                 else:
                     print("Command not recognized")
+                    listening = True
+            self.guiRobot.resetWheels()
 
 
     def talking(self, sentence):
