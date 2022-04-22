@@ -182,7 +182,8 @@ class MyTK():
                 runTime += timeEnd - timeStart
         else:
             self.errorPopUpWind("Invalid Motor Direction")
-        self.guiRobot.resetWheels()
+        self.guiRobot.resetRobot()
+        self.guiRobot.speed = 6000
 
     #
     def turn(self, direction, time):
