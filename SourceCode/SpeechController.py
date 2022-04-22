@@ -58,9 +58,7 @@ def stop(self):
 
 
 class SpeechController:
-
-    def __init__(self):
-        listening = True;
+    listening = True;
 
     while listening:
         with sr.Microphone() as source:

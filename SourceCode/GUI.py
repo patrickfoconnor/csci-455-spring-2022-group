@@ -275,9 +275,38 @@ class MyTK:
             errorPopUpWind("Invalid Robot Waist Turn Direction")
 
     def speech(self):
-        SpeechController()
+        listening = True;
 
-    def talking(self, sentence):
+        while listening:
+            with sr.Microphone() as source:
+                r = sr.Recognizer()
+                r.adjust_for_ambient_noise(source)
+                r.dynamic_energythreshhold = 3000
+                listening = False
+                try:
+                    print("listening")
+                    audio = r.listen(source)
+                    print("Got audio")
+                    word = r.recognize_google(audio)
+                    print(word)
+                except sr.UnknownValueError:
+                    print("Word not recognized")
+                    listening = True
+                    word = ""
+
+                if "waist" in word or "waste" in word:
+                    SpeechController.waist(word)
+                elif "head" in word:
+                    SpeechController.head(word)
+                elif "robot" in word:
+                    SpeechController.arrows(word)
+                elif "stop" in word:
+                    SpeechController.stop()
+                else:
+                    print("Command not recognized")
+
+
+def talking(self, sentence):
         print("The robot says %s" % sentence)
         voices = self.engine.getProperty('voices')
 
