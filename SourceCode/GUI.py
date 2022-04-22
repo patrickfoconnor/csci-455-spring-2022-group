@@ -420,8 +420,6 @@ class MyTK():
                 self.canvas.pack()
                 self.win.update()
             timeLib.sleep(.5)
-            self.guiRobot.resetWheels()
-
 
 win = tk.Tk()
 win.title("Robot Program GUI")
