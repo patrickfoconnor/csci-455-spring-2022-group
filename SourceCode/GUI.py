@@ -205,14 +205,15 @@ class MyTK():
 
     def headtilt(self, direction):
 
-        if direction == "up":
+        if direction in "up":
             runTime = 0
             while (runTime != time):
+                print("headtilt up")
                 timeStart = timeLib.time()
                 self.guiRobot.headUp()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
-        elif direction == "down":
+        elif direction in "down":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
@@ -224,14 +225,14 @@ class MyTK():
 
     def headpan(self, direction):
         print("head pan")
-        if direction == "left":
+        if direction in "left":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
                 self.guiRobot.headLeft()
                 timeEnd = timeLib.time()
                 runTime += timeEnd - timeStart
-        elif direction == "right":
+        elif direction in "right":
             runTime = 0
             while (runTime != time):
                 timeStart = timeLib.time()
