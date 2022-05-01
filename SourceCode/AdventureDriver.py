@@ -23,6 +23,7 @@ from SourceCode.Character import Player, Easy, Hard
 
 def populateGameBoard(baseGameBoard, objectArray):
     objectsPlaced = 0
+    startingPositionX, startingPositionY = 0, 0
     for i in range(len(baseGameBoard)):
         for j in range(len(baseGameBoard[i])):
             if isinstance(baseGameBoard[i][j], int):
@@ -34,20 +35,36 @@ def populateGameBoard(baseGameBoard, objectArray):
     return baseGameBoard, startingPositionX, startingPositionY
 
 
-def checkWest(player):
-    pass
+def checkWest(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if playerX-1 >= 0 and gameBoard[playerX - 1][playerY] != "W":
+        return True
+    else:
+        return False
 
 
-def checkNorth():
-    pass
+def checkNorth(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if playerY-1 >= 0 and gameBoard[playerX][playerY - 1] != "W":
+        return True
+    else:
+        return False
 
 
-def checkEast():
-    pass
+def checkEast(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if len(gameBoard) < playerX+1 and gameBoard[playerX + 1][playerY] != "W":
+        return True
+    else:
+        return False
 
 
-def checkSouth():
-    pass
+def checkSouth(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if playerY+1 < len(gameBoard[1]) and gameBoard[playerX][playerY + 1] != "W":
+        return True
+    else:
+        return False
 
 
 class AdventureDriver:
@@ -55,19 +72,34 @@ class AdventureDriver:
     # constructor
     def __init__(self):
         # Create the player
-        player = Player()
-        player.name = "Player01"
+        self.player = Player()
+        self.player.name = "Player01"
 
-        player.flvrtxt = "Just a trying to finish the semester"
+        self.player.flvrtxt = "Just a trying to finish the semester"
 
         self.objectArray = self.createObjectArray(9)
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+        self.player.setPosition(self.startingPositionX, self.startingPositionY)
 
     def checkForMoves(self, player):
-        northMove = checkNorth(self)
-        eastMove = checkEast(self)
-        southMove = checkSouth(self)
-        westMove = checkWest(self)
+        availableActions = []
+        if (checkNorth(self.player, self.gameBoard) or checkEast(self.player, self.gameBoard) or
+                checkSouth(self.player, self.gameBoard) or checkWest(self.player, self.gameBoard)):
+            if checkNorth(self.player, self.gameBoard):
+                availableActions.append("North")
+                pass
+            elif checkEast(self.player, self.gameBoard):
+                availableActions.append("East")
+                pass
+            elif checkSouth(self.player, self.gameBoard):
+                availableActions.append("South")
+                pass
+            elif checkWest(self.player, self.gameBoard):
+                availableActions.append("West")
+                pass
+            else:
+                pass
+        return availableActions
 
     # Define all of the actions are available for game
     def battle(self, player, enemy):
@@ -88,7 +120,6 @@ class AdventureDriver:
             pass
         elif level == 2:
             baseGameBoard = [[1, "P", "P", "P", 2, "P", "P", "P", 3],
-                             ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
@@ -129,9 +160,12 @@ class AdventureDriver:
         random.shuffle(objectArray)
         return objectArray
 
+    def outputBoard(self):
+        for i in range(len(self.gameBoard)):
+            print(self.gameBoard[i])
+
 
 adventure01 = AdventureDriver()
-print(adventure01.gameBoard)
-print(adventure01.startingPositionX)
-print(adventure01.startingPositionY)
-
+print(adventure01.outputBoard())
+print(adventure01.startingPositionX, adventure01.startingPositionY)
+print(adventure01.checkForMoves(adventure01.player))
