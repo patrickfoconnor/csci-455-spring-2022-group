@@ -110,7 +110,11 @@ class AdventureDriver:
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self, player):
-        pass
+        runChance =  random.randint(0, 100)
+        if runChance < 25:
+            print("Run Fail")
+        else:
+            print("Run Success new position is: ")
 
     # Recharge all Hit points for given player
     def rechargeHealth(self, player):
