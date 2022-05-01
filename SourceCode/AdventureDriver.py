@@ -3,10 +3,28 @@
 from enum import Enum
 
 
+# Base game board
+
+# Numerical = Node, P = Path, W = Wall
+# +-----------------+
+# |1 P P P 2 P P P 3|
+# |W W W W P W W W P|
+# |W W W W P W W W P|
+# |W W W W P W W W P|
+# |W W W W P W W W P|
+# |4 P P P 5 W W W 6|
+# |P W W W P W W W W|
+# |P W W W P W W W W|
+# |P W W W P W W W W|
+# |7 W W W 8 P P P 9|
+
+
 class AdventureDriver:
+
     # constructor
     def __init__(self):
-        pass
+        self.createObjectDict(9)
+        self.createGameBoard(2)
 
     # Define all of the actions are available for game
     def battle(self, player, enemy):
@@ -24,4 +42,30 @@ class AdventureDriver:
     def populateNodes(self):
         pass
 
+    def populateGameBoard(baseGameBoard):
+        for row in baseGameBoard:
+            for col in row:
+                if col.isdigit():
+                    baseGameBoard[row][col] = baseGameBoard.objectDict[col]
 
+    def createGameBoard(level):
+        if level == 1:
+            pass
+        elif level == 2:
+            baseGameBoard = [[1, "P", "P", "P", 2, "P", "P", "P", 3],
+                             ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
+                             ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
+                             ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
+                             ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
+                             [4, "P", "P", "P", 5, "W", "W", "W", 6],
+                             ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
+                             ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
+                             ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
+                             [7, "W", "W", "W", 8, "W", "W", "W", 9]]
+            level.populateGameBoard(baseGameBoard)
+
+    ## NEED TO FINISH
+    def createObjectDict(objectCount, randomObject=None):
+        objectDict = {}
+        for i in range(objectCount):
+            objectDict[i] = randomObject
