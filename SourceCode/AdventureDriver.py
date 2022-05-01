@@ -111,7 +111,7 @@ class AdventureDriver:
 
     # Recharge all Hit points for given player
     def rechargeHealth(self, player):
-        pass
+        player.setHP(100)
 
     # def populateGameBoard(baseGameBoard):
 

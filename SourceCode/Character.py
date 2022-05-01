@@ -26,7 +26,7 @@ class Character(object):
 class Player(Character):
 
     def __init__(self):
-        super(Player, self).__init__("Player01", 100, "fire", 0, 5, "None", 50, "Just a bush, it cannot attack")
+        super(Player, self).__init__("Player01", 100, "fire", 50, 5, "None", 50, "Just a bush, it cannot attack")
         self.positionX = None
         self.positionY = None
 
@@ -41,10 +41,10 @@ class Player(Character):
 class Easy(Character):
 
     def __init__(self):
-        super(Easy, self).__init__("Bulbasaur", 50, "fire", 0, 5, "A Stick", 50, "Just a bush, it cannot attack")
+        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "A Stick", 50, "Just a bush, it cannot attack")
 
 
 class Hard(Character):
 
     def __init__(self):
-        super(Hard, self).__init__("Mewtwo", 75, "none", 10, 10, "none", 150, "Cliche RPG enemy")
+        super(Hard, self).__init__("Mewtwo", 75, "none", 40, 10, "none", 150, "Cliche RPG enemy")
