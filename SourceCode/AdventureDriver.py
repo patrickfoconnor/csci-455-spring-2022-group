@@ -1,7 +1,6 @@
 # Main class that will hold the driver for the adventure-based combat game
-
+import random
 from enum import Enum
-
 
 # Base game board
 
@@ -17,14 +16,30 @@ from enum import Enum
 # |P W W W P W W W W|
 # |P W W W P W W W W|
 # |7 W W W 8 P P P 9|
+import self as self
+
+from SourceCode.Character import Player, Easy, Hard
+
+
+def populateGameBoard(baseGameBoard, objectArray):
+    objectsPlaced = 0
+    for i in range(len(baseGameBoard)):
+        for j in range(len(baseGameBoard[i])):
+            if isinstance(baseGameBoard[i][j], int):
+                if objectArray[objectsPlaced] == "S":
+                    startingPositionX = i
+                    startingPositionY = j
+                baseGameBoard[i][j] = objectArray[objectsPlaced]
+                objectsPlaced += 1
+    return baseGameBoard, startingPositionX, startingPositionY
 
 
 class AdventureDriver:
 
     # constructor
     def __init__(self):
-        self.createObjectDict(9)
-        self.createGameBoard(2)
+        self.objectArray = self.createObjectArray(9)
+        self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
 
     # Define all of the actions are available for game
     def battle(self, player, enemy):
@@ -38,17 +53,9 @@ class AdventureDriver:
     def rechargeHealth(self, player):
         pass
 
-    # Populate all 9 nodes with 1 start, 1 end, 1 recharge station, 4 weak enemies, 2 hard enemies one with a key
-    def populateNodes(self):
-        pass
+    # def populateGameBoard(baseGameBoard):
 
-    def populateGameBoard(baseGameBoard):
-        for row in baseGameBoard:
-            for col in row:
-                if col.isdigit():
-                    baseGameBoard[row][col] = baseGameBoard.objectDict[col]
-
-    def createGameBoard(level):
+    def createGameBoard(self, level):
         if level == 1:
             pass
         elif level == 2:
@@ -62,10 +69,45 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "W", "W", "W", 9]]
-            level.populateGameBoard(baseGameBoard)
+            return populateGameBoard(baseGameBoard, self.objectArray)
 
-    ## NEED TO FINISH
-    def createObjectDict(objectCount, randomObject=None):
-        objectDict = {}
-        for i in range(objectCount):
-            objectDict[i] = randomObject
+    # The array will be created and then shuffled
+    #   Each index will then hold the object
+    #  Start = S
+    #  End = E
+    #  Recharge Station = R
+    #  (4) Weak Bad Guys = Y
+    #  (2) Hard bad guys = H
+    def createObjectArray(self, objectCount):
+        # Create the player
+        player = Player()
+        player.name = "Player01"
+
+        player.flvrtxt = "Just a trying to finish the semester"
+        # Create four bad guys
+        easyEnemyTurtle = Easy()
+        easyEnemyTurtle.setName("Turtle")
+        easyEnemyRabbit = Easy()
+        easyEnemyRabbit.setName("Rabbit")
+        easyEnemySnail = Easy()
+        easyEnemySnail.setName("Snail")
+        easyEnemyMagpie = Easy()
+        easyEnemyMagpie.setName("Magpie")
+
+        hardEnemyKeyLess = Hard()
+        hardEnemyKeyLess.loot = "none"
+        hardEnemyKeyBearer = Hard()
+        hardEnemyKeyBearer.loot = "Golden Key"
+
+        objectArray = [player, easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
+                       hardEnemyKeyBearer, "S", "E", "R"]
+        # Randomize the association of index and object
+        random.shuffle(objectArray)
+        return objectArray
+
+
+adventure01 = AdventureDriver()
+print(adventure01.gameBoard)
+print(adventure01.startingPositionX)
+print(adventure01.startingPositionY)
+
