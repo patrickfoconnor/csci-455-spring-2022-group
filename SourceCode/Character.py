@@ -27,18 +27,15 @@ class Player(Character):
 
     def __init__(self):
         super(Player, self).__init__("Player01", 100, "fire", 0, 5, "None", 50, "Just a bush, it cannot attack")
-    #
-    # def setName(self, name):
-    #     self.name = name
-    #
-    # def getName(self):
-    #     return self.name
-    #
-    # def setHP(self, HP):
-    #     self.HP = HP
-    #
-    # def getHP(self):
-    #     return self.HP
+        self.positionX = None
+        self.positionY = None
+
+    def setPosition(self, positionX, positionY):
+        self.positionX = positionX
+        self.positionY = positionY
+
+    def getPosition(self):
+        return self.positionX, self.positionY
 
 
 class Easy(Character):

@@ -34,12 +34,34 @@ def populateGameBoard(baseGameBoard, objectArray):
     return baseGameBoard, startingPositionX, startingPositionY
 
 
+def checkWest(player):
+    pass
+
+
+def checkNorth():
+    pass
+
+
+def checkEast():
+    pass
+
+
+def checkSouth():
+    pass
+
+
 class AdventureDriver:
 
     # constructor
     def __init__(self):
         self.objectArray = self.createObjectArray(9)
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+
+    def checkForMoves(self, player):
+        northMove = checkNorth(self)
+        eastMove = checkEast(self)
+        southMove = checkSouth(self)
+        westMove = checkWest(self)
 
     # Define all of the actions are available for game
     def battle(self, player, enemy):
