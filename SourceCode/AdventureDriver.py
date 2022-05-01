@@ -103,7 +103,10 @@ class AdventureDriver:
 
     # Define all of the actions are available for game
     def battle(self, player, enemy):
-        pass
+        playersAtackValue = random.randint(0, player.attack)
+        enemyAttackValue = random.randint(0, enemy.attack)
+        player.HP -= enemyAttackValue
+        enemy.HP -= playersAtackValue
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self, player):
