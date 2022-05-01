@@ -77,7 +77,7 @@ class AdventureDriver:
 
         self.player.flvrtxt = "Just a trying to finish the semester"
 
-        self.objectArray = self.createObjectArray(9)
+        self.objectArray = self.createObjectArray()
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
         self.player.setPosition(self.startingPositionX, self.startingPositionY)
 
@@ -140,7 +140,7 @@ class AdventureDriver:
     #  Recharge Station = R
     #  (4) Weak Bad Guys = Y
     #  (2) Hard bad guys = H
-    def createObjectArray(self, objectCount):
+    def createObjectArray(self):
 
         # Create four bad guys
         easyEnemyTurtle = Easy()
