@@ -53,7 +53,7 @@ def checkNorth(player, gameBoard):
 
 def checkEast(player, gameBoard):
     playerX, playerY = player.getPosition()
-    if len(gameBoard) < playerX+1 and gameBoard[playerX + 1][playerY] != "W":
+    if len(gameBoard) > playerX+1 and gameBoard[playerX + 1][playerY] != "W":
         return True
     else:
         return False
@@ -87,16 +87,16 @@ class AdventureDriver:
                 checkSouth(self.player, self.gameBoard) or checkWest(self.player, self.gameBoard)):
             if checkNorth(self.player, self.gameBoard):
                 availableActions.append("North")
-                pass
+
             elif checkEast(self.player, self.gameBoard):
                 availableActions.append("East")
-                pass
+
             elif checkSouth(self.player, self.gameBoard):
                 availableActions.append("South")
-                pass
+
             elif checkWest(self.player, self.gameBoard):
                 availableActions.append("West")
-                pass
+
             else:
                 pass
         return availableActions
