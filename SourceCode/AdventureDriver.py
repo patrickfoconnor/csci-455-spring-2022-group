@@ -88,13 +88,13 @@ class AdventureDriver:
             if checkNorth(self.player, self.gameBoard):
                 availableActions.append("North")
 
-            elif checkEast(self.player, self.gameBoard):
+            if checkEast(self.player, self.gameBoard):
                 availableActions.append("East")
 
-            elif checkSouth(self.player, self.gameBoard):
+            if checkSouth(self.player, self.gameBoard):
                 availableActions.append("South")
 
-            elif checkWest(self.player, self.gameBoard):
+            if checkWest(self.player, self.gameBoard):
                 availableActions.append("West")
 
             else:
