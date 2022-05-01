@@ -54,6 +54,12 @@ class AdventureDriver:
 
     # constructor
     def __init__(self):
+        # Create the player
+        player = Player()
+        player.name = "Player01"
+
+        player.flvrtxt = "Just a trying to finish the semester"
+
         self.objectArray = self.createObjectArray(9)
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
 
@@ -101,11 +107,7 @@ class AdventureDriver:
     #  (4) Weak Bad Guys = Y
     #  (2) Hard bad guys = H
     def createObjectArray(self, objectCount):
-        # Create the player
-        player = Player()
-        player.name = "Player01"
 
-        player.flvrtxt = "Just a trying to finish the semester"
         # Create four bad guys
         easyEnemyTurtle = Easy()
         easyEnemyTurtle.setName("Turtle")
@@ -121,7 +123,7 @@ class AdventureDriver:
         hardEnemyKeyBearer = Hard()
         hardEnemyKeyBearer.loot = "Golden Key"
 
-        objectArray = [player, easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
+        objectArray = [self.player, easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
                        hardEnemyKeyBearer, "S", "E", "R"]
         # Randomize the association of index and object
         random.shuffle(objectArray)
