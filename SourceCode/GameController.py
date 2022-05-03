@@ -1,15 +1,17 @@
 import tkinter as tk
 import AdventureDriver as ad
+import os
 #from TangoRobot import *
 import time
 
+clear = lambda: os.system('cls')
 
-class KeyboardController:
 
-    def __init__(self):
+class GameController:
+
+    def __init__(self, game):
         # tkinter window
         self.win = tk.Tk()
-        self.game = ad.AdventureDriver()
         # setup keybindings
         self.win.bind('<w>', self.move)  # key code: 25
         self.win.bind('<s>', self.move)  # key code: 39
@@ -17,20 +19,20 @@ class KeyboardController:
         self.win.bind('<d>', self.move)  # key code: 40
         # start tkinter window
         self.win.mainloop()
+        self.game = game
 
     def move(self, event):
         keycode = event.keycode
-        x = self.game.getCharacterPosition()[0]
-        y = self.game.getCharacterPosition()[1]
-        xLen = self.game.getSize()[0]
-        yLen = self.game.getSize()[1]
+        y = self.game.getCharacterPosition()[0]
+        x = self.game.getCharacterPosition()[1]
+        yLen = self.game.getSize()[0]
+        xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
-        print(keycode)
         if keycode == 87:
             print("W")
             if moves[0] and x > 0:
                 print("North")
-                self.game.setCharacterPosition(x-1, y)
+                self.game.setCharacterPosition(y, x-1)
             else:
                 print("That's a wall!")
 
@@ -38,7 +40,7 @@ class KeyboardController:
             print("S")
             if moves[1] and x < xLen:
                 print("South")
-                self.game.setCharacterPosition(x+1, y)
+                self.game.setCharacterPosition(y, x+1)
             else:
                 print("That's a wall!")
 
@@ -46,7 +48,7 @@ class KeyboardController:
             print("D")
             if moves[2] and y < yLen:
                 print("East")
-                self.game.setCharacterPosition(x, y+1)
+                self.game.setCharacterPosition(y+1, x)
             else:
                 print("That's a wall!")
 
@@ -54,10 +56,16 @@ class KeyboardController:
             print("A")
             if moves[3] and y > 0:
                 print("West")
-                self.game.setCharacterPosition(x, y-1)
+                self.game.setCharacterPosition(y-1, x)
             else:
                 print("That's a wall!")
 
-        print(self.game.getCharacterPosition())
+        self.display()
 
-KeyboardController()
+
+
+game = ad.AdventureDriver()
+game.outputBoard()
+temp = game.getCharacterPosition()
+print("Y = ", temp[0], "X = ", temp[1])
+GameController(game)
