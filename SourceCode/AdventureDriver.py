@@ -29,43 +29,51 @@ def populateGameBoard(baseGameBoard, objectArray):
         for j in range(len(baseGameBoard[i])):
             if isinstance(baseGameBoard[i][j], int):
                 if objectArray[objectsPlaced] == "S":
-                    startingPositionX = i
-                    startingPositionY = j
+                    startingPositionX = j
+                    startingPositionY = i
                 baseGameBoard[i][j] = objectArray[objectsPlaced]
                 objectsPlaced += 1
     return baseGameBoard, startingPositionX, startingPositionY
 
 
-def checkWest(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if playerX-1 >= 0 and gameBoard[playerX - 1][playerY] != "W":
-        return True
-    else:
-        return False
-
-
 def checkNorth(player, gameBoard):
     playerX, playerY = player.getPosition()
-    if playerY-1 >= 0 and gameBoard[playerX][playerY - 1] != "W":
-        return True
-    else:
-        return False
-
-
-def checkEast(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if len(gameBoard) > playerX+1 and gameBoard[playerX + 1][playerY] != "W":
-        return True
-    else:
-        return False
-
+    if playerY > 0:
+        print("North True", playerX, playerY, len(gameBoard))
+        print(gameBoard[playerX][playerY - 1])
+        if gameBoard[playerX][playerY - 1] != "W":
+            return True
+    return False
 
 def checkSouth(player, gameBoard):
     playerX, playerY = player.getPosition()
-    if playerY+1 < len(gameBoard[1]) and gameBoard[playerX][playerY + 1] != "W":
-        return True
-    else:
-        return False
+    if playerY < len(gameBoard[1])-1:
+        print("South True", playerX, playerY, len(gameBoard))
+        if gameBoard[playerX][playerY + 1] != "W":
+            return True
+    return False
+
+def checkEast(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if playerX < len(gameBoard)-1:
+        print("East", playerX, playerY, len(gameBoard))
+        if gameBoard[playerX + 1][playerY] != "W":
+            return True
+    return False
+
+def checkWest(player, gameBoard):
+    playerX, playerY = player.getPosition()
+    if playerX > 0:
+        print("West", playerX, playerY, len(gameBoard))
+        if gameBoard[playerX - 1][playerY] != "W":
+            return True
+    return False
+
+
+
+
+
+
 
 
 class AdventureDriver:
@@ -77,29 +85,23 @@ class AdventureDriver:
         self.player.name = "Player01"
 
         self.player.flvrtxt = "Just a trying to finish the semester"
-
         self.objectArray = self.createObjectArray()
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+        self.player.setPosition( self.startingPositionX, self.startingPositionY )
         self.player.setPosition(self.startingPositionX, self.startingPositionY)
 
-    def checkForMoves(self, player):
-        availableActions = []
-        if (checkNorth(self.player, self.gameBoard) or checkEast(self.player, self.gameBoard) or
-                checkSouth(self.player, self.gameBoard) or checkWest(self.player, self.gameBoard)):
-            if checkNorth(self.player, self.gameBoard):
-                availableActions.append("North")
+    def getCharacterPosition(self):
+        return self.player.getPosition();
 
-            if checkEast(self.player, self.gameBoard):
-                availableActions.append("East")
+    def setCharacterPosition(self, x, y):
+        self.player.setPosition(x, y)
 
-            if checkSouth(self.player, self.gameBoard):
-                availableActions.append("South")
+    def getSize(self):
+        return len(self.gameBoard), len(self.gameBoard[0])
 
-            if checkWest(self.player, self.gameBoard):
-                availableActions.append("West")
-
-            else:
-                pass
+    def checkForMoves(self):
+        print(self.player.getPosition())
+        availableActions = [checkNorth(self.player, self.gameBoard), checkSouth(self.player, self.gameBoard), checkEast(self.player, self.gameBoard), checkSouth(self.player, self.gameBoard)]
         return availableActions
 
     # Define all of the actions are available for game
@@ -134,7 +136,7 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
-                             [ 7 , "W", "W", "W",  8 , "W", "W", "W",  9 ]]
+                             [ 7 , "W", "W", "W",  8 , "P", "P", "P",  9 ]]
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
@@ -181,4 +183,6 @@ adventure01 = AdventureDriver()
 
 adventure01.outputBoard()
 print(adventure01.startingPositionX, adventure01.startingPositionY)
-print(adventure01.checkForMoves(adventure01.player))
+print(adventure01.checkForMoves())
+
+
