@@ -82,7 +82,8 @@ class AdventureDriver:
 
         self.player.flvrtxt = "Just a trying to finish the semester"
         self.objectArray = self.createObjectArray()
-        self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+        self.ogBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+        self.gameBoard = self.ogBoard
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
     def getCharacterPosition(self):
@@ -90,12 +91,15 @@ class AdventureDriver:
 
     def setCharacterPosition(self, y, x):
         self.player.setPosition(y, x)
+        self.gameBoard = self.ogBoard
+        self.gameBoard[y][x] = "X"
 
     def getSize(self):
         return len(self.gameBoard), len(self.gameBoard[0])
 
     def checkForMoves(self):
-        availableActions = [checkNorth(self.player, self.gameBoard), checkSouth(self.player, self.gameBoard), checkEast(self.player, self.gameBoard), checkWest(self.player, self.gameBoard)]
+        availableActions = [checkNorth(self.player, self.gameBoard), checkSouth(self.player, self.gameBoard),
+                            checkEast(self.player, self.gameBoard), checkWest(self.player, self.gameBoard)]
         return availableActions
 
     # Define all of the actions are available for game

@@ -29,6 +29,7 @@ class Player(Character):
         super(Player, self).__init__("Player01", 100, "fire", 50, 5, "None", 50, "Just a bush, it cannot attack")
         self.positionX = None
         self.positionY = None
+        self.spot = "S"
 
     def setPosition(self, positionY, positionX):
         self.positionX = positionX

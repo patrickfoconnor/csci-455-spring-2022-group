@@ -9,7 +9,12 @@ clear = lambda: os.system('cls')
 
 class GameController:
 
-    def __init__(self, game):
+    def __init__(self):
+        self.game = ad.AdventureDriver()
+        self.game.outputBoard()
+        temp = self.game.getCharacterPosition()
+        print( "Y = ", temp[0], "X = ", temp[1] )
+
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
@@ -19,7 +24,7 @@ class GameController:
         self.win.bind('<d>', self.move)  # key code: 40
         # start tkinter window
         self.win.mainloop()
-        self.game = game
+
 
     def move(self, event):
         keycode = event.keycode
@@ -28,44 +33,42 @@ class GameController:
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
+
         if keycode == 87:
             print("W")
-            if moves[0] and x > 0:
+            if moves[0] and y > 0:
                 print("North")
-                self.game.setCharacterPosition(y, x-1)
+                self.game.setCharacterPosition(y-1, x)
             else:
                 print("That's a wall!")
 
         if keycode == 83:
             print("S")
-            if moves[1] and x < xLen:
+            if moves[1] and y < yLen:
                 print("South")
-                self.game.setCharacterPosition(y, x+1)
+                self.game.setCharacterPosition(y+1, x)
             else:
                 print("That's a wall!")
 
         if keycode == 68:
             print("D")
-            if moves[2] and y < yLen:
+            if moves[2] and x < xLen:
                 print("East")
-                self.game.setCharacterPosition(y+1, x)
+                self.game.setCharacterPosition(y, x+1)
             else:
                 print("That's a wall!")
 
         if keycode == 65:
             print("A")
-            if moves[3] and y > 0:
+            if moves[3] and x > 0:
                 print("West")
-                self.game.setCharacterPosition(y-1, x)
+                self.game.setCharacterPosition(y, x-1)
             else:
                 print("That's a wall!")
 
-        self.display()
+        self.game.outputBoard()
+        temp = self.game.getCharacterPosition()
+        print("Y = ", temp[0], "X = ", temp[1])
 
 
-
-game = ad.AdventureDriver()
-game.outputBoard()
-temp = game.getCharacterPosition()
-print("Y = ", temp[0], "X = ", temp[1])
-GameController(game)
+GameController()
