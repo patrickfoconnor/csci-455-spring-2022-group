@@ -36,12 +36,12 @@ class Player(Character):
         self.positionX = None
         self.positionY = None
 
-    def setPosition(self, positionX, positionY):
+    def setPosition(self, positionY, positionX):
         self.positionX = positionX
         self.positionY = positionY
 
     def getPosition(self):
-        return self.positionX, self.positionY
+        return self.positionY, self.positionX
 
 
 class Easy(Character):
