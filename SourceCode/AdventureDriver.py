@@ -1,6 +1,7 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
-from enum import Enum
+import time
+#from enum import Enum
 
 # Base game board
 
@@ -16,7 +17,7 @@ from enum import Enum
 # |P W W W P W W W W|
 # |P W W W P W W W W|
 # |7 W W W 8 P P P 9|
-import self as self
+#import self as self
 
 from SourceCode.Character import Player, Easy, Hard
 
@@ -121,20 +122,19 @@ class AdventureDriver:
         player.setHP(100)
 
     # def populateGameBoard(baseGameBoard):
-
     def createGameBoard(self, level):
         if level == 1:
             pass
         elif level == 2:
-            baseGameBoard = [[1, "P", "P", "P", 2, "P", "P", "P", 3],
+            baseGameBoard = [[ 1 , "P", "P", "P",  2 , "P", "P", "P",  3 ],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
                              ["W", "W", "W", "W", "P", "W", "W", "W", "P"],
-                             [4, "P", "P", "P", 5, "W", "W", "W", 6],
+                             [ 4 , "P", "P", "P",  5 , "W", "W", "W",  6 ],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
-                             [7, "W", "W", "W", 8, "W", "W", "W", 9]]
+                             [ 7 , "W", "W", "W",  8 , "W", "W", "W",  9 ]]
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
@@ -169,10 +169,17 @@ class AdventureDriver:
 
     def outputBoard(self):
         for i in range(len(self.gameBoard)):
-            print(self.gameBoard[i])
+            for j in range(len(self.gameBoard[i])):
+                if isinstance(self.gameBoard[i][j], str):
+                    print(self.gameBoard[i][j], end=" ")
+                else:
+                    print("?", end=" ")
+            print("")
+
 
 
 adventure01 = AdventureDriver()
-print(adventure01.outputBoard())
+
+adventure01.outputBoard()
 print(adventure01.startingPositionX, adventure01.startingPositionY)
 print(adventure01.checkForMoves(adventure01.player))
