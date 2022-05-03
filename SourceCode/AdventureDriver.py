@@ -177,7 +177,6 @@ class AdventureDriver:
             print("")
 
 
-
 adventure01 = AdventureDriver()
 
 adventure01.outputBoard()
