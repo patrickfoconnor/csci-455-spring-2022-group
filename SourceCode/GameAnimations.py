@@ -37,6 +37,7 @@ class GameAnimations:
         h3 = tk.PhotoImage(file="Game/heart3.png")
         h4 = tk.PhotoImage(file="Game/heart4.png")
         h5 = tk.PhotoImage(file="Game/heart5.png")
+
     def createButtons(self):
         B = tk.Button(self.fr, text="test", command=lambda: self.recharge())
         B.pack()

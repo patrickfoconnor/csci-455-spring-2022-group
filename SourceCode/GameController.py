@@ -2,6 +2,7 @@ import tkinter as tk
 import AdventureDriver as ad
 import os
 import pyttsx3
+#import speech_recognition as sr
 
 # from TangoRobot import *
 import time
@@ -26,6 +27,11 @@ class GameController:
         self.roundsPlayed = 0
         self.maxRounds = 25
 
+        self.listening = True
+
+        self.output = ""
+
+        '''
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
@@ -35,6 +41,7 @@ class GameController:
         self.win.bind('<d>', self.move)  # key code: 40
         # start tkinter window
         self.win.mainloop()
+        '''
 
     def saying(self):
         moves = self.game.checkForMoves()
@@ -50,56 +57,67 @@ class GameController:
         self.engine.say(spokenMoves)
         self.engine.runAndWait()
 
-    def move(self, event):
-        keycode = event.keycode
+    def move(self, word):
         y = self.game.getCharacterPosition()[0]
         x = self.game.getCharacterPosition()[1]
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
 
-        if self.roundsPlayed <= self.maxRounds:
-            self.saying()
+        if word in "North":
+            if moves[0] and y > 0:
+                self.game.move(y - 1, x)
+            else:
+                self.output = "That's a wall!"
 
-            if keycode == 87:
-                print("W")
-                if moves[0] and y > 0:
-                    self.game.move(y - 1, x)
-                else:
-                    print("That's a wall!")
+        if word in "South":
+            if moves[1] and y < yLen:
+                self.game.move(y + 1, x)
+            else:
+                self.output = "That's a wall!"
 
-            if keycode == 83:
-                print("S")
-                if moves[1] and y < yLen:
-                    print("South")
-                    self.game.move(y + 1, x)
-                else:
-                    print("That's a wall!")
+        if word in "East":
+            if moves[2] and x < xLen:
+                self.game.move(y, x + 1)
+            else:
+                self.output = "That's a wall!"
 
-            if keycode == 68:
-                print("D")
-                if moves[2] and x < xLen:
-                    print("East")
-                    self.game.move(y, x + 1)
-                else:
-                    print("That's a wall!")
+        if word in "West":
+            if moves[3] and x > 0:
+                self.game.move(y, x - 1)
+            else:
+                self.output = "That's a wall!"
 
-            if keycode == 65:
-                print("A")
-                if moves[3] and x > 0:
-                    print("West")
-                    self.game.move(y, x - 1)
-                else:
-                    print("That's a wall!")
+        self.game.outputBoard()
+        temp = self.game.getCharacterPosition()
+        print("Y = ", temp[0], "X = ", temp[1])
 
-            self.game.outputBoard()
-            temp = self.game.getCharacterPosition()
-            print("Y = ", temp[0], "X = ", temp[1])
+        self.roundsPlayed += 1
 
-            self.roundsPlayed += 1
+    '''
+    def listen(self):
+        while self.listening and self.roundsPlayed <= self.maxRounds:
+            with sr.Microphone() as source:
+                r = sr.Recognizer()
+                r.adjust_for_ambient_noise( source )
+                r.dynamic_energythreshhold = 3000
 
-        # self.engine.say(spokenMove)
-        # self.engine.runAndWait()
+                self.output = ""
+                self.saying()
 
-
-GameController()
+                try:
+                    print("listening")
+                    audio = r.listen(source)
+                    print("Got audio")
+                    word = r.recognize_google(audio)
+                    print(word)
+                    self.move(word)
+                except sr.UnknownValueError:
+                    print( "Word not recognized" )
+    '''
+    def listen(self):
+        print("...")
+        word = input()
+        self.saying()
+        self.move(word)
+GameController().listen()
