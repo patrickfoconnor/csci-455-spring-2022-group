@@ -205,6 +205,17 @@ class AdventureDriver:
             self.engine.runAndWait()
 
             word = input()
+            '''
+            with sr.Microphone() as source:
+                audio = self.engine.r.listen( source )
+                while not audio in "run":
+                    self.battle( self.player, enemy )
+                    self.engine.say( "Would you like to battle or run" )
+                    audio = self.engine.r.listen( source )
+                if audio in "run":
+                    self.engine.run()
+            '''
+
             if word in "run":
                 dont = False
                 self.run()
@@ -219,16 +230,6 @@ class AdventureDriver:
                 break
 
 
-            '''
-            with sr.Microphone() as source:
-                audio = self.engine.r.listen(source)
-                while not audio in "run":
-                    self.battle(self.player, enemy)
-                    self.engine.say("Would you like to battle or run")
-                    audio = self.engine.r.listen(source)
-                if audio in "run":
-                    self.engine.run()
-            '''
         self.engine.say("Enemy Defeated")
         self.engine.runAndWait()
 
