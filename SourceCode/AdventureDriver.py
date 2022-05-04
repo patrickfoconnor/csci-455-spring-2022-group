@@ -2,7 +2,7 @@
 import random
 import pyttsx3
 import GameAnimations as ga
-from TangoRobot import *
+#from TangoRobot import *
 
 import time
 # from enum import Enum
@@ -166,6 +166,7 @@ class AdventureDriver:
         self.engine.say(temp)
         temp = "You now have " + player.HP + " health points remaining."
         self.engine.say(temp)
+        self.engine.runAndWait()
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self):
@@ -177,7 +178,8 @@ class AdventureDriver:
             (y, x) = randomXY
             self.player.positionX = x
             self.player.positionY = y
-            self.engine.say("Run Success new position is: ", y, ", ", x)
+            temp = "Run Success new position is: " + str(y) + ", " + str(x)
+            self.engine.say(temp)
 
     # Recharge all Hit points for given player
     def rechargeHealth(self):
@@ -187,20 +189,34 @@ class AdventureDriver:
     def battleSequence(self, enemy):
         playerHealth = self.player.HP
         enemyHealth = enemy.HP
-        temp = "You have " + str(playerHealth) + " hitpoints"
-        self.engine.say(temp)
-        temp = enemy.name + " has " + str(enemyHealth) + " hitpoints"
-        self.engine.say(temp)
-        self.engine.say("Would you like to battle or run")
-        with sr.Microphone() as source:
-            audio = self.engine.r.listen(source)
-            while audio != "run":
-                self.battle(self.player, enemy)
-                self.engine.say("Would you like to battle or run")
-                audio = self.engine.r.listen(source)
-            if audio in "run":
-                self.engine.run()
+        while enemyHealth > 0:
+            temp = "You have " + str(playerHealth) + " hitpoints"
+            self.engine.say(temp)
+            temp = enemy.name + " has " + str(enemyHealth) + " hitpoints"
+            self.engine.say(temp)
+            self.engine.say("Would you like to battle or run")
+            self.engine.runAndWait()
+            word = input()
 
+            while word != "run":
+                self.battle( self.player, enemy )
+                self.engine.say("Would you like to battle or run")
+                word = input()
+                if word in "run":
+                    self.run()
+
+            '''
+            with sr.Microphone() as source:
+                audio = self.engine.r.listen(source)
+                while not audio in "run":
+                    self.battle(self.player, enemy)
+                    self.engine.say("Would you like to battle or run")
+                    audio = self.engine.r.listen(source)
+                if audio in "run":
+                    self.engine.run()
+            '''
+        self.engine.say("Enemy Defeated")
+        self.engine.runAndWait()
 
     def createGameBoard(self, level):
         if level == 1:
