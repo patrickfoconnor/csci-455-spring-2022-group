@@ -19,8 +19,8 @@ class GameAnimations:
         self.hearts.append(tk.PhotoImage(file="Game/heart3.png"))
         self.hearts.append(tk.PhotoImage(file="Game/heart4.png"))
         self.hearts.append(tk.PhotoImage(file="Game/heart5.png"))
-        self.win.mainloop()
-
+        self.win.update_idletasks()
+        self.win.update()
 
     def victory(self):
         txt = self.canvas.create_text((240,240),fill ="yellow", text="VICTORY ACHIEVED",font=("Times New Roman", 4))
@@ -44,6 +44,9 @@ class GameAnimations:
             self.canvas.pack()
             self.win.update()
             self.win.after(750)
+        self.win.after(3000, self.canvas.delete('all'))
+        self.canvas.pack()
+        self.win.update()
 
     def createButtons(self):
         B = tk.Button(self.fr, text="test", command=lambda: self.recharge())
@@ -52,7 +55,7 @@ class GameAnimations:
 
 
 ani = GameAnimations()
-
+ani.victory()
 
 
 
