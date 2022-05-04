@@ -40,7 +40,7 @@ def populateGameBoard(baseGameBoard, objectArray):
                 startingPositionY = i
             elif isinstance(baseGameBoard[i][j], int):
                 baseGameBoard[i][j] = objectArray[objectsPlaced]
-                availableRun[objectsPlaced] = (i, j)
+                availableRun[objectsPlaced] = (j, i)
                 objectsPlaced += 1
 
     return baseGameBoard, startingPositionX, startingPositionY, availableRun
@@ -131,6 +131,7 @@ class AdventureDriver:
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
+                self.engine.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
         self.gameBoard = self.ogBoard
         self.gameBoard[y][x] = "X"
@@ -149,6 +150,10 @@ class AdventureDriver:
         enemyAttackValue = random.randint(0, enemy.attack)
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
+        self.engine.say("Using ", player.skills, " an attack of strength ", playersAtackValue)
+        self.engine.say("Using ", enemy.skills, enemy.name, " hit you for ", enemyAttackValue, " health points")
+        self.engine.say("You now have ", player.HP, " health points remaining.")
+
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self, player):
@@ -157,7 +162,7 @@ class AdventureDriver:
             print("Run Fail")
         else:
             randomXY = random.choice(self.availableRun)
-            (x,y) = randomXY
+            (y, x) = randomXY
             self.player.positionX = x
             self.player.positionY = y
             print("Run Success new position is: ", x, ", ", y)
@@ -165,6 +170,18 @@ class AdventureDriver:
     # Recharge all Hit points for given player
     def rechargeHealth(self):
         self.player.setHP(100)
+
+    def battleSequence(self, enemy):
+        playerHealth = self.player.HP
+        enemyHealth = enemy.HP
+
+        if enemyHealth > 0 and playerHealth > 0:
+            # while userInput is != run
+                self.battle(self.player, enemy)
+            # else:
+                #run
+
+
 
     def createGameBoard(self, level):
         if level == 1:

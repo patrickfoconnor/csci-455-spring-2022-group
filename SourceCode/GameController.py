@@ -11,8 +11,6 @@ clear = lambda: os.system('cls')
 
 class GameController:
 
-
-
     def __init__(self):
         self.game = ad.AdventureDriver()
         self.game.outputBoard()
@@ -104,7 +102,4 @@ class GameController:
         # self.engine.runAndWait()
 
 
-
-#
 GameController()
-# roundsPlayed += 1
