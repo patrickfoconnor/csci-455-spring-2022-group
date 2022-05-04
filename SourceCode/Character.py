@@ -39,6 +39,7 @@ class Player(Character):
         super(Player, self).__init__("Player01", 100, "Baseball Bat", 50, 5, "None", 50, "Im a fucking winner")
         self.positionX = None
         self.positionY = None
+        self.spot = "S"
 
     def setPosition(self, positionY, positionX):
         self.positionX = positionX
