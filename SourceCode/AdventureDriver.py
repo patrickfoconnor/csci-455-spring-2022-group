@@ -1,6 +1,9 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
 import pyttsx3
+import speech_recognition as sr
+from TangoRobot import *
+
 import time
 # from enum import Enum
 
@@ -107,6 +110,9 @@ class AdventureDriver:
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
         self.engine.setProperty('rate', 150)
+        self.engine.r = sr.Recognizer()
+
+    # def
 
     def getCharacterPosition(self):
         return self.player.getPosition()
@@ -150,37 +156,42 @@ class AdventureDriver:
         enemyAttackValue = random.randint(0, enemy.attack)
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
+        robot.adventureAttack()
         self.engine.say("Using ", player.skills, " an attack of strength ", playersAtackValue)
         self.engine.say("Using ", enemy.skills, enemy.name, " hit you for ", enemyAttackValue, " health points")
         self.engine.say("You now have ", player.HP, " health points remaining.")
 
-
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
-    def run(self, player):
+    def run(self):
         runChance = random.randint(0, 100)
         if runChance < 25:
-            print("Run Fail")
+            self.engine.say("Run attempt failed. You must fight!")
         else:
             randomXY = random.choice(self.availableRun)
             (y, x) = randomXY
             self.player.positionX = x
             self.player.positionY = y
-            print("Run Success new position is: ", x, ", ", y)
+            self.engine.say("Run Success new position is: ", y, ", ", x)
 
     # Recharge all Hit points for given player
     def rechargeHealth(self):
+        self.engine.say("You've hit a recharge station. Health reset to 100")
         self.player.setHP(100)
 
     def battleSequence(self, enemy):
         playerHealth = self.player.HP
         enemyHealth = enemy.HP
-
-        if enemyHealth > 0 and playerHealth > 0:
-            # while userInput is != run
+        self.engine.say("You have ", playerHealth, " hitpoints")
+        self.engine.say(enemy.name, " has ", enemyHealth, " hitpoints")
+        self.engine.say("Would you like to battle or run")
+        with sr.Microphone() as source:
+            audio = self.engine.r.listen(source)
+            while audio != "run":
                 self.battle(self.player, enemy)
-            # else:
-                #run
-
+                self.engine.say("Would you like to battle or run")
+                audio = self.engine.r.listen(source)
+            if audio in "run":
+                self.engine.run()
 
 
     def createGameBoard(self, level):
