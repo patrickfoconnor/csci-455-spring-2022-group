@@ -1,6 +1,8 @@
 import tkinter as tk
 import AdventureDriver as ad
 import os
+import pyttsx3
+
 #from TangoRobot import *
 import time
 
@@ -15,6 +17,12 @@ class GameController:
         temp = self.game.getCharacterPosition()
         print( "Y = ", temp[0], "X = ", temp[1] )
 
+        self.engine = pyttsx3.init()
+        self.engine.setProperty( 'voice', self.engine.getProperty( 'voices' )[1].id )
+        self.engine.setProperty( 'rate', 150 )
+
+        self.saying()
+
         # tkinter window
         self.win = tk.Tk()
         # setup keybindings
@@ -26,6 +34,20 @@ class GameController:
         self.win.mainloop()
 
 
+    def saying(self):
+        moves = self.game.checkForMoves()
+        spokenMoves = "You can go"
+        if moves[0]:
+            spokenMoves += " , North"
+        if moves[1]:
+            spokenMoves += " , South"
+        if moves[2]:
+            spokenMoves += " , East"
+        if moves[3]:
+            spokenMoves += " , North"
+        self.engine.say(spokenMoves)
+        self.engine.runAndWait()
+
     def move(self, event):
         keycode = event.keycode
         y = self.game.getCharacterPosition()[0]
@@ -34,11 +56,12 @@ class GameController:
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
 
+        self.saying()
+
         if keycode == 87:
             print("W")
             if moves[0] and y > 0:
-                print("North")
-                self.game.setCharacterPosition(y-1, x)
+                self.game.move(y-1, x)
             else:
                 print("That's a wall!")
 
@@ -46,7 +69,7 @@ class GameController:
             print("S")
             if moves[1] and y < yLen:
                 print("South")
-                self.game.setCharacterPosition(y+1, x)
+                self.game.move(y+1, x)
             else:
                 print("That's a wall!")
 
@@ -54,7 +77,7 @@ class GameController:
             print("D")
             if moves[2] and x < xLen:
                 print("East")
-                self.game.setCharacterPosition(y, x+1)
+                self.game.move(y, x+1)
             else:
                 print("That's a wall!")
 
@@ -62,13 +85,18 @@ class GameController:
             print("A")
             if moves[3] and x > 0:
                 print("West")
-                self.game.setCharacterPosition(y, x-1)
+                self.game.move(y, x-1)
             else:
                 print("That's a wall!")
 
         self.game.outputBoard()
         temp = self.game.getCharacterPosition()
         print("Y = ", temp[0], "X = ", temp[1])
+
+
+        #self.engine.say(spokenMove)
+        #self.engine.runAndWait()
+
 
 
 GameController()

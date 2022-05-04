@@ -10,6 +10,7 @@ class Character(object):
         self.loot = loot
         self.expget = expget
         self.flvrtxt = flvrtxt
+
     def setName(self, name):
         self.name = name
 
@@ -22,6 +23,8 @@ class Character(object):
     def getHP(self):
         return self.HP
 
+    def hasKey(self):
+        return self.loot == "Golden Key"
 
 class Player(Character):
 
@@ -37,6 +40,9 @@ class Player(Character):
 
     def getPosition(self):
         return self.positionY, self.positionX
+
+
+
 
 
 class Easy(Character):
