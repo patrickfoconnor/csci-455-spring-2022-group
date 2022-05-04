@@ -17,7 +17,6 @@ import time
 # |P W W W P W W W W|
 # |P W W W P W W W W|
 # |7 W W W 8 P P P 9|
-# import self as self
 
 from SourceCode.Character import Player, Easy, Hard
 

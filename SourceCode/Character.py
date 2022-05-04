@@ -28,6 +28,12 @@ class Character(object):
     def getLoot(self):
         return self.loot
 
+    def hasKey(self):
+        if self.loot == "key":
+            True
+        else:
+            False
+
 
 class Player(Character):
 
@@ -44,13 +50,16 @@ class Player(Character):
         return self.positionY, self.positionX
 
 
+
 class Easy(Character):
 
     def __init__(self):
-        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "A Stick", 50, "Just a dumb bulbasaur")
+        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "none", 50, "Just a dumb bulbasaur")
 
 
 class Hard(Character):
 
     def __init__(self):
         super(Hard, self).__init__("Mewtwo", 75, "none", 40, 10, "none", 150, "Are you ready for the boss")
+
+
