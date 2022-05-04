@@ -65,26 +65,26 @@ class GameController:
         moves = self.game.checkForMoves()
 
         if word in "North":
-            if moves[0] and y > 0:
-                self.game.move(y - 1, x)
+            if moves[0] and y-4 > 0:
+                self.game.move(y - 4, x)
             else:
                 self.output = "That's a wall!"
 
         if word in "South":
-            if moves[1] and y < yLen:
-                self.game.move(y + 1, x)
+            if moves[1] and y+4 < yLen:
+                self.game.move(y + 4, x)
             else:
                 self.output = "That's a wall!"
 
         if word in "East":
-            if moves[2] and x < xLen:
-                self.game.move(y, x + 1)
+            if moves[2] and x+4 < xLen:
+                self.game.move(y, x + 4)
             else:
                 self.output = "That's a wall!"
 
         if word in "West":
-            if moves[3] and x > 0:
-                self.game.move(y, x - 1)
+            if moves[3] and x-4 > 0:
+                self.game.move(y, x - 4)
             else:
                 self.output = "That's a wall!"
 
