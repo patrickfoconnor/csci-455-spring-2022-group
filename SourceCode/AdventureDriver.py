@@ -124,6 +124,9 @@ class AdventureDriver:
         self.player.setPosition(y, x)
 
     def move(self, y, x):
+        oldPositionX = self.player.getPosition()[1]
+        oldPositionY = self.player.getPosition()[0]
+        oldChar = self.player.lastChar
         self.setCharacterPosition(y, x)
         if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
             if self.gameBoard[y][x] == "E":
@@ -145,6 +148,8 @@ class AdventureDriver:
                 self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
         self.gameBoard = self.ogBoard
+        self.gameBoard[oldPositionY][oldPositionX] = oldChar
+        self.player.lastChar = self.gameBoard[y][x]
         self.gameBoard[y][x] = "X"
 
     def getSize(self):
