@@ -88,6 +88,8 @@ class GameController:
             else:
                 self.output = "That's a wall!"
 
+        self.engine.say(self.output)
+        self.engine.runAndWait()
         self.game.outputBoard()
         temp = self.game.getCharacterPosition()
         print("Y = ", temp[0], "X = ", temp[1])

@@ -2,7 +2,7 @@
 import random
 import pyttsx3
 #import speech_recognition as sr
-
+import copy
 from Character import *
 import GameAnimations as ga
 #from TangoRobot import *
@@ -40,7 +40,7 @@ def populateGameBoard(baseGameBoard, objectArray):
     startingPositionX, startingPositionY = 0, 0
     availableRun = {}
     for i in range(len(baseGameBoard)):
-        for j in range(len(baseGameBoard[i]) - 1):
+        for j in range(len(baseGameBoard[i])):
             if baseGameBoard[i][j] == "S":
                 startingPositionX = j
                 startingPositionY = i
@@ -107,7 +107,7 @@ class AdventureDriver:
         self.player.name = "Player01"
         self.objectArray = self.createObjectArray()
         self.ogBoard, self.startingPositionY, self.startingPositionX, self.availableRun = self.createGameBoard(2)
-        self.gameBoard = self.ogBoard
+        self.gameBoard = copy.deepcopy(self.ogBoard)
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
         self.ani = ga.GameAnimations()
@@ -150,7 +150,7 @@ class AdventureDriver:
         self.gameBoard = self.ogBoard
         self.gameBoard[oldPositionY][oldPositionX] = oldChar
         self.player.lastChar = self.gameBoard[y][x]
-        self.gameBoard[y][x] = "X"
+        self.gameBoard[y][x] = "#"
 
     def getSize(self):
         return len(self.gameBoard), len(self.gameBoard[0])
@@ -173,6 +173,7 @@ class AdventureDriver:
         self.engine.say(temp)
         self.engine.runAndWait()
 
+
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self):
         runChance = random.randint(0, 100)
@@ -188,13 +189,12 @@ class AdventureDriver:
 
     # Recharge all Hit points for given player
     def rechargeHealth(self):
-        self.engine.say("You've hit a recharge station. Health reset to 100")
+        self.engine.say(", You've hit a recharge station. Health reset to 100")
         self.player.setHP(100)
 
     def battleSequence(self, enemy):
-        enemyHealth = 100
         dont = True
-        while enemyHealth > 0 and dont:
+        while dont:
             playerHealth = self.player.HP
             enemyHealth = enemy.HP
             temp = ",You have " + str(playerHealth) + " hitpoints"
@@ -210,6 +210,14 @@ class AdventureDriver:
                 self.run()
 
             self.battle(self.player, enemy)
+            enemyHealth = enemy.HP
+            if enemyHealth < 0:
+                self.engine.say(enemy.flvrtxt)
+                temp = self.player.getPosition()
+                self.gameBoard[temp[0]][temp[1]] = "X"
+                dont = False
+                break
+
 
             '''
             with sr.Microphone() as source:
