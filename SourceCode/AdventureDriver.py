@@ -206,7 +206,7 @@ class AdventureDriver:
             self.engine.runAndWait()
 
             word = input()
-            '''
+
             with sr.Microphone() as source:
                 audio = self.engine.r.listen( source )
                 while not audio in "run":
@@ -215,7 +215,7 @@ class AdventureDriver:
                     audio = self.engine.r.listen( source )
                 if audio in "run":
                     self.engine.run()
-            '''
+
 
             if word in "run":
                 dont = False
