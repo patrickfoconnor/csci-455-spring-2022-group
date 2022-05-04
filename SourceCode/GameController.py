@@ -22,6 +22,7 @@ class GameController:
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
         self.engine.setProperty('rate', 150)
+        self.engine.setProperty('voice', 'english')
 
         self.saying()
 
