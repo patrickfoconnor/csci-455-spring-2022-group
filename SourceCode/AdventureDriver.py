@@ -138,13 +138,14 @@ class AdventureDriver:
                     self.engine.say("The door is locked, lets keep looking")
                     self.engine.runAndWait()
             elif self.gameBoard[y][x] == "R":
-                self.rechargeHealth()
                 self.ani.recharge()
+                self.rechargeHealth()
                 saying = "I have healed " + (100 - self.player.getHP()) + "health"
                 self.engine.say(saying)
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
+                self.ani.battle()
                 self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
         self.gameBoard = self.ogBoard
