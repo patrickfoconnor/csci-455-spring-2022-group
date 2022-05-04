@@ -29,7 +29,7 @@ import time
 # |P W W W P W W W W|
 # |7 W W W 8 P P P 9|
 
-from SourceCode.Character import Player, Easy, Hard
+from Character import Player, Easy, Hard
 
 
 def populateGameBoard(baseGameBoard, objectArray):
