@@ -5,12 +5,12 @@ class GameAnimations:
     def __init__(self):
         self.win = tk.Tk()
         self.win.title("Adventure Game")
-        self.win.configure(background='grey')
+        self.win.configure(background='darkgrey')
         self.win.geometry("700x480")
-        self.canvas = tk.Canvas(self.win, highlightthickness=0, bg="grey", width=480, height=480)
+        self.canvas = tk.Canvas(self.win, highlightthickness=0, bg="darkgrey", width=480, height=480)
         self.canvas.pack()
-        self.chests = []
         self.canvaslist = []
+        self.chests = []
         self.chests.append(tk.PhotoImage(file="Game/chest1.png"))
         self.chests.append(tk.PhotoImage(file="Game/chest2.png"))
         self.chests.append(tk.PhotoImage(file="Game/chest3.png"))
@@ -23,6 +23,12 @@ class GameAnimations:
         self.hearts.append(tk.PhotoImage(file="Game/heart3.png"))
         self.hearts.append(tk.PhotoImage(file="Game/heart4.png"))
         self.hearts.append(tk.PhotoImage(file="Game/heart5.png"))
+        self.swords = []
+        self.swords.append(tk.PhotoImage(file="Game/sword1.png"))
+        self.swords.append(tk.PhotoImage(file="Game/sword2.png"))
+        self.swords.append(tk.PhotoImage(file="Game/sword3.png"))
+        self.swords.append(tk.PhotoImage(file="Game/sword4.png"))
+        self.swords.append(tk.PhotoImage(file="Game/sword5.png"))
         self.win.update_idletasks()
         self.win.update()
 
@@ -67,6 +73,7 @@ class GameAnimations:
         self.canvas.delete('all')
         self.canvas.pack()
         self.win.update()
+        self.canvaslist = []
 
     def chest(self):
         self.canvas.create_image((250, 250), image=self.chests[0])
@@ -114,7 +121,40 @@ class GameAnimations:
         self.canvas.pack()
         self.win.update()
 
+    def battle(self):
+        self.canvas.create_image((240,240),image=self.swords[0])
+        self.canvas.pack()
+        self.win.update()
+        self.win.after(300,self.canvas.delete('all'))
+        self.canvas.pack()
+        self.win.update()
+        self.canvas.create_image((240,240),image=self.swords[1])
+        self.canvas.pack()
+        self.win.update()
+        self.win.after(300)
+        self.canvas.delete('all')
+        self.canvas.create_image((240, 240), image=self.swords[2])
+        self.canvas.pack()
+        self.win.update()
+        self.win.after(300)
+        self.canvas.delete('all')
 
+        count = 0
+        for i in range(30):
+            img = []
+            if count % 2 == 0:
+                img = self.swords[3]
+            else:
+                img = self.swords[4]
+            self.canvas.create_image((240, 240), image=img)
+            self.canvas.pack()
+            self.win.update()
+            self.win.after(300)
+            self.canvas.delete('all')
+            count += 1
+        self.win.after(1000, self.canvas.delete('all'))
+        self.canvas.pack()
+        self.win.update()
 
 ani = GameAnimations()
-ani.start()
+ani.battle()
