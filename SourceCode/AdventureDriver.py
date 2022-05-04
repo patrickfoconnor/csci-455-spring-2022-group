@@ -140,7 +140,7 @@ class AdventureDriver:
             elif self.gameBoard[y][x] == "R":
                 self.ani.recharge()
                 self.rechargeHealth()
-                saying = "I have healed " + (100 - self.player.getHP()) + "health"
+                saying = "I have healed ", (100 - self.player.getHP()), "health"
                 self.engine.say(saying)
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
