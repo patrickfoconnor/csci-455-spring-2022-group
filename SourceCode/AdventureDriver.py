@@ -2,7 +2,7 @@
 import random
 import pyttsx3
 import GameAnimations as ga
-#from TangoRobot import *
+from TangoRobot import *
 
 import time
 # from enum import Enum
@@ -187,8 +187,10 @@ class AdventureDriver:
     def battleSequence(self, enemy):
         playerHealth = self.player.HP
         enemyHealth = enemy.HP
-        self.engine.say("You have ", playerHealth, " hitpoints")
-        self.engine.say(enemy.name, " has ", enemyHealth, " hitpoints")
+        temp = "You have " + str(playerHealth) + " hitpoints"
+        self.engine.say(temp)
+        temp = enemy.name + " has " + str(enemyHealth) + " hitpoints"
+        self.engine.say(temp)
         self.engine.say("Would you like to battle or run")
         with sr.Microphone() as source:
             audio = self.engine.r.listen(source)
