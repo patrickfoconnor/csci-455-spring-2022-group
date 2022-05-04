@@ -4,6 +4,7 @@ import pyttsx3
 import speech_recognition as sr
 
 from Character import *
+import GameAnimations as ga
 from TangoRobot import *
 
 import time
@@ -109,6 +110,8 @@ class AdventureDriver:
         self.gameBoard = self.ogBoard
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
+        self.ani = ga.GameAnimations()
+
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
         self.engine.setProperty('rate', 150)
@@ -126,6 +129,7 @@ class AdventureDriver:
         if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
             if self.gameBoard[y][x] == "E":
                 if self.player.hasKey():
+                    self.ani.Victory()
                     self.engine.say("Congratulations, we have survived the Dungeon of the Mad Mage!")
                     self.engine.runAndWait()
                 else:
@@ -133,12 +137,13 @@ class AdventureDriver:
                     self.engine.runAndWait()
             elif self.gameBoard[y][x] == "R":
                 self.rechargeHealth()
+                self.ani.recharge()
                 saying = "I have healed " + (100 - self.player.getHP()) + "health"
                 self.engine.say(saying)
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
-                self.engine.battleSequence(self.gameBoard[y][x])
+                self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
         self.gameBoard = self.ogBoard
         self.gameBoard[y][x] = "X"
@@ -158,9 +163,12 @@ class AdventureDriver:
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
         robot.adventureAttack()
-        self.engine.say("Using ", player.skills, " an attack of strength ", playersAtackValue)
-        self.engine.say("Using ", enemy.skills, enemy.name, " hit you for ", enemyAttackValue, " health points")
-        self.engine.say("You now have ", player.HP, " health points remaining.")
+        temp = "Using " + player.skills + " an attack of strength " + playersAtackValue
+        self.engine.say(temp)
+        temp = "Using " + enemy.skills + " " + enemy.name + " hit you for " + enemyAttackValue + " health points"
+        self.engine.say(temp)
+        temp = "You now have " + player.HP + " health points remaining."
+        self.engine.say(temp)
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self):
@@ -182,8 +190,10 @@ class AdventureDriver:
     def battleSequence(self, enemy):
         playerHealth = self.player.HP
         enemyHealth = enemy.HP
-        self.engine.say("You have ", playerHealth, " hitpoints")
-        self.engine.say(enemy.name, " has ", enemyHealth, " hitpoints")
+        temp = "You have " + str(playerHealth) + " hitpoints"
+        self.engine.say(temp)
+        temp = enemy.name + " has " + str(enemyHealth) + " hitpoints"
+        self.engine.say(temp)
         self.engine.say("Would you like to battle or run")
         with sr.Microphone() as source:
             audio = self.engine.r.listen(source)
