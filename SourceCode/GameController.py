@@ -11,6 +11,8 @@ clear = lambda: os.system('cls')
 
 class GameController:
 
+
+
     def __init__(self):
         self.game = ad.AdventureDriver()
         self.game.outputBoard()
@@ -22,6 +24,9 @@ class GameController:
         self.engine.setProperty('rate', 150)
 
         self.saying()
+
+        self.roundsPlayed = 0
+        self.maxRounds = 25
 
         # tkinter window
         self.win = tk.Tk()
@@ -54,50 +59,51 @@ class GameController:
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
+        if self.roundsPlayed <= self.maxRounds:
+            self.saying()
 
-        self.saying()
+            if keycode == 87:
+                print("W")
+                if moves[0] and y > 0:
+                    self.game.move(y - 1, x)
+                else:
+                    print("That's a wall!")
 
-        if keycode == 87:
-            print("W")
-            if moves[0] and y > 0:
-                self.game.move(y - 1, x)
-            else:
-                print("That's a wall!")
+            if keycode == 83:
+                print("S")
+                if moves[1] and y < yLen:
+                    print("South")
+                    self.game.move(y + 1, x)
+                else:
+                    print("That's a wall!")
 
-        if keycode == 83:
-            print("S")
-            if moves[1] and y < yLen:
-                print("South")
-                self.game.move(y + 1, x)
-            else:
-                print("That's a wall!")
+            if keycode == 68:
+                print("D")
+                if moves[2] and x < xLen:
+                    print("East")
+                    self.game.move(y, x + 1)
+                else:
+                    print("That's a wall!")
 
-        if keycode == 68:
-            print("D")
-            if moves[2] and x < xLen:
-                print("East")
-                self.game.move(y, x + 1)
-            else:
-                print("That's a wall!")
+            if keycode == 65:
+                print("A")
+                if moves[3] and x > 0:
+                    print("West")
+                    self.game.move(y, x - 1)
+                else:
+                    print("That's a wall!")
 
-        if keycode == 65:
-            print("A")
-            if moves[3] and x > 0:
-                print("West")
-                self.game.move(y, x - 1)
-            else:
-                print("That's a wall!")
+            self.game.outputBoard()
+            temp = self.game.getCharacterPosition()
+            print("Y = ", temp[0], "X = ", temp[1])
 
-        self.game.outputBoard()
-        temp = self.game.getCharacterPosition()
-        print("Y = ", temp[0], "X = ", temp[1])
+            self.roundsPlayed += 1
 
         # self.engine.say(spokenMove)
         # self.engine.runAndWait()
 
 
-roundsPlayed = 0
-maxRounds = 25
-# while(roundsPlayed <= maxRounds):
+
+#
 GameController()
 # roundsPlayed += 1
