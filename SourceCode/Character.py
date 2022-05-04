@@ -40,6 +40,7 @@ class Player(Character):
         self.positionX = None
         self.positionY = None
         self.spot = "S"
+        self.direction = "North"
 
     def setPosition(self, positionY, positionX):
         self.positionX = positionX
@@ -52,7 +53,8 @@ class Player(Character):
 class Easy(Character):
 
     def __init__(self):
-        super(Easy, self).__init__("Bulbasaur", 50, "Dandelion", 15, 5, "none", 50, "Just a dumb bulbasaur")
+        super(Easy, self).__init__("Bulbasaur", 50, "Dandelion", 15, 5, "none", 50, "Congrats you beat just a dumb "
+                                                                                    "bulbasaur")
 
 
 class Hard(Character):

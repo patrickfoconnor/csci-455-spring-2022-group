@@ -97,6 +97,8 @@ class GameController:
         #self.engine.say(spokenMove)
         #self.engine.runAndWait()
 
-
-
-GameController()
+roundsPlayed = 0
+maxRounds = 25
+while(roundsPlayed <= maxRounds):
+    GameController()
+    roundsPlayed += 1
