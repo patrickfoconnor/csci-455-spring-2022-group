@@ -73,6 +73,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
+                robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     robot.driveForward()
@@ -98,6 +99,7 @@ class GameController:
                 runTimeD = 0
                 waitTimeD = 3
                 time.sleep(0.2)
+                robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     self.guiRobot.driveForward()
@@ -122,6 +124,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
+                robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     robot.driveForward()
@@ -145,6 +148,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
+                robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     robot.driveForward()
