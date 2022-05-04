@@ -181,11 +181,13 @@ class TangoRobot:
     def adventureAttack(self):
         time.sleep(0.4)
         self.writeCmd(RobotMotor.Shoulder, 7000)
-        self.writeCmd(RobotMotor.Waist, 6500)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 7000)
 
         time.sleep(1)
         self.writeCmd(RobotMotor.Shoulder, 4000)
-        self.writeCmd(RobotMotor.Waist, 4000)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 4000)
 
     def resetMotor(self):
         if (self.motors > MOTOR_TARGET_RESET):
