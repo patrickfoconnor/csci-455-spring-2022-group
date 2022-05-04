@@ -44,7 +44,7 @@ class RobotMotor(Enum):
     Waist = 0x00
     HeadX = 0x03
     HeadY = 0x04
-    ArmLeft = 0x05
+    Shoulder = 0x05
     ArmRight = 0x06
 
 
@@ -142,6 +142,7 @@ class TangoRobot:
             self.resetMotor()
             self.dummy = True
         self.speed -= MOTOR_INCREMENT
+        time.sleep(.4)
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
             print("Too Speedy")
@@ -149,8 +150,10 @@ class TangoRobot:
         # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
 
+
     def driveBackward(self):
         self.speed += MOTOR_INCREMENT
+        time.sleep(.4)
         if (self.speed > MAX_SERVO):
             self.speed = MAX_SERVO
             print("Too Slow")
@@ -158,24 +161,33 @@ class TangoRobot:
         print(self.speed)
 
     def turnLeft(self):
-        # self.speed += MOTOR_INCREMENT
-        if (self.speed > MAX_SERVO):
-            self.speed = MAX_SERVO
-            print("Too Slow")
+        time.sleep(.4)
 
         self.writeCmd(RobotMotor.WheelRight, self.turnLeftSpeed)
 
         time.sleep(.5)
         self.resetWheels()
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnLeftSpeed)
 
     def turnRight(self):
+        time.sleep(.4)
+
         self.writeCmd(RobotMotor.WheelRight, self.turnRightSpeed)
+
         time.sleep(.5)
         self.resetWheels()
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
         print(self.turnRightSpeed)
+
+    def adventureAttack(self):
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.Shoulder, 7000)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 7000)
+
+        time.sleep(1)
+        self.writeCmd(RobotMotor.Shoulder, 4000)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 4000)
 
     def resetMotor(self):
         if (self.motors > MOTOR_TARGET_RESET):
