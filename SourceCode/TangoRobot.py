@@ -146,7 +146,7 @@ class TangoRobot:
         if (self.speed < MIN_SERVO):
             self.speed = MIN_SERVO
             print("Too Speedy")
-        self.writeCmd(RobotMotor.WheelLeft, self.speed)
+        self.writeCmd(RobotMotor.WheelLeft, 6500)
         # self.writeCmd(RobotMotor.WheelRight, self.speed)
         print(self.speed)
 

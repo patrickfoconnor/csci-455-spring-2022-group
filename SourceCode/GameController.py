@@ -75,7 +75,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-                robot.speed(6500)
+
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     robot.driveForward()
