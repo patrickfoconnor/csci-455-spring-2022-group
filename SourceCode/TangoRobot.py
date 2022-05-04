@@ -44,8 +44,8 @@ class RobotMotor(Enum):
     Waist = 0x00
     HeadX = 0x03
     HeadY = 0x04
-    #ArmLeft = 0x05
-    #ArmRight = 0x06
+    Shoulder = 0x05
+    ArmRight = 0x06
 
 
 class TangoRobot:
@@ -177,6 +177,17 @@ class TangoRobot:
         time.sleep(.5)
         self.resetWheels()
         print(self.turnRightSpeed)
+
+    def adventureAttack(self):
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.Shoulder, 7000)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 7000)
+
+        time.sleep(1)
+        self.writeCmd(RobotMotor.Shoulder, 4000)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.ArmRight, 4000)
 
     def resetMotor(self):
         if (self.motors > MOTOR_TARGET_RESET):

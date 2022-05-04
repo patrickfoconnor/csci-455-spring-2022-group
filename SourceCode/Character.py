@@ -22,29 +22,35 @@ class Character(object):
     def getHP(self):
         return self.HP
 
+    def setLoot(self, loot):
+        self.loot = loot
+
+    def getLoot(self):
+        return self.loot
+
 
 class Player(Character):
 
     def __init__(self):
-        super(Player, self).__init__("Player01", 100, "fire", 50, 5, "None", 50, "Just a bush, it cannot attack")
+        super(Player, self).__init__("Player01", 100, "fire", 50, 5, "None", 50, "Im a fucking winner")
         self.positionX = None
         self.positionY = None
 
-    def setPosition(self, positionX, positionY):
+    def setPosition(self, positionY, positionX):
         self.positionX = positionX
         self.positionY = positionY
 
     def getPosition(self):
-        return self.positionX, self.positionY
+        return self.positionY, self.positionX
 
 
 class Easy(Character):
 
     def __init__(self):
-        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "A Stick", 50, "Just a bush, it cannot attack")
+        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "A Stick", 50, "Just a dumb bulbasaur")
 
 
 class Hard(Character):
 
     def __init__(self):
-        super(Hard, self).__init__("Mewtwo", 75, "none", 40, 10, "none", 150, "Cliche RPG enemy")
+        super(Hard, self).__init__("Mewtwo", 75, "none", 40, 10, "none", 150, "Are you ready for the boss")

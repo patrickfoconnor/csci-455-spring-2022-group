@@ -1,6 +1,7 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
-from enum import Enum
+import time
+# from enum import Enum
 
 # Base game board
 
@@ -16,7 +17,7 @@ from enum import Enum
 # |P W W W P W W W W|
 # |P W W W P W W W W|
 # |7 W W W 8 P P P 9|
-import self as self
+# import self as self
 
 from SourceCode.Character import Player, Easy, Hard
 
@@ -28,43 +29,43 @@ def populateGameBoard(baseGameBoard, objectArray):
         for j in range(len(baseGameBoard[i])):
             if isinstance(baseGameBoard[i][j], int):
                 if objectArray[objectsPlaced] == "S":
-                    startingPositionX = i
-                    startingPositionY = j
+                    startingPositionX = j
+                    startingPositionY = i
                 baseGameBoard[i][j] = objectArray[objectsPlaced]
                 objectsPlaced += 1
     return baseGameBoard, startingPositionX, startingPositionY
 
 
-def checkWest(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if playerX-1 >= 0 and gameBoard[playerX - 1][playerY] != "W":
-        return True
-    else:
-        return False
-
-
 def checkNorth(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if playerY-1 >= 0 and gameBoard[playerX][playerY - 1] != "W":
-        return True
-    else:
-        return False
-
-
-def checkEast(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if len(gameBoard) > playerX+1 and gameBoard[playerX + 1][playerY] != "W":
-        return True
-    else:
-        return False
+    playerY, playerX = player.getPosition()
+    if playerY > 0:
+        if gameBoard[playerY - 1][playerX] != "W":
+            return True
+    return False
 
 
 def checkSouth(player, gameBoard):
-    playerX, playerY = player.getPosition()
-    if playerY+1 < len(gameBoard[1]) and gameBoard[playerX][playerY + 1] != "W":
-        return True
-    else:
-        return False
+    playerY, playerX = player.getPosition()
+    if playerY < len(gameBoard) - 1:
+        if gameBoard[playerY + 1][playerX] != "W":
+            return True
+    return False
+
+
+def checkEast(player, gameBoard):
+    playerY, playerX = player.getPosition()
+    if playerX < len(gameBoard[0]) - 1:
+        if gameBoard[playerY][playerX + 1] != "W":
+            return True
+    return False
+
+
+def checkWest(player, gameBoard):
+    playerY, playerX = player.getPosition()
+    if playerX > 0:
+        if gameBoard[playerY][playerX - 1] != "W":
+            return True
+    return False
 
 
 class AdventureDriver:
@@ -74,31 +75,23 @@ class AdventureDriver:
         # Create the player
         self.player = Player()
         self.player.name = "Player01"
-
-        self.player.flvrtxt = "Just a trying to finish the semester"
-
         self.objectArray = self.createObjectArray()
         self.gameBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
         self.player.setPosition(self.startingPositionX, self.startingPositionY)
+        self.player.setPosition(self.startingPositionX, self.startingPositionY)
+        self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
-    def checkForMoves(self, player):
-        availableActions = []
-        if (checkNorth(self.player, self.gameBoard) or checkEast(self.player, self.gameBoard) or
-                checkSouth(self.player, self.gameBoard) or checkWest(self.player, self.gameBoard)):
-            if checkNorth(self.player, self.gameBoard):
-                availableActions.append("North")
+    def getCharacterPosition(self):
+        return self.player.getPosition()
 
-            if checkEast(self.player, self.gameBoard):
-                availableActions.append("East")
+    def setCharacterPosition(self, y, x):
+        self.player.setPosition(y, x)
 
-            if checkSouth(self.player, self.gameBoard):
-                availableActions.append("South")
+    def getSize(self):
+        return len(self.gameBoard), len(self.gameBoard[0])
 
-            if checkWest(self.player, self.gameBoard):
-                availableActions.append("West")
-
-            else:
-                pass
+    def checkForMoves(self):
+        availableActions = [checkNorth(self.player, self.gameBoard), checkSouth(self.player, self.gameBoard), checkEast(self.player, self.gameBoard), checkWest(self.player, self.gameBoard)]
         return availableActions
 
     # Define all of the actions are available for game
@@ -110,7 +103,7 @@ class AdventureDriver:
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self, player):
-        runChance =  random.randint(0, 100)
+        runChance = random.randint(0, 100)
         if runChance < 25:
             print("Run Fail")
         else:
@@ -119,8 +112,6 @@ class AdventureDriver:
     # Recharge all Hit points for given player
     def rechargeHealth(self, player):
         player.setHP(100)
-
-    # def populateGameBoard(baseGameBoard):
 
     def createGameBoard(self, level):
         if level == 1:
@@ -134,7 +125,7 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
-                             [7, "W", "W", "W", 8, "W", "W", "W", 9]]
+                             [7, "W", "W", "W", 8, "P", "P", "P", 9]]
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
@@ -144,6 +135,7 @@ class AdventureDriver:
     #  Recharge Station = R
     #  (4) Weak Bad Guys = Y
     #  (2) Hard bad guys = H
+    #  Player = X
     def createObjectArray(self):
 
         # Create four bad guys
@@ -161,7 +153,7 @@ class AdventureDriver:
         hardEnemyKeyBearer = Hard()
         hardEnemyKeyBearer.loot = "Golden Key"
 
-        objectArray = [self.player, easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
+        objectArray = [easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
                        hardEnemyKeyBearer, "S", "E", "R"]
         # Randomize the association of index and object
         random.shuffle(objectArray)
@@ -169,10 +161,11 @@ class AdventureDriver:
 
     def outputBoard(self):
         for i in range(len(self.gameBoard)):
-            print(self.gameBoard[i])
+            for j in range(len(self.gameBoard[i])):
+                if isinstance(self.gameBoard[i][j], str):
+                    print(self.gameBoard[i][j], end=" ")
+                else:
+                    print("?", end=" ")
+            print("")
 
 
-adventure01 = AdventureDriver()
-print(adventure01.outputBoard())
-print(adventure01.startingPositionX, adventure01.startingPositionY)
-print(adventure01.checkForMoves(adventure01.player))
