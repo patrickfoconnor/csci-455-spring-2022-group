@@ -55,6 +55,7 @@ class MyTK():
 
 
 
+
     def animate(self, ch):
         for c in self.canvaslist:
             if ch in "+":
