@@ -60,7 +60,6 @@ class GameController:
 
         if self.roundsPlayed <= self.maxRounds:
             self.saying()
-
             if keycode == 87:
                 print("W")
                 if moves[0] and y > 0:
