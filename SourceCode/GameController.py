@@ -2,7 +2,7 @@ import tkinter as tk
 import AdventureDriver as ad
 import os
 import pyttsx3
-#import speech_recognition as sr
+import speech_recognition as sr
 
 import time
 from TangoRobot import *
