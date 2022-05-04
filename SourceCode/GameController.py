@@ -32,6 +32,7 @@ class GameController:
             print("W")
             if moves[0] and x > 0:
                 print("North")
+
                 self.game.setCharacterPosition(y, x-1)
             else:
                 print("That's a wall!")

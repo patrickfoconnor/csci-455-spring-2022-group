@@ -78,6 +78,15 @@ class KeyboardController:
             print("Space: Kill Switch")
             robot.resetRobot()
 
-
+    def shoulder(self, event):
+        keycode = event.keycode
+        if keycode == 23:
+            print("Left tab: Shoulder Up")
+            time.sleep(.2)
+            robot.adventureAttack()
+        elif keycode == 50:
+            print("Left Shift: Shoulder Down")
+            time.sleep(.2)
+            robot.headDown()
 
 KeyboardController()

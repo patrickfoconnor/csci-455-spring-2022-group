@@ -135,7 +135,7 @@ class AdventureDriver:
     #  Recharge Station = R
     #  (4) Weak Bad Guys = Y
     #  (2) Hard bad guys = H
-    #  Player
+    #  Player = X
     def createObjectArray(self):
 
         # Create four bad guys
