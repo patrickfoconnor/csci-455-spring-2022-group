@@ -4,8 +4,8 @@ import os
 import pyttsx3
 #import speech_recognition as sr
 
-# from TangoRobot import *
 import time
+from TangoRobot import *
 
 clear = lambda: os.system('cls')
 
@@ -30,6 +30,7 @@ class GameController:
         self.listening = True
 
         self.output = ""
+
 
         '''
         # tkinter window
@@ -68,6 +69,18 @@ class GameController:
 
         if word in "North":
             if moves[0] and y-4 > 0:
+                time.sleep(.2)
+                time.sleep(0.2)
+                runTimeD = 0
+                waitTimeD = 3
+                while runTimeD <= waitTimeD:
+                    timeStartD = timeLib.time()
+                    robot.driveForward()
+                    timeEndD = timeLib.time()
+                    runTimeD += timeEndD - timeStartD
+                robot.resetWheels()
+                robot.speed = 6000
+
                 self.game.move(y - 4, x)
             else:
                 self.output = "That's a wall!"
@@ -75,18 +88,70 @@ class GameController:
         if word in "South":
             if moves[1] and y+4 < yLen:
                 self.game.move(y + 4, x)
+                waitTime = 22
+                runTime = 0
+                while runTime <= waitTime:
+                    timeStart = timeLib.time()
+                    robot.turnLeft()
+                    timeEnd = timeLib.time()
+                    runTime += timeEnd - timeStart
+                runTimeD = 0
+                waitTimeD = 3
+                time.sleep(0.2)
+                while runTimeD <= waitTimeD:
+                    timeStartD = timeLib.time()
+                    self.guiRobot.driveForward()
+                    timeEndD = timeLib.time()
+
+                    runTimeD += timeEndD - timeStartD
+                robot.resetWheels()
+                robot.speed = 6000
             else:
                 self.output = "That's a wall!"
 
         if word in "East":
             if moves[2] and x+4 < xLen:
                 self.game.move(y, x + 4)
+                waitTime = 5
+                runTime = 0
+                while runTime <= waitTime:
+                    timeStart = timeLib.time()
+                    robot.turnRight()
+                    timeEnd = timeLib.time()
+                    runTime += timeEnd - timeStart
+                time.sleep(0.2)
+                runTimeD = 0
+                waitTimeD = 3
+                while runTimeD <= waitTimeD:
+                    timeStartD = timeLib.time()
+                    robot.driveForward()
+                    timeEndD = timeLib.time()
+                    runTimeD += timeEndD - timeStartD
+                robot.resetWheels()
+                robot.speed = 6000
             else:
                 self.output = "That's a wall!"
 
         if word in "West":
             if moves[3] and x-4 > 0:
                 self.game.move(y, x - 4)
+                waitTime = 5
+                runTime = 0
+                while runTime <= waitTime:
+                    timeStart = timeLib.time()
+                    robot.turnLeft()
+                    timeEnd = timeLib.time()
+                    runTime += timeEnd - timeStart
+                time.sleep(0.2)
+                runTimeD = 0
+                waitTimeD = 3
+                while runTimeD <= waitTimeD:
+                    timeStartD = timeLib.time()
+                    robot.driveForward()
+                    timeEndD = timeLib.time()
+                    runTimeD += timeEndD - timeStartD
+                robot.resetWheels()
+                robot.speed = 6000
             else:
                 self.output = "That's a wall!"
 
@@ -98,7 +163,7 @@ class GameController:
 
         self.roundsPlayed += 1
 
-    '''
+
     def listen(self):
         while self.listening and self.roundsPlayed <= self.maxRounds:
             with sr.Microphone() as source:
@@ -118,13 +183,13 @@ class GameController:
                     self.move(word)
                 except sr.UnknownValueError:
                     print( "Word not recognized" )
-    '''
-    def listen(self):
-        while self.roundsPlayed <= self.maxRounds:
-            print("...")
-            word = input()
-            self.saying()
-            self.move(word)
+
+    # def listen(self):
+    #     while self.roundsPlayed <= self.maxRounds:
+    #         print("...")
+    #         word = input()
+    #         self.saying()
+    #         self.move(word)
 
 
 GameController().listen()
