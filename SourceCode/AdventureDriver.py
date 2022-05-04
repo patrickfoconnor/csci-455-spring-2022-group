@@ -3,7 +3,7 @@ import random
 import pyttsx3
 import speech_recognition as sr
 
-import Character
+from Character import *
 from TangoRobot import *
 
 import time
