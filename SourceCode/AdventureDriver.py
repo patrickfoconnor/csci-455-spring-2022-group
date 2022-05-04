@@ -92,7 +92,7 @@ def placeStart(baseGameBoard):
     baseGameBoard[indexY][indexX] = "S"
 
     # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
-    return indexY, indexX, baseGameBoard
+    return baseGameBoard
 
 
 class AdventureDriver:
@@ -103,7 +103,7 @@ class AdventureDriver:
         self.player = Player()
         self.player.name = "Player01"
         self.objectArray = self.createObjectArray()
-        self.ogBoard, self.startingPositionX, self.startingPositionY, self.availableRun = self.createGameBoard(2)
+        self.ogBoard, self.startingPositionY, self.startingPositionX, self.availableRun = self.createGameBoard(2)
         self.gameBoard = self.ogBoard
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
@@ -207,8 +207,8 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
-            baseGameBoard, indexY, indexX = placeStart(baseGameBoard)
-            self.player.setPosition(indexY, indexX)
+            baseGameBoard= placeStart(baseGameBoard)
+            #self.player.setPosition(indexY, indexX)
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
