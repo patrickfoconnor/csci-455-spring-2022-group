@@ -116,8 +116,11 @@ class GameController:
                     print( "Word not recognized" )
     '''
     def listen(self):
-        print("...")
-        word = input()
-        self.saying()
-        self.move(word)
+        while self.roundsPlayed <= self.maxRounds:
+            print("...")
+            word = input()
+            self.saying()
+            self.move(word)
+
+
 GameController().listen()

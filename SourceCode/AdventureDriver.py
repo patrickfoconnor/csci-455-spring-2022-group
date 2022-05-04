@@ -140,7 +140,7 @@ class AdventureDriver:
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
-                self.engine.battleSequence(self.gameBoard[y][x])
+                self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
         self.gameBoard = self.ogBoard
         self.gameBoard[y][x] = "X"
@@ -160,9 +160,12 @@ class AdventureDriver:
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
         robot.adventureAttack()
-        self.engine.say("Using ", player.skills, " an attack of strength ", playersAtackValue)
-        self.engine.say("Using ", enemy.skills, enemy.name, " hit you for ", enemyAttackValue, " health points")
-        self.engine.say("You now have ", player.HP, " health points remaining.")
+        temp = "Using " + player.skills + " an attack of strength " + playersAtackValue
+        self.engine.say(temp)
+        temp = "Using " + enemy.skills + " " + enemy.name + " hit you for " + enemyAttackValue + " health points"
+        self.engine.say(temp)
+        temp = "You now have " + player.HP + " health points remaining."
+        self.engine.say(temp)
 
     # Get random num between 1-100 if 1-25 fleeing failed, if greater than 25 run successful
     def run(self):
