@@ -20,6 +20,8 @@ class KeyboardController:
         self.win.bind('<d>', self.head)  # key code: 40
         self.win.bind('<z>', self.waist)  # key code: 52
         self.win.bind('<c>', self.waist)  # key code: 54
+        self.win.bind('<Shift_L>', self.waist)  # key code: 23
+        self.win.bind('<Tab>', self.waist)  # key code: 50
         # start tkinter window
         self.win.mainloop()
 
@@ -87,6 +89,6 @@ class KeyboardController:
         elif keycode == 50:
             print("Left Shift: Shoulder Down")
             time.sleep(.2)
-            robot.headDown()
+            #robot.headDown()
 
 KeyboardController()
