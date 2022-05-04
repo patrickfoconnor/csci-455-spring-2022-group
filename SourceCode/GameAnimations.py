@@ -12,6 +12,8 @@ class GameAnimations:
         self.canvas = tk.Canvas(self.win, highlightthickness=0, bg="light blue", width=480, height=480)
         self.canvas.pack()
 
+        self.createButtons()
+        self.win.mainloop()
     def Victory(self):
         txt = self.canvas.create_text((240,240),fill ="yellow", text="VICTORY ACHIEVED",font=("Times New Roman", 4))
         self.canvas.pack()
@@ -42,8 +44,7 @@ class GameAnimations:
 
 
 ani = GameAnimations()
-ani.createButtons()
-ani.win.mainloop()
+
 
 
 
