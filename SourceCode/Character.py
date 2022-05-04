@@ -10,6 +10,7 @@ class Character(object):
         self.loot = loot
         self.expget = expget
         self.flvrtxt = flvrtxt
+
     def setName(self, name):
         self.name = name
 
@@ -28,11 +29,14 @@ class Character(object):
     def getLoot(self):
         return self.loot
 
+    def hasKey(self):
+        return self.loot == "Golden Key"
+
 
 class Player(Character):
 
     def __init__(self):
-        super(Player, self).__init__("Player01", 100, "fire", 50, 5, "None", 50, "Im a fucking winner")
+        super(Player, self).__init__("Player01", 100, "Baseball Bat", 50, 5, "None", 50, "Im a fucking winner")
         self.positionX = None
         self.positionY = None
 
@@ -47,10 +51,11 @@ class Player(Character):
 class Easy(Character):
 
     def __init__(self):
-        super(Easy, self).__init__("Bulbasaur", 50, "fire", 15, 5, "A Stick", 50, "Just a dumb bulbasaur")
+        super(Easy, self).__init__("Bulbasaur", 50, "Dandelion", 15, 5, "none", 50, "Just a dumb bulbasaur")
 
 
 class Hard(Character):
 
     def __init__(self):
-        super(Hard, self).__init__("Mewtwo", 75, "none", 40, 10, "none", 150, "Are you ready for the boss")
+        super(Hard, self).__init__("Mewtwo", 75, "Flamethrower", 40, 10, "none", 150, "You have defeated the boss. Go "
+                                                                                      "get some sun")
