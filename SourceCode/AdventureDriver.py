@@ -246,5 +246,6 @@ class AdventureDriver:
                 if isinstance(self.gameBoard[i][j], str):
                     print(self.gameBoard[i][j], end=" ")
                 else:
-                    print(self.gameBoard[i][j].getChar(), end=" ")
+                    if isinstance(self.gameBoard[i][j], object):
+                        print((self.gameBoard[i][j]).getChar(), end=" ")
             print("")
