@@ -86,13 +86,13 @@ def placeStart(baseGameBoard):
     selectedCorner = random.choice(fourCorners)
     for i, x in enumerate(baseGameBoard):
         if selectedCorner in x:
-            indexX = i
-            indexY = x.index(selectedCorner)
-            print(indexX, indexY)
-    baseGameBoard[indexX][indexY] = "S"
+            indexY = i
+            indexX = x.index(selectedCorner)
+            print(indexY, indexX)
+    baseGameBoard[indexY][indexX] = "S"
 
     # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
-    return baseGameBoard
+    return indexY, indexX, baseGameBoard
 
 
 class AdventureDriver:
@@ -207,7 +207,8 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
-            baseGameBoard = placeStart(baseGameBoard)
+            baseGameBoard, indexY, indexX = placeStart(baseGameBoard)
+            self.player.setPosition(indexY, indexX)
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
