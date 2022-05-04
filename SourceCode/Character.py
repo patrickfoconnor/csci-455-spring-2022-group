@@ -46,6 +46,7 @@ class Player(Character):
         self.spot = "S"
         self.direction = "North"
         self.char = "X"
+        self.lastChar = "P"
 
     def setPosition(self, positionY, positionX):
         self.positionX = positionX
