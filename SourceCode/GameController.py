@@ -45,7 +45,8 @@ class GameController:
 
     def saying(self):
         moves = self.game.checkForMoves()
-        spokenMoves = "You can go"
+        print(moves)
+        spokenMoves = ",, You can go"
         if moves[0]:
             spokenMoves += " , North"
         if moves[1]:
@@ -53,7 +54,7 @@ class GameController:
         if moves[2]:
             spokenMoves += " , East"
         if moves[3]:
-            spokenMoves += " , North"
+            spokenMoves += " , West"
         self.engine.say(spokenMoves)
         self.engine.runAndWait()
 
@@ -63,6 +64,7 @@ class GameController:
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
+
 
         if word in "North":
             if moves[0] and y-4 > 0:
@@ -92,7 +94,7 @@ class GameController:
         self.engine.runAndWait()
         self.game.outputBoard()
         temp = self.game.getCharacterPosition()
-        print("Y = ", temp[0], "X = ", temp[1])
+        print( "Y = ", temp[0], "X = ", temp[1] )
 
         self.roundsPlayed += 1
 
