@@ -59,6 +59,7 @@ class GameController:
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
+
         if self.roundsPlayed <= self.maxRounds:
             self.saying()
 
