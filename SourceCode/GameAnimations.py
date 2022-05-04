@@ -11,10 +11,18 @@ class GameAnimations:
         self.fr.pack(side=tk.LEFT)
         self.canvas = tk.Canvas(self.win, highlightthickness=0, bg="light blue", width=480, height=480)
         self.canvas.pack()
-
         self.createButtons()
+        self.hearts = []
+        self.hearts.append(tk.PhotoImage(file="Game/heart0.png"))
+        self.hearts.append(tk.PhotoImage(file="Game/heart.png"))
+        self.hearts.append(tk.PhotoImage(file="Game/heart2.png"))
+        self.hearts.append(tk.PhotoImage(file="Game/heart3.png"))
+        self.hearts.append(tk.PhotoImage(file="Game/heart4.png"))
+        self.hearts.append(tk.PhotoImage(file="Game/heart5.png"))
         self.win.mainloop()
-    def Victory(self):
+
+
+    def victory(self):
         txt = self.canvas.create_text((240,240),fill ="yellow", text="VICTORY ACHIEVED",font=("Times New Roman", 4))
         self.canvas.pack()
         self.win.update()
@@ -31,12 +39,12 @@ class GameAnimations:
         self.win.update()
 
     def recharge(self):
-        h0 = tk.PhotoImage(file="Game/heart0.png")
-        h1 = tk.PhotoImage(file="Game/heart.png")
-        h2 = tk.PhotoImage(file="Game/heart2.png")
-        h3 = tk.PhotoImage(file="Game/heart3.png")
-        h4 = tk.PhotoImage(file="Game/heart4.png")
-        h5 = tk.PhotoImage(file="Game/heart5.png")
+        for img in self.hearts:
+            self.canvas.create_image((100,250),image=img,anchor=tk.W)
+            self.canvas.pack()
+            self.win.update()
+            self.win.after(750)
+
     def createButtons(self):
         B = tk.Button(self.fr, text="test", command=lambda: self.recharge())
         B.pack()
