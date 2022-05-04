@@ -166,7 +166,7 @@ class AdventureDriver:
         enemyAttackValue = random.randint(0, enemy.attack)
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
-        #robot.adventureAttack()
+        robot.adventureAttack()
         temp = ", Using " + player.skills + " an attack of strength " + str(playersAtackValue)
         self.engine.say(temp)
         temp = ", Using " + enemy.skills + " " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
