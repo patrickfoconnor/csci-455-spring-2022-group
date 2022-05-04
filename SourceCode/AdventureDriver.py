@@ -1,7 +1,7 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
 import pyttsx3
-import speech_recognition as sr
+#import speech_recognition as sr
 
 from Character import *
 import GameAnimations as ga
@@ -115,7 +115,6 @@ class AdventureDriver:
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
         self.engine.setProperty('rate', 150)
-        self.engine.r = sr.Recognizer()
 
 
     def getCharacterPosition(self):
@@ -162,12 +161,10 @@ class AdventureDriver:
         enemyAttackValue = random.randint(0, enemy.attack)
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
-        robot.adventureAttack()
-        temp = "Using " + player.skills + " an attack of strength " + playersAtackValue
+        #robot.adventureAttack()
+        temp = ", Using " + player.skills + " an attack of strength " + str(playersAtackValue)
         self.engine.say(temp)
-        temp = "Using " + enemy.skills + " " + enemy.name + " hit you for " + enemyAttackValue + " health points"
-        self.engine.say(temp)
-        temp = "You now have " + player.HP + " health points remaining."
+        temp = ", Using " + enemy.skills + " " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
         self.engine.say(temp)
         self.engine.runAndWait()
 
@@ -190,23 +187,24 @@ class AdventureDriver:
         self.player.setHP(100)
 
     def battleSequence(self, enemy):
-        playerHealth = self.player.HP
-        enemyHealth = enemy.HP
-        while enemyHealth > 0:
-            temp = "You have " + str(playerHealth) + " hitpoints"
+        enemyHealth = 100
+        dont = True
+        while enemyHealth > 0 and dont:
+            playerHealth = self.player.HP
+            enemyHealth = enemy.HP
+            temp = ",You have " + str(playerHealth) + " hitpoints"
             self.engine.say(temp)
-            temp = enemy.name + " has " + str(enemyHealth) + " hitpoints"
+            temp = "," + enemy.name + " has " + str(enemyHealth) + " hitpoints"
             self.engine.say(temp)
-            self.engine.say("Would you like to battle or run")
+            self.engine.say(", Would you like to battle or run")
             self.engine.runAndWait()
-            word = input()
 
-            while word != "run":
-                self.battle( self.player, enemy )
-                self.engine.say("Would you like to battle or run")
-                word = input()
-                if word in "run":
-                    self.run()
+            word = input()
+            if word in "run":
+                dont = False
+                self.run()
+
+            self.battle(self.player, enemy)
 
             '''
             with sr.Microphone() as source:
