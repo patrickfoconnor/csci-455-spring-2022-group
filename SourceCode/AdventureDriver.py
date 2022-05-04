@@ -1,5 +1,6 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
+import pyttsx3
 import time
 # from enum import Enum
 
@@ -79,13 +80,37 @@ class AdventureDriver:
         self.gameBoard = self.ogBoard
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
+        self.engine = pyttsx3.init()
+        self.engine.setProperty( 'voice', self.engine.getProperty( 'voices' )[1].id )
+        self.engine.setProperty( 'rate', 150 )
+
     def getCharacterPosition(self):
         return self.player.getPosition()
 
     def setCharacterPosition(self, y, x):
         self.player.setPosition(y, x)
+
+    def move(self, y, x):
+        self.setCharacterPosition(y, x)
+        if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
+            if self.gameBoard[y][x] == "E":
+                if self.player.hasKey():
+                    self.engine.say("Congratulations, we have survived the Dungeon of the Mad Mage!")
+                    self.engine.runAndWait()
+                else:
+                    self.engine.say( "The door is locked, lets keep looking" )
+                    self.engine.runAndWait()
+            elif self.gameBoard[y][x] == "R":
+                self.rechargeHealth()
+                saying = "I have healed " + (100 - self.player.getHP()) + "health"
+                self.engine.say(saying)
+            elif not isinstance(self.gameBoard[y][x], str):
+                print("enemy")
+                self.engine.say("Gasp, an enemy")
+            self.engine.runAndWait()
         self.gameBoard = self.ogBoard
         self.gameBoard[y][x] = "X"
+
 
     def getSize(self):
         return len(self.gameBoard), len(self.gameBoard[0])
@@ -111,8 +136,8 @@ class AdventureDriver:
             print("Run Success new position is: ")
 
     # Recharge all Hit points for given player
-    def rechargeHealth(self, player):
-        player.setHP(100)
+    def rechargeHealth(self):
+        self.player.setHP(100)
 
     def createGameBoard(self, level):
         if level == 1:
