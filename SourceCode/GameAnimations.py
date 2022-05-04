@@ -55,7 +55,6 @@ class GameAnimations:
 
 
 ani = GameAnimations()
-ani.victory()
 
 
 
