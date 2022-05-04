@@ -5,7 +5,7 @@ import pyttsx3
 import copy
 from Character import *
 import GameAnimations as ga
-#from TangoRobot import *
+from TangoRobot import *
 
 import time as timeLib
 # from enum import Enum
