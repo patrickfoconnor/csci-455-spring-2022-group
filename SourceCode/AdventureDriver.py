@@ -2,6 +2,8 @@
 import random
 import pyttsx3
 import speech_recognition as sr
+
+import Character
 from TangoRobot import *
 
 import time
@@ -245,7 +247,7 @@ class AdventureDriver:
             for j in range(len(self.gameBoard[i])):
                 if isinstance(self.gameBoard[i][j], str):
                     print(self.gameBoard[i][j], end=" ")
-                elif isinstance(self.gameBoard[i][j], object):
+                elif isinstance(self.gameBoard[i][j], Character):
                     objectTemp = (self.gameBoard[i][j])
                     print(objectTemp.getChar(), end=" ")
                 else:
