@@ -248,7 +248,6 @@ class AdventureDriver:
                 elif isinstance(self.gameBoard[i][j], object):
                     objectTemp = (self.gameBoard[i][j])
                     print(objectTemp.getChar(), end=" ")
-
                 else:
-                    print((self.gameBoard[i][j]).getChar(), end=" ")
+                    print("?", end=" ")
             print("")
