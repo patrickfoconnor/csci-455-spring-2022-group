@@ -112,7 +112,6 @@ class AdventureDriver:
         self.engine.setProperty('rate', 150)
         self.engine.r = sr.Recognizer()
 
-    # def
 
     def getCharacterPosition(self):
         return self.player.getPosition()
@@ -247,5 +246,5 @@ class AdventureDriver:
                 if isinstance(self.gameBoard[i][j], str):
                     print(self.gameBoard[i][j], end=" ")
                 else:
-                    print("?", end=" ")
+                    print(self.gameBoard[i][j].getChar(), end=" ")
             print("")

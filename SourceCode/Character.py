@@ -10,6 +10,7 @@ class Character(object):
         self.loot = loot
         self.expget = expget
         self.flvrtxt = flvrtxt
+        self.char = "?"
 
     def setName(self, name):
         self.name = name
@@ -32,6 +33,9 @@ class Character(object):
     def hasKey(self):
         return self.loot == "Golden Key"
 
+    def getChar(self):
+        return self.char
+
 
 class Player(Character):
 
@@ -41,6 +45,7 @@ class Player(Character):
         self.positionY = None
         self.spot = "S"
         self.direction = "North"
+        self.char = "X"
 
     def setPosition(self, positionY, positionX):
         self.positionX = positionX
@@ -55,6 +60,7 @@ class Easy(Character):
     def __init__(self):
         super(Easy, self).__init__("Bulbasaur", 50, "Dandelion", 15, 5, "none", 50, "Congrats you beat just a dumb "
                                                                                     "bulbasaur")
+        self.char = "Y"
 
 
 class Hard(Character):
@@ -62,3 +68,4 @@ class Hard(Character):
     def __init__(self):
         super(Hard, self).__init__("Mewtwo", 75, "Flamethrower", 40, 10, "none", 150, "You have defeated the boss. Go "
                                                                                       "get some sun")
+        self.char = "H"
