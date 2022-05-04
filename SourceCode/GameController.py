@@ -60,7 +60,7 @@ class GameController:
         if keycode == 87:
             print("W")
             if moves[0] and y > 0:
-                self.game.move(y - 1, x)
+                self.game.move(y - 3, x)
             else:
                 print("That's a wall!")
 
@@ -68,7 +68,7 @@ class GameController:
             print("S")
             if moves[1] and y < yLen:
                 print("South")
-                self.game.move(y + 1, x)
+                self.game.move(y + 3, x)
             else:
                 print("That's a wall!")
 
@@ -76,7 +76,7 @@ class GameController:
             print("D")
             if moves[2] and x < xLen:
                 print("East")
-                self.game.move(y, x + 1)
+                self.game.move(y, x + 3)
             else:
                 print("That's a wall!")
 
@@ -84,7 +84,7 @@ class GameController:
             print("A")
             if moves[3] and x > 0:
                 print("West")
-                self.game.move(y, x - 1)
+                self.game.move(y, x - 3)
             else:
                 print("That's a wall!")
 
