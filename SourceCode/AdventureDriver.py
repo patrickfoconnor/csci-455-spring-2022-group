@@ -7,7 +7,7 @@ from Character import *
 import GameAnimations as ga
 #from TangoRobot import *
 
-import time
+import time as timeLib
 # from enum import Enum
 
 # What needs to get done

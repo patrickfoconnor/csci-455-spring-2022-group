@@ -4,8 +4,9 @@ import os
 import pyttsx3
 import speech_recognition as sr
 
-import time
+
 from TangoRobot import *
+import time as timeLib
 
 clear = lambda: os.system('cls')
 
