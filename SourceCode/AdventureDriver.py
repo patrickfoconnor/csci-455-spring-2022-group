@@ -1,7 +1,15 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
+import pyttsx3
 import time
 # from enum import Enum
+
+# What needs to get done
+# • Screen Animation
+# • Have start be in one of the four corners √
+# • Run Action results in random placement √
+# • Full battle run through
+# •
 
 # Base game board
 
@@ -24,15 +32,18 @@ from SourceCode.Character import Player, Easy, Hard
 def populateGameBoard(baseGameBoard, objectArray):
     objectsPlaced = 0
     startingPositionX, startingPositionY = 0, 0
+    availableRun = {}
     for i in range(len(baseGameBoard)):
-        for j in range(len(baseGameBoard[i])):
-            if isinstance(baseGameBoard[i][j], int):
-                if objectArray[objectsPlaced] == "S":
-                    startingPositionX = j
-                    startingPositionY = i
+        for j in range(len(baseGameBoard[i]) - 1):
+            if baseGameBoard[i][j] == "S":
+                startingPositionX = j
+                startingPositionY = i
+            elif isinstance(baseGameBoard[i][j], int):
                 baseGameBoard[i][j] = objectArray[objectsPlaced]
+                availableRun[objectsPlaced] = (i, j)
                 objectsPlaced += 1
-    return baseGameBoard, startingPositionX, startingPositionY
+
+    return baseGameBoard, startingPositionX, startingPositionY, availableRun
 
 
 def checkNorth(player, gameBoard):
@@ -67,6 +78,20 @@ def checkWest(player, gameBoard):
     return False
 
 
+def placeStart(baseGameBoard):
+    fourCorners = [1, 3, 7, 9]
+    selectedCorner = random.choice(fourCorners)
+    for i, x in enumerate(baseGameBoard):
+        if selectedCorner in x:
+            indexX = i
+            indexY = x.index(selectedCorner)
+            print(indexX, indexY)
+    baseGameBoard[indexX][indexY] = "S"
+
+    # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
+    return baseGameBoard
+
+
 class AdventureDriver:
 
     # constructor
@@ -75,15 +100,38 @@ class AdventureDriver:
         self.player = Player()
         self.player.name = "Player01"
         self.objectArray = self.createObjectArray()
-        self.ogBoard, self.startingPositionX, self.startingPositionY = self.createGameBoard(2)
+        self.ogBoard, self.startingPositionX, self.startingPositionY, self.availableRun = self.createGameBoard(2)
         self.gameBoard = self.ogBoard
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
+
+        self.engine = pyttsx3.init()
+        self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
+        self.engine.setProperty('rate', 150)
 
     def getCharacterPosition(self):
         return self.player.getPosition()
 
     def setCharacterPosition(self, y, x):
         self.player.setPosition(y, x)
+
+    def move(self, y, x):
+        self.setCharacterPosition(y, x)
+        if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
+            if self.gameBoard[y][x] == "E":
+                if self.player.hasKey():
+                    self.engine.say("Congratulations, we have survived the Dungeon of the Mad Mage!")
+                    self.engine.runAndWait()
+                else:
+                    self.engine.say("The door is locked, lets keep looking")
+                    self.engine.runAndWait()
+            elif self.gameBoard[y][x] == "R":
+                self.rechargeHealth()
+                saying = "I have healed " + (100 - self.player.getHP()) + "health"
+                self.engine.say(saying)
+            elif not isinstance(self.gameBoard[y][x], str):
+                print("enemy")
+                self.engine.say("Gasp, an enemy")
+            self.engine.runAndWait()
         self.gameBoard = self.ogBoard
         self.gameBoard[y][x] = "X"
 
@@ -108,11 +156,15 @@ class AdventureDriver:
         if runChance < 25:
             print("Run Fail")
         else:
-            print("Run Success new position is: ")
+            randomXY = random.choice(self.availableRun)
+            (x,y) = randomXY
+            self.player.positionX = x
+            self.player.positionY = y
+            print("Run Success new position is: ", x, ", ", y)
 
     # Recharge all Hit points for given player
-    def rechargeHealth(self, player):
-        player.setHP(100)
+    def rechargeHealth(self):
+        self.player.setHP(100)
 
     def createGameBoard(self, level):
         if level == 1:
@@ -127,6 +179,7 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
+            baseGameBoard = placeStart(baseGameBoard)
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
@@ -138,7 +191,6 @@ class AdventureDriver:
     #  (2) Hard bad guys = H
     #  Player = X
     def createObjectArray(self):
-
         # Create four bad guys
         easyEnemyTurtle = Easy()
         easyEnemyTurtle.setName("Turtle")
@@ -155,7 +207,7 @@ class AdventureDriver:
         hardEnemyKeyBearer.loot = "Golden Key"
 
         objectArray = [easyEnemyTurtle, easyEnemyRabbit, easyEnemySnail, easyEnemyMagpie, hardEnemyKeyLess,
-                       hardEnemyKeyBearer, "S", "E", "R"]
+                       hardEnemyKeyBearer, "E", "R"]
         # Randomize the association of index and object
         random.shuffle(objectArray)
         return objectArray
@@ -168,5 +220,3 @@ class AdventureDriver:
                 else:
                     print("?", end=" ")
             print("")
-
-
