@@ -7,7 +7,7 @@ import time
 # What needs to get done
 # • Screen Animation
 # • Have start be in one of the four corners √
-# • Run Action results in random placement
+# • Run Action results in random placement √
 # • Full battle run through
 # •
 
