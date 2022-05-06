@@ -97,6 +97,7 @@ class GameController:
             self.robot.wheelMotorCycle()
             timeEndD = timeLib.time()
             runTimeD += timeEndD - timeStartD
+        self.robot.resetWheels()
         '''
         while runTimeD <= waitTimeD:
             timeStartD = timeLib.time()
