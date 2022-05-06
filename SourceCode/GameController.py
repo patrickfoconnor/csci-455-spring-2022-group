@@ -31,6 +31,7 @@ class GameController:
         self.roundsPlayed = 0
         self.maxRounds = 25
 
+        self.currentDir = ""
         self.listening = True
 
         self.output = ""
@@ -63,6 +64,45 @@ class GameController:
         self.engine.say(spokenMoves)
         self.engine.runAndWait()
 
+    def left(self):
+        waitTime = 5
+        runTime = 0
+        while runTime <= waitTime:
+            timeStart = timeLib.time()
+            self.robot.turnRight()
+            timeEnd = timeLib.time()
+            runTime += timeEnd - timeStart
+        time.sleep( 0.2 )
+
+    def right(self):
+        waitTime = 5
+        runTime = 0
+        while runTime <= waitTime:
+            timeStart = timeLib.time()
+            self.robot.turnLeft()
+            timeEnd = timeLib.time()
+            runTime += timeEnd - timeStart
+        time.sleep( 0.2 )
+
+    def forward(self):
+        runTimeD = 0
+        waitTimeD = 3
+        self.robot.speed = 6500
+        while runTimeD <= waitTimeD:
+            timeStartD = timeLib.time()
+            self.robot.driveForward()
+            timeEndD = timeLib.time()
+            runTimeD += timeEndD - timeStartD
+
+    def around(self):
+        waitTime = 22
+        runTime = 0
+        while runTime <= waitTime:
+            timeStart = timeLib.time()
+            self.robot.turnLeft()
+            timeEnd = timeLib.time()
+            runTime += timeEnd - timeStart
+
     def move(self, word):
         y = self.game.getCharacterPosition()[0]
         x = self.game.getCharacterPosition()[1]
@@ -71,18 +111,17 @@ class GameController:
         moves = self.game.checkForMoves()
         self.output = " "
 
-        if word in "North":
+
+        if "North" in word:
             if moves[0] and y-4 >= 0:
                 time.sleep(.2)
-                time.sleep(0.2)
-                runTimeD = 0
-                waitTimeD = 3
-                self.robot.speed = 6500
-                while runTimeD <= waitTimeD:
-                    timeStartD = timeLib.time()
-                    self.robot.driveForward()
-                    timeEndD = timeLib.time()
-                    runTimeD += timeEndD - timeStartD
+                if self.currentDir == "South":
+                    self.around()
+                elif self.currentDir == "East":
+                    self.right()
+                elif self.currentDir == "West":
+                    self.left()
+                self.forward()
                 self.robot.resetWheels()
                 self.robot.speed = 6000
 
@@ -90,76 +129,50 @@ class GameController:
             else:
                 self.output = "That's a wall!"
 
-        if word in "South":
+        if "South" in word:
             if moves[1] and y+4 < yLen:
-                waitTime = 22
-                runTime = 0
-                while runTime <= waitTime:
-                    timeStart = timeLib.time()
-                    self.robot.turnLeft()
-                    timeEnd = timeLib.time()
-                    runTime += timeEnd - timeStart
-                runTimeD = 0
-                waitTimeD = 3
-                time.sleep(0.2)
+                if self.currentDir == "North":
+                    self.around()
+                elif self.currentDir == "East":
+                    self.left()
+                elif self.currentDir == "West":
+                    self.right()
+                self.forward()
                 self.robot.speed = 6500
-                while runTimeD <= waitTimeD:
-                    timeStartD = timeLib.time()
-                    self.robot.driveForward()
-                    timeEndD = timeLib.time()
-
-                    runTimeD += timeEndD - timeStartD
                 self.robot.resetWheels()
-                self.robot.speed = 6000
 
                 self.game.move( y + 4, x )
             else:
                 self.output = "That's a wall!"
 
-        if word in "East":
+        if "East" in word:
             if moves[2] and x+4 < xLen:
-                waitTime = 5
-                runTime = 0
-                while runTime <= waitTime:
-                    timeStart = timeLib.time()
-                    self.robot.turnRight()
-                    timeEnd = timeLib.time()
-                    runTime += timeEnd - timeStart
-                time.sleep(0.2)
-                runTimeD = 0
-                waitTimeD = 3
+                if self.currentDir == "North":
+                    self.left()
+                elif self.currentDir == "South":
+                    self.right()
+                elif self.currentDir == "West":
+                    self.around()
+                self.forward()
                 self.robot.speed = 6500
-                while runTimeD <= waitTimeD:
-                    timeStartD = timeLib.time()
-                    self.robot.driveForward()
-                    timeEndD = timeLib.time()
-                    runTimeD += timeEndD - timeStartD
                 self.robot.resetWheels()
-                self.robot.speed = 6000
+
                 self.game.move( y, x + 4 )
             else:
                 self.output = "That's a wall!"
 
-        if word in "West":
+        if "West" in word:
             if moves[3] and x-4 >= 0:
-                waitTime = 5
-                runTime = 0
-                while runTime <= waitTime:
-                    timeStart = timeLib.time()
-                    self.robot.turnLeft()
-                    timeEnd = timeLib.time()
-                    runTime += timeEnd - timeStart
-                time.sleep(0.2)
-                runTimeD = 0
-                waitTimeD = 3
+                if self.currentDir == "North":
+                    self.right()
+                elif self.currentDir == "South":
+                    self.left()
+                elif self.currentDir == "East":
+                    self.around()
+                self.forward()
                 self.robot.speed = 6500
-                while runTimeD <= waitTimeD:
-                    timeStartD = timeLib.time()
-                    self.robot.driveForward()
-                    timeEndD = timeLib.time()
-                    runTimeD += timeEndD - timeStartD
                 self.robot.resetWheels()
-                self.robot.speed = 6000
+
                 self.game.move( y, x - 4 )
             else:
                 self.output = "That's a wall!"

@@ -184,10 +184,10 @@ class TangoRobot:
         time.sleep(0.4)
         self.writeCmd(RobotMotor.ArmRight, 7000)
 
-        time.sleep(2)
-        self.writeCmd(RobotMotor.Shoulder, 4500)
+        time.sleep(e)
+        self.writeCmd(RobotMotor.Shoulder, 5500)
         time.sleep(0.4)
-        self.writeCmd(RobotMotor.ArmRight, 4500)
+        self.writeCmd(RobotMotor.ArmRight, 5500)
 
     def resetMotor(self):
         if (self.motors > MOTOR_TARGET_RESET):

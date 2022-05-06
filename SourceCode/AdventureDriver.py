@@ -231,10 +231,11 @@ class AdventureDriver:
                 self.gameBoard[temp[0]][temp[1]] = "X"
                 if enemy.hasKey():
                     self.player.setLoot("Golden Key")
+                self.engine.say( "Enemy Defeated" )
+                self.engine.runAndWait()
                 break
 
-        self.engine.say("Enemy Defeated")
-        self.engine.runAndWait()
+
 
 
     def createGameBoard(self, level):
