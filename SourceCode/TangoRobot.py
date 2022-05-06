@@ -206,5 +206,13 @@ class TangoRobot:
         self.writeCmd(RobotMotor.WheelRight, TARGET_CENTER)
         self.writeCmd(RobotMotor.WheelLeft, TARGET_CENTER)
 
+    def wheelMotorCycle(self):
+        # Center all robot motors to 6000
+        self.writeCmd(RobotMotor.WheelRight, MAX_SERVO)
+        self.writeCmd(RobotMotor.WheelLeft, MAX_SERVO)
+        time.sleep(0.4)
+        self.writeCmd(RobotMotor.WheelRight, MIN_SERVO)
+        self.writeCmd(RobotMotor.WheelLeft, MIN_SERVO)
+
 
 robot = TangoRobot()
