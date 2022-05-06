@@ -89,7 +89,7 @@ class GameController:
     def forward(self):
         runTimeD = 0
         waitTimeD = 3
-        self.robot.speed = 6500
+        self.robot.speed = 6800
         while runTimeD <= waitTimeD:
             timeStartD = timeLib.time()
             self.robot.driveForward()
