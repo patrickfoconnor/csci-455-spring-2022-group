@@ -252,7 +252,7 @@ class AdventureDriver:
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
             baseGameBoard, start_coords = placeStart(baseGameBoard)
             self.player.setPosition(start_coords[0], start_coords[1])
-            return populateGameBoard(baseGameBoard, start_coords, self.objectArray)
+            return populateGameBoard(baseGameBoard, self.objectArray, start_coords)
 
     # The array will be created and then shuffled
     #   Each index will then hold the object
