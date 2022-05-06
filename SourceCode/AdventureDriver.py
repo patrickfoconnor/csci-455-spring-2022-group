@@ -91,6 +91,7 @@ def placeStart(baseGameBoard):
             print(indexY, indexX)
     baseGameBoard[indexY][indexX] = "S"
     '''
+    print(selectedCorner[0], type(selectedCorner[0]))
     baseGameBoard[selectedCorner[0], selectedCorner[1]] = "S"
     # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
     return baseGameBoard, selectedCorner
@@ -250,7 +251,7 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
-            baseGameBoard, start_coords= placeStart(baseGameBoard)
+            baseGameBoard, start_coords = placeStart(baseGameBoard)
             self.player.setPosition(start_coords[0], start_coords[1])
             return populateGameBoard(baseGameBoard, self.objectArray)
 
