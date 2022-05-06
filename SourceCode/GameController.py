@@ -19,6 +19,8 @@ class GameController:
         temp = self.game.getCharacterPosition()
         print("Y = ", temp[0], "X = ", temp[1])
 
+        self.robot = TangoRobot()
+
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)
         self.engine.setProperty('rate', 150)
@@ -78,11 +80,11 @@ class GameController:
 
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
-                    robot.driveForward()
+                    self.robot.driveForward()
                     timeEndD = timeLib.time()
                     runTimeD += timeEndD - timeStartD
-                robot.resetWheels()
-                robot.speed = 6000
+                self.robot.resetWheels()
+                self.robot.speed = 6000
 
                 self.game.move(y - 4, x)
             else:
@@ -94,21 +96,21 @@ class GameController:
                 runTime = 0
                 while runTime <= waitTime:
                     timeStart = timeLib.time()
-                    robot.turnLeft()
+                    self.robot.turnLeft()
                     timeEnd = timeLib.time()
                     runTime += timeEnd - timeStart
                 runTimeD = 0
                 waitTimeD = 3
                 time.sleep(0.2)
-                robot.speed(6500)
+                self.robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
-                    self.guiRobot.driveForward()
+                    self.robot.driveForward()
                     timeEndD = timeLib.time()
 
                     runTimeD += timeEndD - timeStartD
-                robot.resetWheels()
-                robot.speed = 6000
+                self.robot.resetWheels()
+                self.robot.speed = 6000
 
                 self.game.move( y + 4, x )
             else:
@@ -120,20 +122,20 @@ class GameController:
                 runTime = 0
                 while runTime <= waitTime:
                     timeStart = timeLib.time()
-                    robot.turnRight()
+                    self.robot.turnRight()
                     timeEnd = timeLib.time()
                     runTime += timeEnd - timeStart
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-                robot.speed(6500)
+                self.robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
-                    robot.driveForward()
+                    self.robot.driveForward()
                     timeEndD = timeLib.time()
                     runTimeD += timeEndD - timeStartD
-                robot.resetWheels()
-                robot.speed = 6000
+                self.robot.resetWheels()
+                self.robot.speed = 6000
                 self.game.move( y, x + 4 )
             else:
                 self.output = "That's a wall!"
@@ -144,20 +146,20 @@ class GameController:
                 runTime = 0
                 while runTime <= waitTime:
                     timeStart = timeLib.time()
-                    robot.turnLeft()
+                    self.robot.turnLeft()
                     timeEnd = timeLib.time()
                     runTime += timeEnd - timeStart
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-                robot.speed(6500)
+                self.robot.speed(6500)
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
-                    robot.driveForward()
+                    self.robot.driveForward()
                     timeEndD = timeLib.time()
                     runTimeD += timeEndD - timeStartD
-                robot.resetWheels()
-                robot.speed = 6000
+                self.robot.resetWheels()
+                self.robot.speed = 6000
                 self.game.move( y, x - 4 )
             else:
                 self.output = "That's a wall!"
