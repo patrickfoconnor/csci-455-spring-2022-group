@@ -1,10 +1,10 @@
 import tkinter as tk
 import time
-import threading.Thread
+import threading
 
-class GameAnimations(Thread):
+class GameAnimations( threading.Thread ):
     def __init__(self):
-        Thread.__init__(self)
+        threading.Thread.__init__(self)
         self.win = tk.Tk()
         self.win.title("Adventure Game")
         self.win.configure(background='darkgrey')
