@@ -2,10 +2,10 @@ import tkinter as tk
 import AdventureDriver as ad
 import os
 import pyttsx3
-import speech_recognition as sr
+#import speech_recognition as sr
 
 
-from TangoRobot import *
+#from TangoRobot import *
 import time as timeLib
 
 clear = lambda: os.system('cls')
@@ -67,7 +67,7 @@ class GameController:
         yLen = self.game.getSize()[0]
         xLen = self.game.getSize()[1]
         moves = self.game.checkForMoves()
-
+        self.output = " "
 
         if word in "North":
             if moves[0] and y-4 > 0:
@@ -169,7 +169,6 @@ class GameController:
 
         self.roundsPlayed += 1
 
-
     def listen(self):
         while self.listening and self.roundsPlayed <= self.maxRounds:
             with sr.Microphone() as source:
@@ -189,13 +188,13 @@ class GameController:
                     self.move(word)
                 except sr.UnknownValueError:
                     print( "Word not recognized" )
-
-    # def listen(self):
-    #     while self.roundsPlayed <= self.maxRounds:
-    #         print("...")
-    #         word = input()
-    #         self.saying()
-    #         self.move(word)
-
+    '''
+    def listen(self):
+        while self.roundsPlayed <= self.maxRounds:
+            print("...")
+            word = input()
+            self.saying()
+            self.move(word)
+    '''
 
 GameController().listen()
