@@ -230,7 +230,11 @@ class AdventureDriver(threading.Thread):
 
             self.battle(self.player, enemy)
             enemyHealth = enemy.HP
-            if enemyHealth <= 0:
+            if self.player.HP <= 0:
+                self.engine.say("You have fainted")
+                self.player.HP = 100
+                self.run()
+            elif enemyHealth <= 0:
                 self.engine.say(enemy.flvrtxt)
                 temp = self.player.getPosition()
                 self.gameBoard[temp[0]][temp[1]] = "X"
