@@ -145,6 +145,7 @@ class AdventureDriver:
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
+                self.engine.runAndWait()
                 self.ani.battle()
                 self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
