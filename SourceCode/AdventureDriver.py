@@ -132,7 +132,7 @@ class AdventureDriver(threading.Thread):
         if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
             if self.gameBoard[y][x] == "E":
                 if self.player.hasKey():
-                    self.ani.Victory()
+                    self.ani.victory()
                     self.engine.say("Congratulations, we have survived the Dungeon of the Mad Mage!")
                     self.engine.runAndWait()
                 else:
@@ -170,9 +170,9 @@ class AdventureDriver(threading.Thread):
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
         robot.adventureAttack()
-        temp = ", Using " + player.skills + " an attack of strength " + str(playersAtackValue)
+        temp = ", Using " + player.skills + " dealing " + str(playersAtackValue) + " damage"
         self.engine.say(temp)
-        temp = ", Using " + enemy.skills + " " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
+        temp = ", Using " + enemy.skills + ", " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
         self.engine.say(temp)
         self.engine.runAndWait()
 
@@ -239,6 +239,7 @@ class AdventureDriver(threading.Thread):
                 self.gameBoard[temp[0]][temp[1]] = "X"
                 if enemy.hasKey():
                     self.player.setLoot("Golden Key")
+                    self.ani.chests
                 self.engine.say( "Enemy Defeated" )
                 self.engine.runAndWait()
                 break

@@ -89,15 +89,23 @@ class GameController:
 
     def forward(self):
         runTimeD = 0
-        waitTimeD = 6
-        self.robot.speed = 7200
-        self.robot.wheelMotorCycle()
+        waitTimeD = 1
+        self.robot.speed = 4800
+
+        while runTimeD <= waitTimeD:
+            timeStartD = timeLib.time()
+            self.robot.wheelMotorCycle()
+            timeEndD = timeLib.time()
+            runTimeD += timeEndD - timeStartD
+        self.robot.resetWheels()
+        '''
         while runTimeD <= waitTimeD:
             timeStartD = timeLib.time()
             self.robot.driveForward()
             timeEndD = timeLib.time()
             runTimeD += timeEndD - timeStartD
         self.robot.resetWheels()
+        '''
 
     def around(self):
         waitTime = 22
