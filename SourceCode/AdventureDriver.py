@@ -207,7 +207,6 @@ class AdventureDriver:
             #word = input()
 
             with sr.Microphone() as source:
-                word = self.r.listen( source )
                 r = sr.Recognizer()
                 r.adjust_for_ambient_noise( source )
                 r.dynamic_energythreshhold = 3000
