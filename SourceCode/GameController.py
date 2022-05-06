@@ -125,6 +125,8 @@ class GameController:
                 self.robot.resetWheels()
                 self.robot.speed = 6000
 
+                self.currentDir = "North"
+
                 self.game.move(y - 4, x)
             else:
                 self.output = "That's a wall!"
@@ -140,6 +142,8 @@ class GameController:
                 self.forward()
                 self.robot.speed = 6500
                 self.robot.resetWheels()
+
+                self.currentDir = "South"
 
                 self.game.move( y + 4, x )
             else:
@@ -157,6 +161,8 @@ class GameController:
                 self.robot.speed = 6500
                 self.robot.resetWheels()
 
+                self.currentDir = "East"
+
                 self.game.move( y, x + 4 )
             else:
                 self.output = "That's a wall!"
@@ -172,6 +178,8 @@ class GameController:
                 self.forward()
                 self.robot.speed = 6500
                 self.robot.resetWheels()
+
+                self.currentDir = "West"
 
                 self.game.move( y, x - 4 )
             else:
