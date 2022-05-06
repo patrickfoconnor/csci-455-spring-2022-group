@@ -170,9 +170,9 @@ class AdventureDriver(threading.Thread):
         player.HP -= enemyAttackValue
         enemy.HP -= playersAtackValue
         robot.adventureAttack()
-        temp = ", Using " + player.skills + " an attack of strength " + str(playersAtackValue)
+        temp = ", Using " + player.skills + " dealing " + str(playersAtackValue) + " damage"
         self.engine.say(temp)
-        temp = ", Using " + enemy.skills + " " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
+        temp = ", Using " + enemy.skills + ", " + enemy.name + " hit you for " + str(enemyAttackValue) + " damage"
         self.engine.say(temp)
         self.engine.runAndWait()
 
