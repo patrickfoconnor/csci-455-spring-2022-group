@@ -227,7 +227,7 @@ class AdventureDriver:
 
             self.battle(self.player, enemy)
             enemyHealth = enemy.HP
-            if enemyHealth < 0:
+            if enemyHealth <= 0:
                 self.engine.say(enemy.flvrtxt)
                 temp = self.player.getPosition()
                 self.gameBoard[temp[0]][temp[1]] = "X"
