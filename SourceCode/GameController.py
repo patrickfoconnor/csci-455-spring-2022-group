@@ -73,6 +73,7 @@ class GameController:
             timeEnd = timeLib.time()
             runTime += timeEnd - timeStart
         time.sleep( 0.2 )
+        self.robot.resetWheels()
 
     def right(self):
         waitTime = 5
@@ -83,16 +84,18 @@ class GameController:
             timeEnd = timeLib.time()
             runTime += timeEnd - timeStart
         time.sleep( 0.2 )
+        self.robot.resetWheels()
 
     def forward(self):
         runTimeD = 0
         waitTimeD = 3
-        self.robot.speed = 6500
+        self.robot.speed = 6800
         while runTimeD <= waitTimeD:
             timeStartD = timeLib.time()
             self.robot.driveForward()
             timeEndD = timeLib.time()
             runTimeD += timeEndD - timeStartD
+        self.robot.resetWheels()
 
     def around(self):
         waitTime = 22
@@ -102,6 +105,7 @@ class GameController:
             self.robot.turnLeft()
             timeEnd = timeLib.time()
             runTime += timeEnd - timeStart
+        self.robot.resetWheels()
 
     def move(self, word):
         y = self.game.getCharacterPosition()[0]
@@ -122,7 +126,6 @@ class GameController:
                 elif self.currentDir == "West":
                     self.left()
                 self.forward()
-                self.robot.resetWheels()
                 self.robot.speed = 6000
 
                 self.currentDir = "North"
@@ -140,8 +143,7 @@ class GameController:
                 elif self.currentDir == "West":
                     self.right()
                 self.forward()
-                self.robot.speed = 6500
-                self.robot.resetWheels()
+                self.robot.speed = 6000
 
                 self.currentDir = "South"
 
@@ -158,8 +160,7 @@ class GameController:
                 elif self.currentDir == "West":
                     self.around()
                 self.forward()
-                self.robot.speed = 6500
-                self.robot.resetWheels()
+                self.robot.speed = 6000
 
                 self.currentDir = "East"
 
@@ -176,8 +177,7 @@ class GameController:
                 elif self.currentDir == "East":
                     self.around()
                 self.forward()
-                self.robot.speed = 6500
-                self.robot.resetWheels()
+                self.robot.speed = 6000
 
                 self.currentDir = "West"
 
