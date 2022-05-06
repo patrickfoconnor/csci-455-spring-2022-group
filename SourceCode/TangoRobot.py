@@ -184,7 +184,7 @@ class TangoRobot:
         time.sleep(0.4)
         self.writeCmd(RobotMotor.ArmRight, 7000)
 
-        time.sleep(e)
+        time.sleep(3)
         self.writeCmd(RobotMotor.Shoulder, 5500)
         time.sleep(0.4)
         self.writeCmd(RobotMotor.ArmRight, 5500)
