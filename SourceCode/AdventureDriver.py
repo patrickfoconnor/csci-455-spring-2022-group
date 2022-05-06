@@ -232,7 +232,7 @@ class AdventureDriver:
                 temp = self.player.getPosition()
                 self.gameBoard[temp[0]][temp[1]] = "X"
                 if enemy.hasKey():
-                    player.setLoot("Golden Key")
+                    self.player.setLoot("Golden Key")
                 break
 
         self.engine.say("Enemy Defeated")
