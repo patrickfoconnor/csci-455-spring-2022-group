@@ -1,6 +1,6 @@
 import tkinter as tk
 import time
-import Thread
+import threading.Thread
 
 class GameAnimations(Thread):
     def __init__(self):
