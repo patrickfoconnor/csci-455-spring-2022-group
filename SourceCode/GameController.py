@@ -77,7 +77,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-
+                self.robot.speed = 6500
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     self.robot.driveForward()
@@ -102,7 +102,7 @@ class GameController:
                 runTimeD = 0
                 waitTimeD = 3
                 time.sleep(0.2)
-                self.robot.speed(6500)
+                self.robot.speed = 6500
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     self.robot.driveForward()
@@ -128,7 +128,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-                self.robot.speed(6500)
+                self.robot.speed = 6500
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     self.robot.driveForward()
@@ -152,7 +152,7 @@ class GameController:
                 time.sleep(0.2)
                 runTimeD = 0
                 waitTimeD = 3
-                self.robot.speed(6500)
+                self.robot.speed = 6500
                 while runTimeD <= waitTimeD:
                     timeStartD = timeLib.time()
                     self.robot.driveForward()
