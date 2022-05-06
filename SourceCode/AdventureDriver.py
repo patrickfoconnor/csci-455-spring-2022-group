@@ -6,6 +6,7 @@ import copy
 from Character import *
 import GameAnimations as ga
 from TangoRobot import *
+import threading
 
 import time as timeLib
 # from enum import Enum
@@ -96,10 +97,11 @@ def placeStart(baseGameBoard):
     return baseGameBoard, selectedCorner
 
 
-class AdventureDriver:
+class AdventureDriver(threading.Thread):
 
     # constructor
     def __init__(self):
+        threading.Thread.__init__(self)
         # Create the player
         self.player = Player()
         self.player.name = "Player01"

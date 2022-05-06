@@ -15,6 +15,7 @@ class GameController:
 
     def __init__(self):
         self.game = ad.AdventureDriver()
+        self.game.start()
         self.game.outputBoard()
         temp = self.game.getCharacterPosition()
         print("Y = ", temp[0], "X = ", temp[1])
