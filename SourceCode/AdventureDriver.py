@@ -37,19 +37,15 @@ from Character import Player, Easy, Hard
 
 def populateGameBoard(baseGameBoard, objectArray):
     objectsPlaced = 0
-    startingPositionX, startingPositionY = 0, 0
     availableRun = {}
     for i in range(len(baseGameBoard)):
         for j in range(len(baseGameBoard[i])):
-            if baseGameBoard[i][j] == "S":
-                startingPositionX = j
-                startingPositionY = i
-            elif isinstance(baseGameBoard[i][j], int):
+            if isinstance(baseGameBoard[i][j], int):
                 baseGameBoard[i][j] = objectArray[objectsPlaced]
                 availableRun[objectsPlaced] = (j, i)
                 objectsPlaced += 1
 
-    return baseGameBoard, startingPositionX, startingPositionY, availableRun
+    return baseGameBoard, availableRun
 
 
 def checkNorth(player, gameBoard):
@@ -85,17 +81,19 @@ def checkWest(player, gameBoard):
 
 
 def placeStart(baseGameBoard):
-    fourCorners = [1, 3, 7, 9]
+    fourCorners = [[0, 0], [0, 8], [8, 0], [8, 8]]
     selectedCorner = random.choice(fourCorners)
+    '''
     for i, x in enumerate(baseGameBoard):
         if selectedCorner in x:
             indexY = i
             indexX = x.index(selectedCorner)
             print(indexY, indexX)
     baseGameBoard[indexY][indexX] = "S"
-
+    '''
+    baseGameBoard[selectedCorner[0], selectedCorner[1]] = "S"
     # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
-    return baseGameBoard
+    return baseGameBoard, selectedCorner
 
 
 class AdventureDriver:
@@ -252,8 +250,8 @@ class AdventureDriver:
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              ["P", "W", "W", "W", "P", "W", "W", "W", "W"],
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
-            baseGameBoard= placeStart(baseGameBoard)
-            #self.player.setPosition(indexY, indexX)
+            baseGameBoard, start_coords= placeStart(baseGameBoard)
+            self.player.setPosition(start_coords[0], start_coords[1])
             return populateGameBoard(baseGameBoard, self.objectArray)
 
     # The array will be created and then shuffled
