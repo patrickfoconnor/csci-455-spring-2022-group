@@ -1,7 +1,7 @@
 # Main class that will hold the driver for the adventure-based combat game
 import random
 import pyttsx3
-#import speech_recognition as sr
+import speech_recognition as sr
 import copy
 from Character import *
 import GameAnimations as ga
@@ -139,12 +139,13 @@ class AdventureDriver:
                     self.engine.runAndWait()
             elif self.gameBoard[y][x] == "R":
                 self.ani.recharge()
-                self.rechargeHealth()
                 saying = "I have healed ", (100 - self.player.getHP()), "health"
+                self.rechargeHealth()
                 self.engine.say(saying)
             elif not isinstance(self.gameBoard[y][x], str):
                 print("enemy")
                 self.engine.say("Gasp, an enemy")
+                self.engine.runAndWait()
                 self.ani.battle()
                 self.battleSequence(self.gameBoard[y][x])
             self.engine.runAndWait()
@@ -194,8 +195,7 @@ class AdventureDriver:
         self.player.setHP(100)
 
     def battleSequence(self, enemy):
-        dont = True
-        while dont:
+        while True:
             playerHealth = self.player.HP
             enemyHealth = enemy.HP
             temp = ",You have " + str(playerHealth) + " hitpoints"
@@ -205,21 +205,25 @@ class AdventureDriver:
             self.engine.say(", Would you like to battle or run")
             self.engine.runAndWait()
 
-            word = input()
+            #word = input()
 
             with sr.Microphone() as source:
-                audio = self.engine.r.listen( source )
-                while not audio in "run":
-                    self.battle( self.player, enemy )
-                    self.engine.say( "Would you like to battle or run" )
-                    audio = self.engine.r.listen( source )
-                if audio in "run":
-                    self.engine.run()
+                r = sr.Recognizer()
+                r.adjust_for_ambient_noise( source )
+                r.dynamic_energythreshhold = 3000
 
+                try:
+                    print("listening")
+                    audio = r.listen(source)
+                    print("Got audio")
+                    word = r.recognize_google(audio)
+                    print(word)
+                except sr.UnknownValueError:
+                    print( "Word not recognized" )
 
             if word in "run":
-                dont = False
                 self.run()
+                break
 
             self.battle(self.player, enemy)
             enemyHealth = enemy.HP
@@ -227,9 +231,7 @@ class AdventureDriver:
                 self.engine.say(enemy.flvrtxt)
                 temp = self.player.getPosition()
                 self.gameBoard[temp[0]][temp[1]] = "X"
-                dont = False
                 break
-
 
         self.engine.say("Enemy Defeated")
         self.engine.runAndWait()
