@@ -90,7 +90,6 @@ class GameController:
 
         if word in "South":
             if moves[1] and y+4 < yLen:
-                self.game.move(y + 4, x)
                 waitTime = 22
                 runTime = 0
                 while runTime <= waitTime:
@@ -110,12 +109,13 @@ class GameController:
                     runTimeD += timeEndD - timeStartD
                 robot.resetWheels()
                 robot.speed = 6000
+
+                self.game.move( y + 4, x )
             else:
                 self.output = "That's a wall!"
 
         if word in "East":
             if moves[2] and x+4 < xLen:
-                self.game.move(y, x + 4)
                 waitTime = 5
                 runTime = 0
                 while runTime <= waitTime:
@@ -134,12 +134,12 @@ class GameController:
                     runTimeD += timeEndD - timeStartD
                 robot.resetWheels()
                 robot.speed = 6000
+                self.game.move( y, x + 4 )
             else:
                 self.output = "That's a wall!"
 
         if word in "West":
             if moves[3] and x-4 > 0:
-                self.game.move(y, x - 4)
                 waitTime = 5
                 runTime = 0
                 while runTime <= waitTime:
@@ -158,6 +158,7 @@ class GameController:
                     runTimeD += timeEndD - timeStartD
                 robot.resetWheels()
                 robot.speed = 6000
+                self.game.move( y, x - 4 )
             else:
                 self.output = "That's a wall!"
 
