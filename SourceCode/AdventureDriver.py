@@ -91,8 +91,7 @@ def placeStart(baseGameBoard):
             print(indexY, indexX)
     baseGameBoard[indexY][indexX] = "S"
     '''
-    print(selectedCorner[0], type(selectedCorner[0]))
-    baseGameBoard[selectedCorner[0], selectedCorner[1]] = "S"
+    baseGameBoard[selectedCorner[0]][selectedCorner[1]] = "S"
     # baseGameBoard = [[val.replace(fourCorners[selectedCorner], 'S') for val in row] for row in baseGameBoard]
     return baseGameBoard, selectedCorner
 
