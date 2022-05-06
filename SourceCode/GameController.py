@@ -139,8 +139,9 @@ class GameController:
                     self.left()
                 elif self.currentDir == "West":
                     self.right()
-                self.forward()
                 self.robot.speed = 6500
+                self.forward()
+
                 self.robot.resetWheels()
 
                 self.currentDir = "South"

@@ -205,20 +205,21 @@ class AdventureDriver:
             self.engine.runAndWait()
 
             #word = input()
+            while True:
+                with sr.Microphone() as source:
+                    r = sr.Recognizer()
+                    r.adjust_for_ambient_noise( source )
+                    r.dynamic_energythreshhold = 3000
 
-            with sr.Microphone() as source:
-                r = sr.Recognizer()
-                r.adjust_for_ambient_noise( source )
-                r.dynamic_energythreshhold = 3000
-
-                try:
-                    print("listening")
-                    audio = r.listen(source)
-                    print("Got audio")
-                    word = r.recognize_google(audio)
-                    print(word)
-                except sr.UnknownValueError:
-                    print( "Word not recognized" )
+                    try:
+                        print("listening")
+                        audio = r.listen(source)
+                        print("Got audio")
+                        word = r.recognize_google(audio)
+                        print(word)
+                        break
+                    except sr.UnknownValueError:
+                        print( "Word not recognized" )
 
             if word in "run":
                 self.run()
