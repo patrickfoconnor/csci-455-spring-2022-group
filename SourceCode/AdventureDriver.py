@@ -35,7 +35,7 @@ import time as timeLib
 from Character import Player, Easy, Hard
 
 
-def populateGameBoard(baseGameBoard, objectArray):
+def populateGameBoard(baseGameBoard, objectArray, start_coords):
     objectsPlaced = 0
     availableRun = {}
     for i in range(len(baseGameBoard)):
@@ -45,7 +45,7 @@ def populateGameBoard(baseGameBoard, objectArray):
                 availableRun[objectsPlaced] = (j, i)
                 objectsPlaced += 1
 
-    return baseGameBoard, availableRun
+    return baseGameBoard, start_coords[0], start_coords[1], availableRun
 
 
 def checkNorth(player, gameBoard):
@@ -252,7 +252,7 @@ class AdventureDriver:
                              [7, "W", "W", "W", 8, "P", "P", "P", 9]]
             baseGameBoard, start_coords = placeStart(baseGameBoard)
             self.player.setPosition(start_coords[0], start_coords[1])
-            return populateGameBoard(baseGameBoard, self.objectArray)
+            return populateGameBoard(baseGameBoard, start_coords, self.objectArray)
 
     # The array will be created and then shuffled
     #   Each index will then hold the object
