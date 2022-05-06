@@ -72,7 +72,7 @@ class GameController:
         self.output = " "
 
         if word in "North":
-            if moves[0] and y-4 > 0:
+            if moves[0] and y-4 >= 0:
                 time.sleep(.2)
                 time.sleep(0.2)
                 runTimeD = 0
@@ -141,7 +141,7 @@ class GameController:
                 self.output = "That's a wall!"
 
         if word in "West":
-            if moves[3] and x-4 > 0:
+            if moves[3] and x-4 >= 0:
                 waitTime = 5
                 runTime = 0
                 while runTime <= waitTime:
