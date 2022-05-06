@@ -109,6 +109,7 @@ class AdventureDriver:
         self.player.setPosition(self.startingPositionY, self.startingPositionX)
 
         self.ani = ga.GameAnimations()
+        self.ani.start()
 
         self.engine = pyttsx3.init()
         self.engine.setProperty('voice', self.engine.getProperty('voices')[1].id)

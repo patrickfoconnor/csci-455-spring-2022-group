@@ -1,8 +1,10 @@
 import tkinter as tk
 import time
+import Thread
 
-class GameAnimations:
+class GameAnimations(Thread):
     def __init__(self):
+        Thread.__init__(self)
         self.win = tk.Tk()
         self.win.title("Adventure Game")
         self.win.configure(background='darkgrey')
