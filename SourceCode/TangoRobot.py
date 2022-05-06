@@ -209,6 +209,8 @@ class TangoRobot:
     def wheelMotorCycle(self):
         # ???
         time.sleep(.2)
+        self.writeCmd(RobotMotor.WheelRight, MAX_SERVO)
+        self.writeCmd(RobotMotor.WheelLeft, MAX_SERVO)
         self.writeCmd(RobotMotor.WheelRight, MIN_SERVO)
         self.writeCmd(RobotMotor.WheelLeft, MIN_SERVO)
 
