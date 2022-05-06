@@ -139,7 +139,7 @@ class GameController:
                 self.robot.speed = 6000
 
                 self.currentDir = "North"
-
+                timeLib.sleep( 1 )
                 self.game.move(y - 4, x)
             else:
                 self.output = "That's a wall!"
@@ -156,7 +156,7 @@ class GameController:
                 self.robot.speed = 6000
 
                 self.currentDir = "South"
-
+                timeLib.sleep( 1 )
                 self.game.move( y + 4, x )
             else:
                 self.output = "That's a wall!"
@@ -173,7 +173,7 @@ class GameController:
                 self.robot.speed = 6000
 
                 self.currentDir = "East"
-
+                timeLib.sleep( 1 )
                 self.game.move( y, x + 4 )
             else:
                 self.output = "That's a wall!"
@@ -190,13 +190,14 @@ class GameController:
                 self.robot.speed = 6000
 
                 self.currentDir = "West"
-
+                timeLib.sleep(1)
                 self.game.move( y, x - 4 )
             else:
                 self.output = "That's a wall!"
 
-        self.engine.say(self.output)
-        self.engine.runAndWait()
+        if self.output in "That's a wall!":
+            self.engine.say(self.output)
+            self.engine.runAndWait()
         self.game.outputBoard()
         temp = self.game.getCharacterPosition()
         print( "Y = ", temp[0], "X = ", temp[1] )

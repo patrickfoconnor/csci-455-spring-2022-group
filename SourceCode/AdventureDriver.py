@@ -129,6 +129,7 @@ class AdventureDriver(threading.Thread):
         oldPositionY = self.player.getPosition()[0]
         oldChar = self.player.lastChar
         self.setCharacterPosition(y, x)
+
         if self.gameBoard[y][x] != "P" or self.gameBoard[y][x] != "S":
             if self.gameBoard[y][x] == "E":
                 if self.player.hasKey():
